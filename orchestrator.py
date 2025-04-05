@@ -1,0 +1,345 @@
+#!/usr/bin/env python
+import argparse
+import logging
+from logging.config import fileConfig
+import os
+import json
+from datetime import datetime, timedelta
+import schedule
+import time
+
+# Import des modules personnalisés
+from scrapping.scrapping import call_api_between_dates
+from data_preparation.data_preparation import DataPreparation
+from model.prediction_model import PredictionModel
+from analysis.historical_analysis import HistoricalAnalysis
+from model.model_evaluation import ModelEvaluation
+from batch_processing.batch_processor import BatchProcessor
+
+# Configuration du logging
+fileConfig('logger/logging_config.ini')
+logger = logging.getLogger(__name__)
+
+class PMUOrchestrateur:
+    """Orchestrateur pour le système de prédiction de courses PMU."""
+    
+    def __init__(self, config_path='config/config.json'):
+        """Initialise l'orchestrateur avec la configuration."""
+        self.logger = logging.getLogger(__name__)
+        
+        # Charger la configuration
+        self.config = self._load_config(config_path)
+        
+        # Initialiser les composants
+        self.data_prep = DataPreparation(self.config.get('db_path', 'database/db/pmu_data.db'))
+        self.batch_processor = BatchProcessor(
+            db_path=self.config.get('db_path', 'database/db/pmu_data.db'),
+            model_path=self.config.get('model_path', 'model/trained_models/horse_race_model.pkl')
+        )
+    
+    def _load_config(self, config_path):
+        """Charge la configuration depuis un fichier JSON."""
+        try:
+            if os.path.exists(config_path):
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                self.logger.info(f"Configuration chargée depuis {config_path}")
+                return config
+            else:
+                self.logger.warning(f"Fichier de configuration {config_path} non trouvé. Utilisation des valeurs par défaut.")
+                return self._create_default_config(config_path)
+        except Exception as e:
+            self.logger.error(f"Erreur lors du chargement de la configuration: {str(e)}")
+            return self._create_default_config(config_path)
+    
+    def _create_default_config(self, config_path):
+        """Crée une configuration par défaut."""
+        config = {
+            'db_path': 'database/db/pmu_data.db',
+            'model_path': 'model/trained_models/horse_race_model.pkl',
+            'scraping': {
+                'days_back': 7,
+                'schedule': {
+                    'time': '00:00',  # Minuit
+                    'frequency': 'daily'
+                }
+            },
+            'prediction': {
+                'days_ahead': 1,
+                'schedule': {
+                    'time': '07:00',  # 7h du matin
+                    'frequency': 'daily'
+                }
+            },
+            'evaluation': {
+                'days_back': 30,
+                'schedule': {
+                    'time': '23:00',  # 23h du soir
+                    'frequency': 'weekly',
+                    'day': 'sunday'
+                }
+            },
+            'training': {
+                'days_back': 60,
+                'test_days': 14,
+                'model_type': 'xgboost',
+                'schedule': {
+                    'time': '01:00',  # 1h du matin
+                    'frequency': 'monthly',
+                    'day': 1
+                }
+            }
+        }
+        
+        # Créer le répertoire si nécessaire
+        os.makedirs(os.path.dirname(config_path), exist_ok=True)
+        
+        # Sauvegarder la configuration
+        with open(config_path, 'w') as f:
+            json.dump(config, f, indent=2)
+        
+        self.logger.info(f"Configuration par défaut créée et sauvegardée dans {config_path}")
+        return config
+    
+    def run_scraping(self):
+        """Exécute le scraping des données PMU."""
+        self.logger.info("Démarrage du scraping des données PMU")
+        
+        try:
+            days_back = self.config.get('scraping', {}).get('days_back', 7)
+            end_date = datetime.now()
+            start_date = end_date - timedelta(days=days_back)
+            
+            self.logger.info(f"Scraping des données du {start_date.strftime('%Y-%m-%d')} au {end_date.strftime('%Y-%m-%d')}")
+            
+            call_api_between_dates(start_date, end_date)
+            
+            self.logger.info("Scraping des données terminé avec succès")
+        except Exception as e:
+            self.logger.error(f"Erreur lors du scraping des données: {str(e)}")
+    
+    def run_predictions(self):
+        """Exécute les prédictions pour les courses à venir."""
+        self.logger.info("Démarrage des prédictions pour les courses à venir")
+        
+        try:
+            days_ahead = self.config.get('prediction', {}).get('days_ahead', 1)
+            
+            self.logger.info(f"Prédiction des courses pour les {days_ahead} prochains jours")
+            
+            predictions = self.batch_processor.predict_upcoming_races(days_ahead=days_ahead)
+            
+            if predictions:
+                self.logger.info(f"Prédictions générées pour {len(predictions)} courses")
+            else:
+                self.logger.warning("Aucune prédiction générée")
+                
+        except Exception as e:
+            self.logger.error(f"Erreur lors des prédictions: {str(e)}")
+    
+    def run_evaluation(self):
+        """Évalue les prédictions passées."""
+        self.logger.info("Démarrage de l'évaluation des prédictions passées")
+        
+        try:
+            days_back = self.config.get('evaluation', {}).get('days_back', 30)
+            
+            self.logger.info(f"Évaluation des prédictions des {days_back} derniers jours")
+            
+            summary = self.batch_processor.evaluate_past_predictions(days_back=days_back)
+            
+            if summary:
+                self.logger.info(f"Résultats de l'évaluation: {summary}")
+            else:
+                self.logger.warning("Aucun résultat d'évaluation disponible")
+                
+        except Exception as e:
+            self.logger.error(f"Erreur lors de l'évaluation: {str(e)}")
+    
+    def run_training(self):
+        """Entraîne un nouveau modèle sur les données historiques."""
+        self.logger.info("Démarrage de l'entraînement d'un nouveau modèle")
+        
+        try:
+            days_back = self.config.get('training', {}).get('days_back', 60)
+            test_days = self.config.get('training', {}).get('test_days', 14)
+            model_type = self.config.get('training', {}).get('model_type', 'xgboost')
+            
+            self.logger.info(f"Entraînement d'un modèle {model_type} sur les données des {days_back} derniers jours")
+            
+            result = self.batch_processor.batch_train_test(
+                days_back=days_back,
+                test_days=test_days,
+                model_type=model_type
+            )
+            
+            if result:
+                self.logger.info(f"Modèle entraîné et sauvegardé dans {result['model_path']}")
+                
+                if result['test_results']:
+                    self.logger.info(f"Résultats du test: {result['test_results']}")
+                
+                # Mettre à jour le chemin du modèle dans la configuration
+                self.config['model_path'] = result['model_path']
+                
+                with open('config/config.json', 'w') as f:
+                    json.dump(self.config, f, indent=2)
+                
+                self.logger.info("Configuration mise à jour avec le nouveau modèle")
+            else:
+                self.logger.warning("Échec de l'entraînement du modèle")
+                
+        except Exception as e:
+            self.logger.error(f"Erreur lors de l'entraînement: {str(e)}")
+    
+    def schedule_jobs(self):
+        """Planifie les tâches selon la configuration."""
+        self.logger.info("Planification des tâches récurrentes")
+        
+        # Scraping
+        scraping_config = self.config.get('scraping', {}).get('schedule', {})
+        scraping_time = scraping_config.get('time', '00:00')
+        scraping_frequency = scraping_config.get('frequency', 'daily')
+        
+        if scraping_frequency == 'daily':
+            schedule.every().day.at(scraping_time).do(self.run_scraping)
+            self.logger.info(f"Scraping planifié tous les jours à {scraping_time}")
+        elif scraping_frequency == 'weekly':
+            day = scraping_config.get('day', 'monday').lower()
+            getattr(schedule.every(), day).at(scraping_time).do(self.run_scraping)
+            self.logger.info(f"Scraping planifié tous les {day} à {scraping_time}")
+        
+        # Prédictions
+        prediction_config = self.config.get('prediction', {}).get('schedule', {})
+        prediction_time = prediction_config.get('time', '07:00')
+        prediction_frequency = prediction_config.get('frequency', 'daily')
+        
+        if prediction_frequency == 'daily':
+            schedule.every().day.at(prediction_time).do(self.run_predictions)
+            self.logger.info(f"Prédictions planifiées tous les jours à {prediction_time}")
+        elif prediction_frequency == 'weekly':
+            day = prediction_config.get('day', 'monday').lower()
+            getattr(schedule.every(), day).at(prediction_time).do(self.run_predictions)
+            self.logger.info(f"Prédictions planifiées tous les {day} à {prediction_time}")
+        
+        # Évaluation
+        evaluation_config = self.config.get('evaluation', {}).get('schedule', {})
+        evaluation_time = evaluation_config.get('time', '23:00')
+        evaluation_frequency = evaluation_config.get('frequency', 'weekly')
+        
+        if evaluation_frequency == 'daily':
+            schedule.every().day.at(evaluation_time).do(self.run_evaluation)
+            self.logger.info(f"Évaluation planifiée tous les jours à {evaluation_time}")
+        elif evaluation_frequency == 'weekly':
+            day = evaluation_config.get('day', 'sunday').lower()
+            getattr(schedule.every(), day).at(evaluation_time).do(self.run_evaluation)
+            self.logger.info(f"Évaluation planifiée tous les {day} à {evaluation_time}")
+        
+        # Entraînement
+        training_config = self.config.get('training', {}).get('schedule', {})
+        training_time = training_config.get('time', '01:00')
+        training_frequency = training_config.get('frequency', 'monthly')
+        
+        if training_frequency == 'daily':
+            schedule.every().day.at(training_time).do(self.run_training)
+            self.logger.info(f"Entraînement planifié tous les jours à {training_time}")
+        elif training_frequency == 'weekly':
+            day = training_config.get('day', 'monday').lower()
+            getattr(schedule.every(), day).at(training_time).do(self.run_training)
+            self.logger.info(f"Entraînement planifié tous les {day} à {training_time}")
+        elif training_frequency == 'monthly':
+            day = training_config.get('day', 1)
+            schedule.every().month.at(day).at(training_time).do(self.run_training)
+            self.logger.info(f"Entraînement planifié le {day} de chaque mois à {training_time}")
+        
+        self.logger.info("Toutes les tâches ont été planifiées")
+    
+    def run_scheduler(self):
+        """Lance le planificateur de tâches."""
+        self.logger.info("Démarrage du planificateur de tâches")
+        
+        # Planifier les tâches
+        self.schedule_jobs()
+        
+        # Boucle principale du planificateur
+        try:
+            while True:
+                schedule.run_pending()
+                time.sleep(60)  # Vérifier toutes les minutes
+        except KeyboardInterrupt:
+            self.logger.info("Arrêt du planificateur de tâches")
+    
+    def run_all(self):
+        """Exécute toutes les tâches principales en séquence."""
+        self.logger.info("Exécution de toutes les tâches principales")
+        
+        # 1. Scraping
+        self.run_scraping()
+        
+        # 2. Entraînement (si nécessaire)
+        if not os.path.exists(self.config.get('model_path')):
+            self.logger.info("Aucun modèle trouvé. Entraînement d'un nouveau modèle.")
+            self.run_training()
+        
+        # 3. Prédictions
+        self.run_predictions()
+        
+        # 4. Évaluation
+        self.run_evaluation()
+        
+        self.logger.info("Toutes les tâches ont été exécutées")
+
+def parse_args():
+    """Parse les arguments de ligne de commande."""
+    parser = argparse.ArgumentParser(description='Orchestrateur du système de prédiction PMU')
+    
+    parser.add_argument('--config', type=str, default='config/config.json',
+                        help='Chemin vers le fichier de configuration')
+    
+    parser.add_argument('--action', type=str, choices=['all', 'scrape', 'predict', 'evaluate', 'train', 'schedule'],
+                        default='all', help='Action à exécuter')
+    
+    parser.add_argument('--days-back', type=int,
+                        help='Nombre de jours en arrière pour le scraping ou l\'évaluation')
+    
+    parser.add_argument('--days-ahead', type=int,
+                        help='Nombre de jours en avant pour les prédictions')
+    
+    return parser.parse_args()
+
+def main():
+    """Fonction principale."""
+    args = parse_args()
+    
+    # Initialiser l'orchestrateur
+    orchestrateur = PMUOrchestrateur(config_path=args.config)
+    
+    # Exécuter l'action demandée
+    if args.action == 'all':
+        orchestrateur.run_all()
+    
+    elif args.action == 'scrape':
+        if args.days_back:
+            orchestrateur.config['scraping']['days_back'] = args.days_back
+        orchestrateur.run_scraping()
+    
+    elif args.action == 'predict':
+        if args.days_ahead:
+            orchestrateur.config['prediction']['days_ahead'] = args.days_ahead
+        orchestrateur.run_predictions()
+    
+    elif args.action == 'evaluate':
+        if args.days_back:
+            orchestrateur.config['evaluation']['days_back'] = args.days_back
+        orchestrateur.run_evaluation()
+    
+    elif args.action == 'train':
+        if args.days_back:
+            orchestrateur.config['training']['days_back'] = args.days_back
+        orchestrateur.run_training()
+    
+    elif args.action == 'schedule':
+        orchestrateur.run_scheduler()
+
+if __name__ == '__main__':
+    main()
