@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from setup_database import Cheval, CoteEvolution, CoteHistorique, Jockey, Participant, Participation, Prediction, engine, Hippodrome, Pays, Reunion, Course
+from database.setup_database import Cheval, CoteEvolution, CoteHistorique, Jockey, Participant, Participation, Prediction, engine, Hippodrome, Pays, Reunion, Course
 
 
 def save_pays(pays_data):
