@@ -1,5 +1,5 @@
 from datetime import datetime
-from database.database import save_pays, save_hippodrome, save_reunions, save_courses, save_participation,save_course
+from database.database import save_pays, save_hippodrome, save_pmu_course, save_reunions, save_courses, save_participation,save_course
 #from database.database import save_pays, save_hippodrome, save_reunions
 from database.setup_database import PmuCourse, PmuParticipant
 

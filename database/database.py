@@ -4,10 +4,11 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from database.setup_database import (
-    Cheval, CoteHistorique, Jockey, Participation, 
+    Cheval, CoteHistorique, Jockey, Participant, Participation, 
     Prediction, engine, Hippodrome, Pays, Reunion, Course,
     PmuCourse, PmuParticipant, PmuCoteEvolution as CoteEvolution
 )
+from scraping import save_commentaire, save_incidents
 
 
 def save_pays(pays_data):
@@ -47,29 +48,40 @@ def save_reunions(reunion_data):
         logging.info("Saving reunion data")
     session.commit()
 
-def save_courses(courses_data):
+def save_courses(course_data):
+    """Sauvegarde une course et retourne son ID"""
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    for course_data in courses_data:
-        course_data['heureDepart'] = datetime.utcfromtimestamp(course_data['heureDepart'] / 1000.0)
-        existing_course = (session.query(Course).filter_by(
-            heureDepart=course_data.get('heureDepart'),
-            numReunion=course_data.get('numReunion'),
-            numOrdre=course_data.get('numOrdre')
-        ).first())
-        if not existing_course:
-            hipodrome_code = course_data.get('hippodrome', {}).get('codeHippodrome')
-            # Définissez une liste des noms d'attributs valides de la classe Course
-            valid_attributes = [attr.name for attr in Course.__table__.columns]
-
-            # Créez un nouveau dictionnaire avec seulement les attributs valides
-            filtered_course_data = {key: value for key, value in course_data.items() if key in valid_attributes}
-
-            course_obj = Course(**filtered_course_data, hippodrome_code=hipodrome_code)
-            session.add(course_obj)
-            logging.info("Saving Course data")
-            session.commit()
+    
+    try:
+        # Vérifier si la course existe déjà
+        if 'heureDepart' in course_data and 'numReunion' in course_data and 'numOrdre' in course_data:
+            existing_course = session.query(Course).filter_by(
+                heureDepart=course_data.get('heureDepart'),
+                numReunion=course_data.get('numReunion'),
+                numOrdre=course_data.get('numOrdre')
+            ).first()
+            
+            if existing_course:
+                logging.info(f"Course already exists: {course_data.get('libelle')} at {course_data.get('heureDepart')}")
+                return existing_course.id
+        
+        # Créer une nouvelle course
+        new_course = Course(**course_data)
+        session.add(new_course)
+        session.commit()
+        
+        course_id = new_course.id
+        logging.info(f"Saved course: {course_data.get('libelle')} with ID {course_id}")
+        return course_id
+    
+    except Exception as e:
+        session.rollback()
+        logging.error(f"Error saving course: {str(e)}")
+        return None
+    
+    finally:
+        session.close()
 
 
 def save_course(course_data):
@@ -376,3 +388,42 @@ def save_pmu_course(course_data):
     
     finally:
         session.close()
+
+
+def save_course_data(course_data):
+    """Sauvegarde une course individuelle et ses données associées"""
+    # Conversion de l'heure de départ
+    if 'heureDepart' in course_data:
+        course_data['heureDepart'] = datetime.utcfromtimestamp(course_data['heureDepart'] / 1000.0)
+    
+    # Filtrer les champs correspondant à la table courses
+    from database.setup_database import Course
+    valid_fields = [column.name for column in Course.__table__.columns]
+    
+    filtered_data = {}
+    for key, value in course_data.items():
+        if key in valid_fields:
+            filtered_data[key] = value
+    
+    if 'hippodrome' in course_data and 'codeHippodrome' in course_data['hippodrome']:
+        filtered_data['hippodrome_code'] = course_data['hippodrome']['codeHippodrome']
+    
+    # Sauvegarde des données de course
+    course_id = save_courses(filtered_data)
+    
+    # Si nous avons un ID de course valide, sauvegardons les autres informations
+    if course_id:
+        # Sauvegarde des incidents
+        if 'incidents' in course_data and course_data['incidents']:
+            save_incidents(course_data['incidents'], course_id)
+        
+        # Sauvegarde du commentaire
+        if 'commentaireApresCourse' in course_data and course_data['commentaireApresCourse']:
+            save_commentaire(course_data['commentaireApresCourse'], course_id)
+        
+        # Sauvegarde de l'ordre d'arrivée
+        # if 'ordreArrivee' in course_data and course_data['ordreArrivee']:
+        #     # Mettre à jour la course avec l'ordre d'arrivée
+        #     update_course_ordre_arrivee(course_id, course_data['ordreArrivee'])
+    
+    return course_id

@@ -988,3 +988,925 @@
 2025-04-06 00:28:18 - DEBUG - Attempting to call API for 09022025, R12
 2025-04-06 00:28:18 - DEBUG - Response 200 for reunions [12] on 2025-02-09 00:24:27.076561
 2025-04-06 00:28:18 - ERROR - Erreur lors de l'import initial des données: 'prochaineCourse' is an invalid keyword argument for PmuReunion
+2025-04-06 09:13:13 - INFO - Démarrage de l'import initial des données PMU
+2025-04-06 09:13:13 - INFO - Collecte des données du 2025-01-06 au 2025-04-06
+2025-04-06 09:13:13 - DEBUG - Attempting to call API for 06012025, R1
+2025-04-06 09:13:19 - DEBUG - Response 200 for reunions [1] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:19 - INFO - Saving pays data
+2025-04-06 09:13:19 - INFO - Saving hippodrome data
+2025-04-06 09:13:19 - INFO - Saving reunion data
+2025-04-06 09:13:19 - DEBUG - Attempting to call API for 06012025, R2
+2025-04-06 09:13:19 - DEBUG - Response 200 for reunions [2] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:19 - INFO - Saving pays data
+2025-04-06 09:13:20 - INFO - Saving hippodrome data
+2025-04-06 09:13:20 - INFO - Saving reunion data
+2025-04-06 09:13:20 - DEBUG - Attempting to call API for 06012025, R3
+2025-04-06 09:13:20 - DEBUG - Response 200 for reunions [3] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:20 - INFO - Saving hippodrome data
+2025-04-06 09:13:20 - INFO - Saving reunion data
+2025-04-06 09:13:20 - DEBUG - Attempting to call API for 06012025, R4
+2025-04-06 09:13:21 - DEBUG - Response 200 for reunions [4] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:21 - INFO - Saving hippodrome data
+2025-04-06 09:13:21 - INFO - Saving reunion data
+2025-04-06 09:13:21 - DEBUG - Attempting to call API for 06012025, R5
+2025-04-06 09:13:21 - DEBUG - Response 200 for reunions [5] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:21 - INFO - Saving pays data
+2025-04-06 09:13:21 - INFO - Saving hippodrome data
+2025-04-06 09:13:21 - INFO - Saving reunion data
+2025-04-06 09:13:21 - DEBUG - Attempting to call API for 06012025, R6
+2025-04-06 09:13:22 - DEBUG - Response 200 for reunions [6] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:22 - INFO - Saving pays data
+2025-04-06 09:13:22 - INFO - Saving hippodrome data
+2025-04-06 09:13:22 - INFO - Saving reunion data
+2025-04-06 09:13:22 - DEBUG - Attempting to call API for 06012025, R7
+2025-04-06 09:13:22 - DEBUG - Response 200 for reunions [7] on 2025-01-06 09:13:13.678027
+2025-04-06 09:13:22 - INFO - Saving hippodrome data
+2025-04-06 09:13:22 - INFO - Saving reunion data
+2025-04-06 09:13:22 - DEBUG - Attempting to call API for 06012025, R8
+2025-04-06 09:13:28 - INFO - No more reunion [8] on 2025-01-06 09:13:13.678027 : 204
+2025-04-06 09:13:28 - DEBUG - Attempting to call API for 07012025, R1
+2025-04-06 09:13:29 - DEBUG - Response 200 for reunions [1] on 2025-01-07 09:13:13.678027
+2025-04-06 09:13:29 - INFO - Saving reunion data
+2025-04-06 09:13:29 - DEBUG - Attempting to call API for 07012025, R2
+2025-04-06 09:13:29 - DEBUG - Response 200 for reunions [2] on 2025-01-07 09:13:13.678027
+2025-04-06 09:13:29 - INFO - Saving pays data
+2025-04-06 09:13:29 - INFO - Saving hippodrome data
+2025-04-06 09:13:29 - INFO - Saving reunion data
+2025-04-06 09:13:29 - DEBUG - Attempting to call API for 07012025, R3
+2025-04-06 09:13:30 - DEBUG - Response 200 for reunions [3] on 2025-01-07 09:13:13.678027
+2025-04-06 09:13:30 - INFO - Saving reunion data
+2025-04-06 09:13:30 - DEBUG - Attempting to call API for 07012025, R4
+2025-04-06 09:13:30 - DEBUG - Response 200 for reunions [4] on 2025-01-07 09:13:13.678027
+2025-04-06 09:13:30 - INFO - Saving hippodrome data
+2025-04-06 09:13:30 - INFO - Saving reunion data
+2025-04-06 09:13:30 - DEBUG - Attempting to call API for 07012025, R5
+2025-04-06 09:13:31 - DEBUG - Response 200 for reunions [5] on 2025-01-07 09:13:13.678027
+2025-04-06 09:13:31 - INFO - Saving hippodrome data
+2025-04-06 09:13:31 - INFO - Saving reunion data
+2025-04-06 09:13:31 - DEBUG - Attempting to call API for 07012025, R6
+2025-04-06 09:13:31 - DEBUG - Response 200 for reunions [6] on 2025-01-07 09:13:13.678027
+2025-04-06 09:13:31 - INFO - Saving pays data
+2025-04-06 09:13:31 - INFO - Saving hippodrome data
+2025-04-06 09:13:31 - INFO - Saving reunion data
+2025-04-06 09:13:31 - DEBUG - Attempting to call API for 07012025, R7
+2025-04-06 09:13:32 - INFO - No more reunion [7] on 2025-01-07 09:13:13.678027 : 204
+2025-04-06 09:13:32 - DEBUG - Attempting to call API for 08012025, R1
+2025-04-06 09:13:32 - DEBUG - Response 200 for reunions [1] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:32 - INFO - Saving hippodrome data
+2025-04-06 09:13:32 - INFO - Saving reunion data
+2025-04-06 09:13:32 - DEBUG - Attempting to call API for 08012025, R2
+2025-04-06 09:13:33 - DEBUG - Response 200 for reunions [2] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:33 - INFO - Saving pays data
+2025-04-06 09:13:33 - INFO - Saving hippodrome data
+2025-04-06 09:13:33 - INFO - Saving reunion data
+2025-04-06 09:13:33 - DEBUG - Attempting to call API for 08012025, R3
+2025-04-06 09:13:33 - DEBUG - Response 200 for reunions [3] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:33 - INFO - Saving hippodrome data
+2025-04-06 09:13:33 - INFO - Saving reunion data
+2025-04-06 09:13:33 - DEBUG - Attempting to call API for 08012025, R4
+2025-04-06 09:13:34 - DEBUG - Response 200 for reunions [4] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:34 - INFO - Saving hippodrome data
+2025-04-06 09:13:34 - INFO - Saving reunion data
+2025-04-06 09:13:34 - DEBUG - Attempting to call API for 08012025, R5
+2025-04-06 09:13:35 - DEBUG - Response 200 for reunions [5] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:35 - INFO - Saving pays data
+2025-04-06 09:13:35 - INFO - Saving hippodrome data
+2025-04-06 09:13:35 - INFO - Saving reunion data
+2025-04-06 09:13:35 - DEBUG - Attempting to call API for 08012025, R6
+2025-04-06 09:13:35 - DEBUG - Response 200 for reunions [6] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:35 - INFO - Saving pays data
+2025-04-06 09:13:35 - INFO - Saving hippodrome data
+2025-04-06 09:13:35 - INFO - Saving reunion data
+2025-04-06 09:13:35 - DEBUG - Attempting to call API for 08012025, R7
+2025-04-06 09:13:36 - DEBUG - Response 200 for reunions [7] on 2025-01-08 09:13:13.678027
+2025-04-06 09:13:36 - INFO - Saving pays data
+2025-04-06 09:13:36 - INFO - Saving hippodrome data
+2025-04-06 09:13:36 - INFO - Saving reunion data
+2025-04-06 09:13:36 - DEBUG - Attempting to call API for 08012025, R8
+2025-04-06 09:13:36 - INFO - No more reunion [8] on 2025-01-08 09:13:13.678027 : 204
+2025-04-06 09:13:36 - DEBUG - Attempting to call API for 09012025, R1
+2025-04-06 09:13:37 - DEBUG - Response 200 for reunions [1] on 2025-01-09 09:13:13.678027
+2025-04-06 09:13:37 - INFO - Saving reunion data
+2025-04-06 09:13:37 - DEBUG - Attempting to call API for 09012025, R2
+2025-04-06 09:13:37 - DEBUG - Response 200 for reunions [2] on 2025-01-09 09:13:13.678027
+2025-04-06 09:13:37 - INFO - Saving reunion data
+2025-04-06 09:13:37 - DEBUG - Attempting to call API for 09012025, R3
+2025-04-06 09:13:38 - DEBUG - Response 200 for reunions [3] on 2025-01-09 09:13:13.678027
+2025-04-06 09:13:38 - INFO - Saving hippodrome data
+2025-04-06 09:13:38 - INFO - Saving reunion data
+2025-04-06 09:13:38 - DEBUG - Attempting to call API for 09012025, R4
+2025-04-06 09:13:39 - DEBUG - Response 200 for reunions [4] on 2025-01-09 09:13:13.678027
+2025-04-06 09:13:39 - INFO - Saving reunion data
+2025-04-06 09:13:39 - DEBUG - Attempting to call API for 09012025, R5
+2025-04-06 09:13:39 - DEBUG - Response 200 for reunions [5] on 2025-01-09 09:13:13.678027
+2025-04-06 09:13:39 - INFO - Saving hippodrome data
+2025-04-06 09:13:39 - INFO - Saving reunion data
+2025-04-06 09:13:39 - DEBUG - Attempting to call API for 09012025, R6
+2025-04-06 09:13:40 - DEBUG - Response 200 for reunions [6] on 2025-01-09 09:13:13.678027
+2025-04-06 09:13:40 - INFO - Saving pays data
+2025-04-06 09:13:40 - INFO - Saving hippodrome data
+2025-04-06 09:13:40 - INFO - Saving reunion data
+2025-04-06 09:13:40 - DEBUG - Attempting to call API for 09012025, R7
+2025-04-06 09:13:40 - INFO - No more reunion [7] on 2025-01-09 09:13:13.678027 : 204
+2025-04-06 09:13:40 - DEBUG - Attempting to call API for 10012025, R1
+2025-04-06 09:13:41 - DEBUG - Response 200 for reunions [1] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:41 - INFO - Saving hippodrome data
+2025-04-06 09:13:41 - INFO - Saving reunion data
+2025-04-06 09:13:41 - DEBUG - Attempting to call API for 10012025, R2
+2025-04-06 09:13:41 - DEBUG - Response 200 for reunions [2] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:41 - INFO - Saving reunion data
+2025-04-06 09:13:41 - DEBUG - Attempting to call API for 10012025, R3
+2025-04-06 09:13:42 - DEBUG - Response 200 for reunions [3] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:42 - INFO - Saving reunion data
+2025-04-06 09:13:42 - DEBUG - Attempting to call API for 10012025, R4
+2025-04-06 09:13:42 - DEBUG - Response 200 for reunions [4] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:42 - INFO - Saving reunion data
+2025-04-06 09:13:42 - DEBUG - Attempting to call API for 10012025, R5
+2025-04-06 09:13:43 - DEBUG - Response 200 for reunions [5] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:43 - INFO - Saving pays data
+2025-04-06 09:13:43 - INFO - Saving hippodrome data
+2025-04-06 09:13:43 - INFO - Saving reunion data
+2025-04-06 09:13:43 - DEBUG - Attempting to call API for 10012025, R6
+2025-04-06 09:13:49 - DEBUG - Response 200 for reunions [6] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:49 - INFO - Saving reunion data
+2025-04-06 09:13:49 - DEBUG - Attempting to call API for 10012025, R7
+2025-04-06 09:13:54 - DEBUG - Response 200 for reunions [7] on 2025-01-10 09:13:13.678027
+2025-04-06 09:13:54 - INFO - Saving hippodrome data
+2025-04-06 09:13:54 - INFO - Saving reunion data
+2025-04-06 09:13:54 - DEBUG - Attempting to call API for 10012025, R8
+2025-04-06 09:13:55 - INFO - No more reunion [8] on 2025-01-10 09:13:13.678027 : 204
+2025-04-06 09:13:55 - DEBUG - Attempting to call API for 11012025, R1
+2025-04-06 09:13:55 - DEBUG - Response 200 for reunions [1] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:55 - INFO - Saving reunion data
+2025-04-06 09:13:55 - DEBUG - Attempting to call API for 11012025, R2
+2025-04-06 09:13:56 - DEBUG - Response 200 for reunions [2] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:56 - INFO - Saving pays data
+2025-04-06 09:13:56 - INFO - Saving hippodrome data
+2025-04-06 09:13:56 - INFO - Saving reunion data
+2025-04-06 09:13:56 - DEBUG - Attempting to call API for 11012025, R3
+2025-04-06 09:13:56 - DEBUG - Response 200 for reunions [3] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:56 - INFO - Saving hippodrome data
+2025-04-06 09:13:56 - INFO - Saving reunion data
+2025-04-06 09:13:56 - DEBUG - Attempting to call API for 11012025, R4
+2025-04-06 09:13:57 - DEBUG - Response 200 for reunions [4] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:57 - INFO - Saving reunion data
+2025-04-06 09:13:57 - DEBUG - Attempting to call API for 11012025, R5
+2025-04-06 09:13:58 - DEBUG - Response 200 for reunions [5] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:58 - INFO - Saving pays data
+2025-04-06 09:13:58 - INFO - Saving hippodrome data
+2025-04-06 09:13:58 - INFO - Saving reunion data
+2025-04-06 09:13:58 - DEBUG - Attempting to call API for 11012025, R6
+2025-04-06 09:13:58 - DEBUG - Response 200 for reunions [6] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:58 - INFO - Saving reunion data
+2025-04-06 09:13:58 - DEBUG - Attempting to call API for 11012025, R7
+2025-04-06 09:13:59 - DEBUG - Response 200 for reunions [7] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:59 - INFO - Saving reunion data
+2025-04-06 09:13:59 - DEBUG - Attempting to call API for 11012025, R8
+2025-04-06 09:13:59 - DEBUG - Response 200 for reunions [8] on 2025-01-11 09:13:13.678027
+2025-04-06 09:13:59 - INFO - Saving hippodrome data
+2025-04-06 09:13:59 - INFO - Saving reunion data
+2025-04-06 09:13:59 - DEBUG - Attempting to call API for 11012025, R9
+2025-04-06 09:13:59 - INFO - No more reunion [9] on 2025-01-11 09:13:13.678027 : 204
+2025-04-06 09:13:59 - DEBUG - Attempting to call API for 12012025, R1
+2025-04-06 09:14:00 - DEBUG - Response 200 for reunions [1] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:00 - INFO - Saving reunion data
+2025-04-06 09:14:00 - DEBUG - Attempting to call API for 12012025, R2
+2025-04-06 09:14:01 - DEBUG - Response 200 for reunions [2] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:01 - INFO - Saving hippodrome data
+2025-04-06 09:14:01 - INFO - Saving reunion data
+2025-04-06 09:14:01 - DEBUG - Attempting to call API for 12012025, R3
+2025-04-06 09:14:01 - DEBUG - Response 200 for reunions [3] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:01 - INFO - Saving hippodrome data
+2025-04-06 09:14:01 - INFO - Saving reunion data
+2025-04-06 09:14:01 - DEBUG - Attempting to call API for 12012025, R4
+2025-04-06 09:14:02 - DEBUG - Response 200 for reunions [4] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:02 - INFO - Saving reunion data
+2025-04-06 09:14:02 - DEBUG - Attempting to call API for 12012025, R5
+2025-04-06 09:14:02 - DEBUG - Response 200 for reunions [5] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:02 - INFO - Saving reunion data
+2025-04-06 09:14:02 - DEBUG - Attempting to call API for 12012025, R6
+2025-04-06 09:14:03 - DEBUG - Response 200 for reunions [6] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:03 - INFO - Saving hippodrome data
+2025-04-06 09:14:03 - INFO - Saving reunion data
+2025-04-06 09:14:03 - DEBUG - Attempting to call API for 12012025, R7
+2025-04-06 09:14:03 - DEBUG - Response 200 for reunions [7] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:03 - INFO - Saving reunion data
+2025-04-06 09:14:03 - DEBUG - Attempting to call API for 12012025, R8
+2025-04-06 09:14:09 - DEBUG - Response 200 for reunions [8] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:09 - INFO - Saving reunion data
+2025-04-06 09:14:09 - DEBUG - Attempting to call API for 12012025, R9
+2025-04-06 09:14:10 - DEBUG - Response 200 for reunions [9] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:10 - INFO - Saving reunion data
+2025-04-06 09:14:10 - DEBUG - Attempting to call API for 12012025, R10
+2025-04-06 09:14:10 - DEBUG - Response 200 for reunions [10] on 2025-01-12 09:13:13.678027
+2025-04-06 09:14:10 - INFO - Saving hippodrome data
+2025-04-06 09:14:10 - INFO - Saving reunion data
+2025-04-06 09:14:10 - DEBUG - Attempting to call API for 12012025, R11
+2025-04-06 09:14:11 - INFO - No more reunion [11] on 2025-01-12 09:13:13.678027 : 204
+2025-04-06 09:14:11 - DEBUG - Attempting to call API for 13012025, R1
+2025-04-06 09:14:11 - DEBUG - Response 200 for reunions [1] on 2025-01-13 09:13:13.678027
+2025-04-06 09:14:11 - INFO - Saving reunion data
+2025-04-06 09:14:11 - DEBUG - Attempting to call API for 13012025, R2
+2025-04-06 09:14:12 - DEBUG - Response 200 for reunions [2] on 2025-01-13 09:13:13.678027
+2025-04-06 09:14:12 - INFO - Saving pays data
+2025-04-06 09:14:12 - INFO - Saving hippodrome data
+2025-04-06 09:14:12 - INFO - Saving reunion data
+2025-04-06 09:14:12 - DEBUG - Attempting to call API for 13012025, R3
+2025-04-06 09:14:13 - DEBUG - Response 200 for reunions [3] on 2025-01-13 09:13:13.678027
+2025-04-06 09:14:13 - INFO - Saving hippodrome data
+2025-04-06 09:14:13 - INFO - Saving reunion data
+2025-04-06 09:14:13 - DEBUG - Attempting to call API for 13012025, R4
+2025-04-06 09:14:13 - DEBUG - Response 200 for reunions [4] on 2025-01-13 09:13:13.678027
+2025-04-06 09:14:13 - INFO - Saving reunion data
+2025-04-06 09:14:13 - DEBUG - Attempting to call API for 13012025, R5
+2025-04-06 09:14:14 - DEBUG - Response 200 for reunions [5] on 2025-01-13 09:13:13.678027
+2025-04-06 09:14:14 - INFO - Saving reunion data
+2025-04-06 09:14:14 - DEBUG - Attempting to call API for 13012025, R6
+2025-04-06 09:14:14 - DEBUG - Response 200 for reunions [6] on 2025-01-13 09:13:13.678027
+2025-04-06 09:14:14 - INFO - Saving reunion data
+2025-04-06 09:14:14 - DEBUG - Attempting to call API for 13012025, R7
+2025-04-06 09:14:15 - INFO - No more reunion [7] on 2025-01-13 09:13:13.678027 : 204
+2025-04-06 09:14:15 - DEBUG - Attempting to call API for 14012025, R1
+2025-04-06 09:14:15 - DEBUG - Response 200 for reunions [1] on 2025-01-14 09:13:13.678027
+2025-04-06 09:14:15 - INFO - Saving reunion data
+2025-04-06 09:14:15 - DEBUG - Attempting to call API for 14012025, R2
+2025-04-06 09:14:16 - DEBUG - Response 200 for reunions [2] on 2025-01-14 09:13:13.678027
+2025-04-06 09:14:16 - INFO - Saving reunion data
+2025-04-06 09:14:16 - DEBUG - Attempting to call API for 14012025, R3
+2025-04-06 09:14:16 - DEBUG - Response 200 for reunions [3] on 2025-01-14 09:13:13.678027
+2025-04-06 09:14:16 - INFO - Saving reunion data
+2025-04-06 09:14:17 - DEBUG - Attempting to call API for 14012025, R4
+2025-04-06 09:14:17 - DEBUG - Response 200 for reunions [4] on 2025-01-14 09:13:13.678027
+2025-04-06 09:14:17 - INFO - Saving hippodrome data
+2025-04-06 09:14:17 - INFO - Saving reunion data
+2025-04-06 09:14:17 - DEBUG - Attempting to call API for 14012025, R5
+2025-04-06 09:14:18 - DEBUG - Response 200 for reunions [5] on 2025-01-14 09:13:13.678027
+2025-04-06 09:14:18 - INFO - Saving pays data
+2025-04-06 09:14:18 - INFO - Saving hippodrome data
+2025-04-06 09:14:18 - INFO - Saving reunion data
+2025-04-06 09:14:18 - DEBUG - Attempting to call API for 14012025, R6
+2025-04-06 09:14:18 - DEBUG - Response 200 for reunions [6] on 2025-01-14 09:13:13.678027
+2025-04-06 09:14:18 - INFO - Saving reunion data
+2025-04-06 09:14:18 - DEBUG - Attempting to call API for 14012025, R7
+2025-04-06 09:14:19 - INFO - No more reunion [7] on 2025-01-14 09:13:13.678027 : 204
+2025-04-06 09:14:19 - DEBUG - Attempting to call API for 15012025, R1
+2025-04-06 09:14:19 - DEBUG - Response 200 for reunions [1] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:19 - INFO - Saving reunion data
+2025-04-06 09:14:19 - DEBUG - Attempting to call API for 15012025, R2
+2025-04-06 09:14:20 - DEBUG - Response 200 for reunions [2] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:20 - INFO - Saving reunion data
+2025-04-06 09:14:20 - DEBUG - Attempting to call API for 15012025, R3
+2025-04-06 09:14:20 - DEBUG - Response 200 for reunions [3] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:20 - INFO - Saving hippodrome data
+2025-04-06 09:14:20 - INFO - Saving reunion data
+2025-04-06 09:14:20 - DEBUG - Attempting to call API for 15012025, R4
+2025-04-06 09:14:21 - DEBUG - Response 200 for reunions [4] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:21 - INFO - Saving reunion data
+2025-04-06 09:14:21 - DEBUG - Attempting to call API for 15012025, R5
+2025-04-06 09:14:21 - DEBUG - Response 200 for reunions [5] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:21 - INFO - Saving reunion data
+2025-04-06 09:14:21 - DEBUG - Attempting to call API for 15012025, R6
+2025-04-06 09:14:22 - DEBUG - Response 200 for reunions [6] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:22 - INFO - Saving reunion data
+2025-04-06 09:14:22 - DEBUG - Attempting to call API for 15012025, R7
+2025-04-06 09:14:23 - DEBUG - Response 200 for reunions [7] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:23 - INFO - Saving reunion data
+2025-04-06 09:14:23 - DEBUG - Attempting to call API for 15012025, R8
+2025-04-06 09:14:23 - DEBUG - Response 200 for reunions [8] on 2025-01-15 09:13:13.678027
+2025-04-06 09:14:23 - INFO - Saving reunion data
+2025-04-06 09:14:23 - DEBUG - Attempting to call API for 15012025, R9
+2025-04-06 09:14:23 - INFO - No more reunion [9] on 2025-01-15 09:13:13.678027 : 204
+2025-04-06 09:14:23 - DEBUG - Attempting to call API for 16012025, R1
+2025-04-06 09:14:24 - DEBUG - Response 200 for reunions [1] on 2025-01-16 09:13:13.678027
+2025-04-06 09:14:24 - INFO - Saving reunion data
+2025-04-06 09:14:24 - DEBUG - Attempting to call API for 16012025, R2
+2025-04-06 09:14:25 - DEBUG - Response 200 for reunions [2] on 2025-01-16 09:13:13.678027
+2025-04-06 09:14:25 - INFO - Saving pays data
+2025-04-06 09:14:25 - INFO - Saving hippodrome data
+2025-04-06 09:14:25 - INFO - Saving reunion data
+2025-04-06 09:14:25 - DEBUG - Attempting to call API for 16012025, R3
+2025-04-06 09:14:30 - DEBUG - Response 200 for reunions [3] on 2025-01-16 09:13:13.678027
+2025-04-06 09:14:30 - INFO - Saving reunion data
+2025-04-06 09:14:30 - DEBUG - Attempting to call API for 16012025, R4
+2025-04-06 09:14:31 - DEBUG - Response 200 for reunions [4] on 2025-01-16 09:13:13.678027
+2025-04-06 09:14:31 - INFO - Saving reunion data
+2025-04-06 09:14:31 - DEBUG - Attempting to call API for 16012025, R5
+2025-04-06 09:14:31 - DEBUG - Response 200 for reunions [5] on 2025-01-16 09:13:13.678027
+2025-04-06 09:14:31 - INFO - Saving reunion data
+2025-04-06 09:14:31 - DEBUG - Attempting to call API for 16012025, R6
+2025-04-06 09:14:32 - DEBUG - Response 200 for reunions [6] on 2025-01-16 09:13:13.678027
+2025-04-06 09:14:32 - INFO - Saving reunion data
+2025-04-06 09:14:32 - DEBUG - Attempting to call API for 16012025, R7
+2025-04-06 09:14:32 - INFO - No more reunion [7] on 2025-01-16 09:13:13.678027 : 204
+2025-04-06 09:14:32 - DEBUG - Attempting to call API for 17012025, R1
+2025-04-06 09:14:33 - DEBUG - Response 200 for reunions [1] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:33 - INFO - Saving reunion data
+2025-04-06 09:14:33 - DEBUG - Attempting to call API for 17012025, R2
+2025-04-06 09:14:33 - DEBUG - Response 200 for reunions [2] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:33 - INFO - Saving reunion data
+2025-04-06 09:14:33 - DEBUG - Attempting to call API for 17012025, R3
+2025-04-06 09:14:34 - DEBUG - Response 200 for reunions [3] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:34 - INFO - Saving reunion data
+2025-04-06 09:14:34 - DEBUG - Attempting to call API for 17012025, R4
+2025-04-06 09:14:34 - DEBUG - Response 200 for reunions [4] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:34 - INFO - Saving reunion data
+2025-04-06 09:14:34 - DEBUG - Attempting to call API for 17012025, R5
+2025-04-06 09:14:35 - DEBUG - Response 200 for reunions [5] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:35 - INFO - Saving reunion data
+2025-04-06 09:14:35 - DEBUG - Attempting to call API for 17012025, R6
+2025-04-06 09:14:35 - DEBUG - Response 200 for reunions [6] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:35 - INFO - Saving reunion data
+2025-04-06 09:14:35 - DEBUG - Attempting to call API for 17012025, R7
+2025-04-06 09:14:36 - DEBUG - Response 200 for reunions [7] on 2025-01-17 09:13:13.678027
+2025-04-06 09:14:36 - INFO - Saving reunion data
+2025-04-06 09:14:36 - DEBUG - Attempting to call API for 17012025, R8
+2025-04-06 09:14:36 - INFO - No more reunion [8] on 2025-01-17 09:13:13.678027 : 204
+2025-04-06 09:14:36 - DEBUG - Attempting to call API for 18012025, R1
+2025-04-06 09:14:37 - DEBUG - Response 200 for reunions [1] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:37 - INFO - Saving reunion data
+2025-04-06 09:14:37 - DEBUG - Attempting to call API for 18012025, R2
+2025-04-06 09:14:38 - DEBUG - Response 200 for reunions [2] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:38 - INFO - Saving reunion data
+2025-04-06 09:14:38 - DEBUG - Attempting to call API for 18012025, R3
+2025-04-06 09:14:38 - DEBUG - Response 200 for reunions [3] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:38 - INFO - Saving reunion data
+2025-04-06 09:14:38 - DEBUG - Attempting to call API for 18012025, R4
+2025-04-06 09:14:39 - DEBUG - Response 200 for reunions [4] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:39 - INFO - Saving reunion data
+2025-04-06 09:14:39 - DEBUG - Attempting to call API for 18012025, R5
+2025-04-06 09:14:39 - DEBUG - Response 200 for reunions [5] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:39 - INFO - Saving reunion data
+2025-04-06 09:14:39 - DEBUG - Attempting to call API for 18012025, R6
+2025-04-06 09:14:40 - DEBUG - Response 200 for reunions [6] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:40 - INFO - Saving reunion data
+2025-04-06 09:14:40 - DEBUG - Attempting to call API for 18012025, R7
+2025-04-06 09:14:40 - DEBUG - Response 200 for reunions [7] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:40 - INFO - Saving reunion data
+2025-04-06 09:14:40 - DEBUG - Attempting to call API for 18012025, R8
+2025-04-06 09:14:41 - DEBUG - Response 200 for reunions [8] on 2025-01-18 09:13:13.678027
+2025-04-06 09:14:41 - INFO - Saving reunion data
+2025-04-06 09:14:41 - DEBUG - Attempting to call API for 18012025, R9
+2025-04-06 09:14:42 - INFO - No more reunion [9] on 2025-01-18 09:13:13.678027 : 204
+2025-04-06 09:14:42 - DEBUG - Attempting to call API for 19012025, R1
+2025-04-06 09:14:42 - DEBUG - Response 200 for reunions [1] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:42 - INFO - Saving reunion data
+2025-04-06 09:14:42 - DEBUG - Attempting to call API for 19012025, R2
+2025-04-06 09:14:43 - DEBUG - Response 200 for reunions [2] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:43 - INFO - Saving reunion data
+2025-04-06 09:14:43 - DEBUG - Attempting to call API for 19012025, R3
+2025-04-06 09:14:43 - DEBUG - Response 200 for reunions [3] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:43 - INFO - Saving hippodrome data
+2025-04-06 09:14:43 - INFO - Saving reunion data
+2025-04-06 09:14:43 - DEBUG - Attempting to call API for 19012025, R4
+2025-04-06 09:14:44 - DEBUG - Response 200 for reunions [4] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:44 - INFO - Saving reunion data
+2025-04-06 09:14:44 - DEBUG - Attempting to call API for 19012025, R5
+2025-04-06 09:14:45 - DEBUG - Response 200 for reunions [5] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:45 - INFO - Saving reunion data
+2025-04-06 09:14:45 - DEBUG - Attempting to call API for 19012025, R6
+2025-04-06 09:14:45 - DEBUG - Response 200 for reunions [6] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:45 - INFO - Saving reunion data
+2025-04-06 09:14:45 - DEBUG - Attempting to call API for 19012025, R7
+2025-04-06 09:14:51 - DEBUG - Response 200 for reunions [7] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:51 - INFO - Saving hippodrome data
+2025-04-06 09:14:51 - INFO - Saving reunion data
+2025-04-06 09:14:51 - DEBUG - Attempting to call API for 19012025, R8
+2025-04-06 09:14:51 - DEBUG - Response 200 for reunions [8] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:51 - INFO - Saving hippodrome data
+2025-04-06 09:14:51 - INFO - Saving reunion data
+2025-04-06 09:14:51 - DEBUG - Attempting to call API for 19012025, R9
+2025-04-06 09:14:52 - DEBUG - Response 200 for reunions [9] on 2025-01-19 09:13:13.678027
+2025-04-06 09:14:52 - INFO - Saving reunion data
+2025-04-06 09:14:52 - DEBUG - Attempting to call API for 19012025, R10
+2025-04-06 09:14:52 - INFO - No more reunion [10] on 2025-01-19 09:13:13.678027 : 204
+2025-04-06 09:14:52 - DEBUG - Attempting to call API for 20012025, R1
+2025-04-06 09:14:53 - DEBUG - Response 200 for reunions [1] on 2025-01-20 09:13:13.678027
+2025-04-06 09:14:53 - INFO - Saving reunion data
+2025-04-06 09:14:53 - DEBUG - Attempting to call API for 20012025, R2
+2025-04-06 09:14:53 - DEBUG - Response 200 for reunions [2] on 2025-01-20 09:13:13.678027
+2025-04-06 09:14:53 - INFO - Saving reunion data
+2025-04-06 09:14:53 - DEBUG - Attempting to call API for 20012025, R3
+2025-04-06 09:14:54 - DEBUG - Response 200 for reunions [3] on 2025-01-20 09:13:13.678027
+2025-04-06 09:14:54 - INFO - Saving reunion data
+2025-04-06 09:14:54 - DEBUG - Attempting to call API for 20012025, R4
+2025-04-06 09:14:54 - DEBUG - Response 200 for reunions [4] on 2025-01-20 09:13:13.678027
+2025-04-06 09:14:54 - INFO - Saving reunion data
+2025-04-06 09:14:55 - DEBUG - Attempting to call API for 20012025, R5
+2025-04-06 09:14:55 - DEBUG - Response 200 for reunions [5] on 2025-01-20 09:13:13.678027
+2025-04-06 09:14:55 - INFO - Saving reunion data
+2025-04-06 09:14:55 - DEBUG - Attempting to call API for 20012025, R6
+2025-04-06 09:14:56 - DEBUG - Response 200 for reunions [6] on 2025-01-20 09:13:13.678027
+2025-04-06 09:14:56 - INFO - Saving hippodrome data
+2025-04-06 09:14:56 - INFO - Saving reunion data
+2025-04-06 09:14:56 - DEBUG - Attempting to call API for 20012025, R7
+2025-04-06 09:14:56 - INFO - No more reunion [7] on 2025-01-20 09:13:13.678027 : 204
+2025-04-06 09:14:56 - DEBUG - Attempting to call API for 21012025, R1
+2025-04-06 09:14:57 - DEBUG - Response 200 for reunions [1] on 2025-01-21 09:13:13.678027
+2025-04-06 09:14:57 - INFO - Saving reunion data
+2025-04-06 09:14:57 - DEBUG - Attempting to call API for 21012025, R2
+2025-04-06 09:14:57 - DEBUG - Response 200 for reunions [2] on 2025-01-21 09:13:13.678027
+2025-04-06 09:14:57 - INFO - Saving reunion data
+2025-04-06 09:14:57 - DEBUG - Attempting to call API for 21012025, R3
+2025-04-06 09:14:58 - DEBUG - Response 200 for reunions [3] on 2025-01-21 09:13:13.678027
+2025-04-06 09:14:58 - INFO - Saving reunion data
+2025-04-06 09:14:58 - DEBUG - Attempting to call API for 21012025, R4
+2025-04-06 09:14:58 - DEBUG - Response 200 for reunions [4] on 2025-01-21 09:13:13.678027
+2025-04-06 09:14:58 - INFO - Saving reunion data
+2025-04-06 09:14:58 - DEBUG - Attempting to call API for 21012025, R5
+2025-04-06 09:14:59 - DEBUG - Response 200 for reunions [5] on 2025-01-21 09:13:13.678027
+2025-04-06 09:14:59 - INFO - Saving reunion data
+2025-04-06 09:14:59 - DEBUG - Attempting to call API for 21012025, R6
+2025-04-06 09:14:59 - DEBUG - Response 200 for reunions [6] on 2025-01-21 09:13:13.678027
+2025-04-06 09:14:59 - INFO - Saving reunion data
+2025-04-06 09:14:59 - DEBUG - Attempting to call API for 21012025, R7
+2025-04-06 09:15:00 - DEBUG - Response 200 for reunions [7] on 2025-01-21 09:13:13.678027
+2025-04-06 09:15:00 - INFO - Saving reunion data
+2025-04-06 09:15:00 - DEBUG - Attempting to call API for 21012025, R8
+2025-04-06 09:15:00 - INFO - No more reunion [8] on 2025-01-21 09:13:13.678027 : 204
+2025-04-06 09:15:00 - DEBUG - Attempting to call API for 22012025, R1
+2025-04-06 09:15:01 - DEBUG - Response 200 for reunions [1] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:01 - INFO - Saving reunion data
+2025-04-06 09:15:01 - DEBUG - Attempting to call API for 22012025, R2
+2025-04-06 09:15:02 - DEBUG - Response 200 for reunions [2] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:02 - INFO - Saving reunion data
+2025-04-06 09:15:02 - DEBUG - Attempting to call API for 22012025, R3
+2025-04-06 09:15:02 - DEBUG - Response 200 for reunions [3] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:02 - INFO - Saving reunion data
+2025-04-06 09:15:02 - DEBUG - Attempting to call API for 22012025, R4
+2025-04-06 09:15:03 - DEBUG - Response 200 for reunions [4] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:03 - INFO - Saving reunion data
+2025-04-06 09:15:03 - DEBUG - Attempting to call API for 22012025, R5
+2025-04-06 09:15:03 - DEBUG - Response 200 for reunions [5] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:03 - INFO - Saving reunion data
+2025-04-06 09:15:03 - DEBUG - Attempting to call API for 22012025, R6
+2025-04-06 09:15:04 - DEBUG - Response 200 for reunions [6] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:04 - INFO - Saving reunion data
+2025-04-06 09:15:04 - DEBUG - Attempting to call API for 22012025, R7
+2025-04-06 09:15:04 - DEBUG - Response 200 for reunions [7] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:04 - INFO - Saving reunion data
+2025-04-06 09:15:04 - DEBUG - Attempting to call API for 22012025, R8
+2025-04-06 09:15:05 - DEBUG - Response 200 for reunions [8] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:05 - INFO - Saving reunion data
+2025-04-06 09:15:05 - DEBUG - Attempting to call API for 22012025, R9
+2025-04-06 09:15:05 - DEBUG - Response 200 for reunions [9] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:05 - INFO - Saving reunion data
+2025-04-06 09:15:05 - DEBUG - Attempting to call API for 22012025, R10
+2025-04-06 09:15:06 - DEBUG - Response 200 for reunions [10] on 2025-01-22 09:13:13.678027
+2025-04-06 09:15:06 - INFO - Saving reunion data
+2025-04-06 09:15:06 - DEBUG - Attempting to call API for 22012025, R11
+2025-04-06 09:15:06 - INFO - No more reunion [11] on 2025-01-22 09:13:13.678027 : 204
+2025-04-06 09:15:06 - DEBUG - Attempting to call API for 23012025, R1
+2025-04-06 09:15:07 - DEBUG - Response 200 for reunions [1] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:07 - INFO - Saving reunion data
+2025-04-06 09:15:07 - DEBUG - Attempting to call API for 23012025, R2
+2025-04-06 09:15:07 - DEBUG - Response 200 for reunions [2] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:07 - INFO - Saving reunion data
+2025-04-06 09:15:07 - DEBUG - Attempting to call API for 23012025, R3
+2025-04-06 09:15:08 - DEBUG - Response 200 for reunions [3] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:08 - INFO - Saving reunion data
+2025-04-06 09:15:08 - DEBUG - Attempting to call API for 23012025, R4
+2025-04-06 09:15:09 - DEBUG - Response 200 for reunions [4] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:09 - INFO - Saving reunion data
+2025-04-06 09:15:09 - DEBUG - Attempting to call API for 23012025, R5
+2025-04-06 09:15:09 - DEBUG - Response 200 for reunions [5] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:09 - INFO - Saving reunion data
+2025-04-06 09:15:09 - DEBUG - Attempting to call API for 23012025, R6
+2025-04-06 09:15:10 - DEBUG - Response 200 for reunions [6] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:10 - INFO - Saving reunion data
+2025-04-06 09:15:10 - DEBUG - Attempting to call API for 23012025, R7
+2025-04-06 09:15:10 - DEBUG - Response 200 for reunions [7] on 2025-01-23 09:13:13.678027
+2025-04-06 09:15:10 - INFO - Saving reunion data
+2025-04-06 09:15:10 - DEBUG - Attempting to call API for 23012025, R8
+2025-04-06 09:15:11 - INFO - No more reunion [8] on 2025-01-23 09:13:13.678027 : 204
+2025-04-06 09:15:11 - DEBUG - Attempting to call API for 24012025, R1
+2025-04-06 09:15:11 - DEBUG - Response 200 for reunions [1] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:11 - INFO - Saving reunion data
+2025-04-06 09:15:11 - DEBUG - Attempting to call API for 24012025, R2
+2025-04-06 09:15:12 - DEBUG - Response 200 for reunions [2] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:12 - INFO - Saving reunion data
+2025-04-06 09:15:12 - DEBUG - Attempting to call API for 24012025, R3
+2025-04-06 09:15:13 - DEBUG - Response 200 for reunions [3] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:13 - INFO - Saving hippodrome data
+2025-04-06 09:15:13 - INFO - Saving reunion data
+2025-04-06 09:15:13 - DEBUG - Attempting to call API for 24012025, R4
+2025-04-06 09:15:13 - DEBUG - Response 200 for reunions [4] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:13 - INFO - Saving reunion data
+2025-04-06 09:15:13 - DEBUG - Attempting to call API for 24012025, R5
+2025-04-06 09:15:14 - DEBUG - Response 200 for reunions [5] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:14 - INFO - Saving reunion data
+2025-04-06 09:15:14 - DEBUG - Attempting to call API for 24012025, R6
+2025-04-06 09:15:14 - DEBUG - Response 200 for reunions [6] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:14 - INFO - Saving reunion data
+2025-04-06 09:15:14 - DEBUG - Attempting to call API for 24012025, R7
+2025-04-06 09:15:15 - DEBUG - Response 200 for reunions [7] on 2025-01-24 09:13:13.678027
+2025-04-06 09:15:15 - INFO - Saving reunion data
+2025-04-06 09:15:15 - DEBUG - Attempting to call API for 24012025, R8
+2025-04-06 09:15:15 - INFO - No more reunion [8] on 2025-01-24 09:13:13.678027 : 204
+2025-04-06 09:15:15 - DEBUG - Attempting to call API for 25012025, R1
+2025-04-06 09:15:21 - DEBUG - Response 200 for reunions [1] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:21 - INFO - Saving reunion data
+2025-04-06 09:15:21 - DEBUG - Attempting to call API for 25012025, R2
+2025-04-06 09:15:22 - DEBUG - Response 200 for reunions [2] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:22 - INFO - Saving reunion data
+2025-04-06 09:15:22 - DEBUG - Attempting to call API for 25012025, R3
+2025-04-06 09:15:22 - DEBUG - Response 200 for reunions [3] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:22 - INFO - Saving reunion data
+2025-04-06 09:15:22 - DEBUG - Attempting to call API for 25012025, R4
+2025-04-06 09:15:23 - DEBUG - Response 200 for reunions [4] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:23 - INFO - Saving reunion data
+2025-04-06 09:15:23 - DEBUG - Attempting to call API for 25012025, R5
+2025-04-06 09:15:23 - DEBUG - Response 200 for reunions [5] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:23 - INFO - Saving reunion data
+2025-04-06 09:15:23 - DEBUG - Attempting to call API for 25012025, R6
+2025-04-06 09:15:24 - DEBUG - Response 200 for reunions [6] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:24 - INFO - Saving reunion data
+2025-04-06 09:15:24 - DEBUG - Attempting to call API for 25012025, R7
+2025-04-06 09:15:24 - DEBUG - Response 200 for reunions [7] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:24 - INFO - Saving reunion data
+2025-04-06 09:15:24 - DEBUG - Attempting to call API for 25012025, R8
+2025-04-06 09:15:25 - DEBUG - Response 200 for reunions [8] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:25 - INFO - Saving hippodrome data
+2025-04-06 09:15:25 - INFO - Saving reunion data
+2025-04-06 09:15:25 - DEBUG - Attempting to call API for 25012025, R9
+2025-04-06 09:15:25 - DEBUG - Response 200 for reunions [9] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:25 - INFO - Saving reunion data
+2025-04-06 09:15:25 - DEBUG - Attempting to call API for 25012025, R10
+2025-04-06 09:15:26 - DEBUG - Response 200 for reunions [10] on 2025-01-25 09:13:13.678027
+2025-04-06 09:15:26 - INFO - Saving reunion data
+2025-04-06 09:15:26 - DEBUG - Attempting to call API for 25012025, R11
+2025-04-06 09:15:26 - INFO - No more reunion [11] on 2025-01-25 09:13:13.678027 : 204
+2025-04-06 09:15:26 - DEBUG - Attempting to call API for 26012025, R1
+2025-04-06 09:15:27 - DEBUG - Response 200 for reunions [1] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:27 - INFO - Saving reunion data
+2025-04-06 09:15:27 - DEBUG - Attempting to call API for 26012025, R2
+2025-04-06 09:15:28 - DEBUG - Response 200 for reunions [2] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:28 - INFO - Saving reunion data
+2025-04-06 09:15:28 - DEBUG - Attempting to call API for 26012025, R3
+2025-04-06 09:15:28 - DEBUG - Response 200 for reunions [3] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:28 - INFO - Saving reunion data
+2025-04-06 09:15:28 - DEBUG - Attempting to call API for 26012025, R4
+2025-04-06 09:15:29 - DEBUG - Response 200 for reunions [4] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:29 - INFO - Saving reunion data
+2025-04-06 09:15:29 - DEBUG - Attempting to call API for 26012025, R5
+2025-04-06 09:15:29 - DEBUG - Response 200 for reunions [5] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:29 - INFO - Saving reunion data
+2025-04-06 09:15:29 - DEBUG - Attempting to call API for 26012025, R6
+2025-04-06 09:15:30 - DEBUG - Response 200 for reunions [6] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:30 - INFO - Saving reunion data
+2025-04-06 09:15:30 - DEBUG - Attempting to call API for 26012025, R7
+2025-04-06 09:15:30 - DEBUG - Response 200 for reunions [7] on 2025-01-26 09:13:13.678027
+2025-04-06 09:15:30 - INFO - Saving hippodrome data
+2025-04-06 09:15:30 - INFO - Saving reunion data
+2025-04-06 09:15:30 - DEBUG - Attempting to call API for 26012025, R8
+2025-04-06 09:15:31 - INFO - No more reunion [8] on 2025-01-26 09:13:13.678027 : 204
+2025-04-06 09:15:31 - DEBUG - Attempting to call API for 27012025, R1
+2025-04-06 09:15:31 - DEBUG - Response 200 for reunions [1] on 2025-01-27 09:13:13.678027
+2025-04-06 09:15:31 - INFO - Saving reunion data
+2025-04-06 09:15:31 - DEBUG - Attempting to call API for 27012025, R2
+2025-04-06 09:15:32 - DEBUG - Response 200 for reunions [2] on 2025-01-27 09:13:13.678027
+2025-04-06 09:15:32 - INFO - Saving reunion data
+2025-04-06 09:15:32 - DEBUG - Attempting to call API for 27012025, R3
+2025-04-06 09:15:33 - DEBUG - Response 200 for reunions [3] on 2025-01-27 09:13:13.678027
+2025-04-06 09:15:33 - INFO - Saving reunion data
+2025-04-06 09:15:33 - DEBUG - Attempting to call API for 27012025, R4
+2025-04-06 09:15:33 - DEBUG - Response 200 for reunions [4] on 2025-01-27 09:13:13.678027
+2025-04-06 09:15:33 - INFO - Saving reunion data
+2025-04-06 09:15:33 - DEBUG - Attempting to call API for 27012025, R5
+2025-04-06 09:15:34 - DEBUG - Response 200 for reunions [5] on 2025-01-27 09:13:13.678027
+2025-04-06 09:15:34 - INFO - Saving reunion data
+2025-04-06 09:15:34 - DEBUG - Attempting to call API for 27012025, R6
+2025-04-06 09:15:34 - DEBUG - Response 200 for reunions [6] on 2025-01-27 09:13:13.678027
+2025-04-06 09:15:34 - INFO - Saving reunion data
+2025-04-06 09:15:34 - DEBUG - Attempting to call API for 27012025, R7
+2025-04-06 09:15:35 - INFO - No more reunion [7] on 2025-01-27 09:13:13.678027 : 204
+2025-04-06 09:15:35 - DEBUG - Attempting to call API for 28012025, R1
+2025-04-06 09:15:35 - DEBUG - Response 200 for reunions [1] on 2025-01-28 09:13:13.678027
+2025-04-06 09:15:35 - INFO - Saving reunion data
+2025-04-06 09:15:35 - DEBUG - Attempting to call API for 28012025, R2
+2025-04-06 09:15:36 - DEBUG - Response 200 for reunions [2] on 2025-01-28 09:13:13.678027
+2025-04-06 09:15:36 - INFO - Saving reunion data
+2025-04-06 09:15:36 - DEBUG - Attempting to call API for 28012025, R3
+2025-04-06 09:15:36 - DEBUG - Response 200 for reunions [3] on 2025-01-28 09:13:13.678027
+2025-04-06 09:15:36 - INFO - Saving reunion data
+2025-04-06 09:15:36 - DEBUG - Attempting to call API for 28012025, R4
+2025-04-06 09:15:37 - DEBUG - Response 200 for reunions [4] on 2025-01-28 09:13:13.678027
+2025-04-06 09:15:37 - INFO - Saving reunion data
+2025-04-06 09:15:37 - DEBUG - Attempting to call API for 28012025, R5
+2025-04-06 09:15:38 - DEBUG - Response 200 for reunions [5] on 2025-01-28 09:13:13.678027
+2025-04-06 09:15:38 - INFO - Saving reunion data
+2025-04-06 09:15:38 - DEBUG - Attempting to call API for 28012025, R6
+2025-04-06 09:15:38 - DEBUG - Response 200 for reunions [6] on 2025-01-28 09:13:13.678027
+2025-04-06 09:15:38 - INFO - Saving reunion data
+2025-04-06 09:15:38 - DEBUG - Attempting to call API for 28012025, R7
+2025-04-06 09:15:39 - INFO - No more reunion [7] on 2025-01-28 09:13:13.678027 : 204
+2025-04-06 09:15:39 - DEBUG - Attempting to call API for 29012025, R1
+2025-04-06 09:15:39 - DEBUG - Response 200 for reunions [1] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:39 - INFO - Saving reunion data
+2025-04-06 09:15:39 - DEBUG - Attempting to call API for 29012025, R2
+2025-04-06 09:15:40 - DEBUG - Response 200 for reunions [2] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:40 - INFO - Saving reunion data
+2025-04-06 09:15:40 - DEBUG - Attempting to call API for 29012025, R3
+2025-04-06 09:15:40 - DEBUG - Response 200 for reunions [3] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:40 - INFO - Saving reunion data
+2025-04-06 09:15:40 - DEBUG - Attempting to call API for 29012025, R4
+2025-04-06 09:15:41 - DEBUG - Response 200 for reunions [4] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:41 - INFO - Saving reunion data
+2025-04-06 09:15:41 - DEBUG - Attempting to call API for 29012025, R5
+2025-04-06 09:15:47 - DEBUG - Response 200 for reunions [5] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:47 - INFO - Saving reunion data
+2025-04-06 09:15:47 - DEBUG - Attempting to call API for 29012025, R6
+2025-04-06 09:15:47 - DEBUG - Response 200 for reunions [6] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:47 - INFO - Saving reunion data
+2025-04-06 09:15:47 - DEBUG - Attempting to call API for 29012025, R7
+2025-04-06 09:15:47 - DEBUG - Response 200 for reunions [7] on 2025-01-29 09:13:13.678027
+2025-04-06 09:15:48 - INFO - Saving reunion data
+2025-04-06 09:15:48 - DEBUG - Attempting to call API for 29012025, R8
+2025-04-06 09:15:48 - INFO - No more reunion [8] on 2025-01-29 09:13:13.678027 : 204
+2025-04-06 09:15:48 - DEBUG - Attempting to call API for 30012025, R1
+2025-04-06 09:15:49 - DEBUG - Response 200 for reunions [1] on 2025-01-30 09:13:13.678027
+2025-04-06 09:15:49 - INFO - Saving reunion data
+2025-04-06 09:15:49 - DEBUG - Attempting to call API for 30012025, R2
+2025-04-06 09:15:49 - DEBUG - Response 200 for reunions [2] on 2025-01-30 09:13:13.678027
+2025-04-06 09:15:49 - INFO - Saving hippodrome data
+2025-04-06 09:15:49 - INFO - Saving reunion data
+2025-04-06 09:15:49 - DEBUG - Attempting to call API for 30012025, R3
+2025-04-06 09:15:50 - DEBUG - Response 200 for reunions [3] on 2025-01-30 09:13:13.678027
+2025-04-06 09:15:50 - INFO - Saving reunion data
+2025-04-06 09:15:50 - DEBUG - Attempting to call API for 30012025, R4
+2025-04-06 09:15:50 - DEBUG - Response 200 for reunions [4] on 2025-01-30 09:13:13.678027
+2025-04-06 09:15:50 - INFO - Saving reunion data
+2025-04-06 09:15:50 - DEBUG - Attempting to call API for 30012025, R5
+2025-04-06 09:15:51 - DEBUG - Response 200 for reunions [5] on 2025-01-30 09:13:13.678027
+2025-04-06 09:15:51 - INFO - Saving reunion data
+2025-04-06 09:15:51 - DEBUG - Attempting to call API for 30012025, R6
+2025-04-06 09:15:51 - DEBUG - Response 200 for reunions [6] on 2025-01-30 09:13:13.678027
+2025-04-06 09:15:51 - INFO - Saving reunion data
+2025-04-06 09:15:51 - DEBUG - Attempting to call API for 30012025, R7
+2025-04-06 09:15:52 - INFO - No more reunion [7] on 2025-01-30 09:13:13.678027 : 204
+2025-04-06 09:15:52 - DEBUG - Attempting to call API for 31012025, R1
+2025-04-06 09:15:52 - DEBUG - Response 200 for reunions [1] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:52 - INFO - Saving reunion data
+2025-04-06 09:15:52 - DEBUG - Attempting to call API for 31012025, R2
+2025-04-06 09:15:53 - DEBUG - Response 200 for reunions [2] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:53 - INFO - Saving reunion data
+2025-04-06 09:15:53 - DEBUG - Attempting to call API for 31012025, R3
+2025-04-06 09:15:53 - DEBUG - Response 200 for reunions [3] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:53 - INFO - Saving reunion data
+2025-04-06 09:15:53 - DEBUG - Attempting to call API for 31012025, R4
+2025-04-06 09:15:54 - DEBUG - Response 200 for reunions [4] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:54 - INFO - Saving reunion data
+2025-04-06 09:15:54 - DEBUG - Attempting to call API for 31012025, R5
+2025-04-06 09:15:54 - DEBUG - Response 200 for reunions [5] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:54 - INFO - Saving reunion data
+2025-04-06 09:15:54 - DEBUG - Attempting to call API for 31012025, R6
+2025-04-06 09:15:55 - DEBUG - Response 200 for reunions [6] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:55 - INFO - Saving reunion data
+2025-04-06 09:15:55 - DEBUG - Attempting to call API for 31012025, R7
+2025-04-06 09:15:55 - DEBUG - Response 200 for reunions [7] on 2025-01-31 09:13:13.678027
+2025-04-06 09:15:55 - INFO - Saving reunion data
+2025-04-06 09:15:55 - DEBUG - Attempting to call API for 31012025, R8
+2025-04-06 09:15:56 - INFO - No more reunion [8] on 2025-01-31 09:13:13.678027 : 204
+2025-04-06 09:15:56 - DEBUG - Attempting to call API for 01022025, R1
+2025-04-06 09:15:57 - DEBUG - Response 200 for reunions [1] on 2025-02-01 09:13:13.678027
+2025-04-06 09:15:57 - INFO - Saving reunion data
+2025-04-06 09:15:57 - DEBUG - Attempting to call API for 01022025, R2
+2025-04-06 09:15:57 - DEBUG - Response 200 for reunions [2] on 2025-02-01 09:13:13.678027
+2025-04-06 09:15:57 - INFO - Saving hippodrome data
+2025-04-06 09:15:57 - INFO - Saving reunion data
+2025-04-06 09:15:57 - DEBUG - Attempting to call API for 01022025, R3
+2025-04-06 09:15:58 - DEBUG - Response 200 for reunions [3] on 2025-02-01 09:13:13.678027
+2025-04-06 09:15:58 - INFO - Saving reunion data
+2025-04-06 09:15:58 - DEBUG - Attempting to call API for 01022025, R4
+2025-04-06 09:15:58 - DEBUG - Response 200 for reunions [4] on 2025-02-01 09:13:13.678027
+2025-04-06 09:15:58 - INFO - Saving reunion data
+2025-04-06 09:15:58 - DEBUG - Attempting to call API for 01022025, R5
+2025-04-06 09:16:04 - DEBUG - Response 200 for reunions [5] on 2025-02-01 09:13:13.678027
+2025-04-06 09:16:04 - INFO - Saving reunion data
+2025-04-06 09:16:04 - DEBUG - Attempting to call API for 01022025, R6
+2025-04-06 09:16:04 - DEBUG - Response 200 for reunions [6] on 2025-02-01 09:13:13.678027
+2025-04-06 09:16:04 - INFO - Saving reunion data
+2025-04-06 09:16:04 - DEBUG - Attempting to call API for 01022025, R7
+2025-04-06 09:16:05 - DEBUG - Response 200 for reunions [7] on 2025-02-01 09:13:13.678027
+2025-04-06 09:16:05 - INFO - Saving hippodrome data
+2025-04-06 09:16:05 - INFO - Saving reunion data
+2025-04-06 09:16:05 - DEBUG - Attempting to call API for 01022025, R8
+2025-04-06 09:16:05 - DEBUG - Response 200 for reunions [8] on 2025-02-01 09:13:13.678027
+2025-04-06 09:16:05 - INFO - Saving pays data
+2025-04-06 09:16:05 - INFO - Saving hippodrome data
+2025-04-06 09:16:05 - INFO - Saving reunion data
+2025-04-06 09:16:05 - DEBUG - Attempting to call API for 01022025, R9
+2025-04-06 09:16:06 - INFO - No more reunion [9] on 2025-02-01 09:13:13.678027 : 204
+2025-04-06 09:16:06 - DEBUG - Attempting to call API for 02022025, R1
+2025-04-06 09:16:07 - DEBUG - Response 200 for reunions [1] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:07 - INFO - Saving reunion data
+2025-04-06 09:16:07 - DEBUG - Attempting to call API for 02022025, R2
+2025-04-06 09:16:07 - DEBUG - Response 200 for reunions [2] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:07 - INFO - Saving reunion data
+2025-04-06 09:16:07 - DEBUG - Attempting to call API for 02022025, R3
+2025-04-06 09:16:08 - DEBUG - Response 200 for reunions [3] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:08 - INFO - Saving reunion data
+2025-04-06 09:16:08 - DEBUG - Attempting to call API for 02022025, R4
+2025-04-06 09:16:08 - DEBUG - Response 200 for reunions [4] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:08 - INFO - Saving reunion data
+2025-04-06 09:16:08 - DEBUG - Attempting to call API for 02022025, R5
+2025-04-06 09:16:09 - DEBUG - Response 200 for reunions [5] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:09 - INFO - Saving reunion data
+2025-04-06 09:16:09 - DEBUG - Attempting to call API for 02022025, R6
+2025-04-06 09:16:09 - DEBUG - Response 200 for reunions [6] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:09 - INFO - Saving reunion data
+2025-04-06 09:16:09 - DEBUG - Attempting to call API for 02022025, R7
+2025-04-06 09:16:15 - DEBUG - Response 200 for reunions [7] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:15 - INFO - Saving reunion data
+2025-04-06 09:16:15 - DEBUG - Attempting to call API for 02022025, R8
+2025-04-06 09:16:16 - DEBUG - Response 200 for reunions [8] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:16 - INFO - Saving reunion data
+2025-04-06 09:16:16 - DEBUG - Attempting to call API for 02022025, R9
+2025-04-06 09:16:16 - DEBUG - Response 200 for reunions [9] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:16 - INFO - Saving reunion data
+2025-04-06 09:16:16 - DEBUG - Attempting to call API for 02022025, R10
+2025-04-06 09:16:17 - DEBUG - Response 200 for reunions [10] on 2025-02-02 09:13:13.678027
+2025-04-06 09:16:17 - INFO - Saving hippodrome data
+2025-04-06 09:16:17 - INFO - Saving reunion data
+2025-04-06 09:16:17 - DEBUG - Attempting to call API for 02022025, R11
+2025-04-06 09:16:17 - INFO - No more reunion [11] on 2025-02-02 09:13:13.678027 : 204
+2025-04-06 09:16:17 - DEBUG - Attempting to call API for 03022025, R1
+2025-04-06 09:16:18 - DEBUG - Response 200 for reunions [1] on 2025-02-03 09:13:13.678027
+2025-04-06 09:16:18 - INFO - Saving reunion data
+2025-04-06 09:16:18 - DEBUG - Attempting to call API for 03022025, R2
+2025-04-06 09:16:18 - DEBUG - Response 200 for reunions [2] on 2025-02-03 09:13:13.678027
+2025-04-06 09:16:18 - INFO - Saving hippodrome data
+2025-04-06 09:16:18 - INFO - Saving reunion data
+2025-04-06 09:16:18 - DEBUG - Attempting to call API for 03022025, R3
+2025-04-06 09:16:19 - DEBUG - Response 200 for reunions [3] on 2025-02-03 09:13:13.678027
+2025-04-06 09:16:19 - INFO - Saving reunion data
+2025-04-06 09:16:19 - DEBUG - Attempting to call API for 03022025, R4
+2025-04-06 09:16:19 - DEBUG - Response 200 for reunions [4] on 2025-02-03 09:13:13.678027
+2025-04-06 09:16:19 - INFO - Saving reunion data
+2025-04-06 09:16:19 - DEBUG - Attempting to call API for 03022025, R5
+2025-04-06 09:16:20 - DEBUG - Response 200 for reunions [5] on 2025-02-03 09:13:13.678027
+2025-04-06 09:16:20 - INFO - Saving hippodrome data
+2025-04-06 09:16:20 - INFO - Saving reunion data
+2025-04-06 09:16:20 - DEBUG - Attempting to call API for 03022025, R6
+2025-04-06 09:16:20 - DEBUG - Response 200 for reunions [6] on 2025-02-03 09:13:13.678027
+2025-04-06 09:16:20 - INFO - Saving reunion data
+2025-04-06 09:16:20 - DEBUG - Attempting to call API for 03022025, R7
+2025-04-06 09:16:21 - INFO - No more reunion [7] on 2025-02-03 09:13:13.678027 : 204
+2025-04-06 09:16:21 - DEBUG - Attempting to call API for 04022025, R1
+2025-04-06 09:16:21 - DEBUG - Response 200 for reunions [1] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:21 - INFO - Saving reunion data
+2025-04-06 09:16:21 - DEBUG - Attempting to call API for 04022025, R2
+2025-04-06 09:16:22 - DEBUG - Response 200 for reunions [2] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:22 - INFO - Saving reunion data
+2025-04-06 09:16:22 - DEBUG - Attempting to call API for 04022025, R3
+2025-04-06 09:16:22 - DEBUG - Response 200 for reunions [3] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:22 - INFO - Saving reunion data
+2025-04-06 09:16:22 - DEBUG - Attempting to call API for 04022025, R4
+2025-04-06 09:16:23 - DEBUG - Response 200 for reunions [4] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:23 - INFO - Saving reunion data
+2025-04-06 09:16:23 - DEBUG - Attempting to call API for 04022025, R5
+2025-04-06 09:16:24 - DEBUG - Response 200 for reunions [5] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:24 - INFO - Saving reunion data
+2025-04-06 09:16:24 - DEBUG - Attempting to call API for 04022025, R6
+2025-04-06 09:16:24 - DEBUG - Response 200 for reunions [6] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:24 - INFO - Saving reunion data
+2025-04-06 09:16:24 - DEBUG - Attempting to call API for 04022025, R7
+2025-04-06 09:16:25 - DEBUG - Response 200 for reunions [7] on 2025-02-04 09:13:13.678027
+2025-04-06 09:16:25 - INFO - Saving reunion data
+2025-04-06 09:16:25 - DEBUG - Attempting to call API for 04022025, R8
+2025-04-06 09:16:25 - INFO - No more reunion [8] on 2025-02-04 09:13:13.678027 : 204
+2025-04-06 09:16:25 - DEBUG - Attempting to call API for 05022025, R1
+2025-04-06 09:16:26 - DEBUG - Response 200 for reunions [1] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:26 - INFO - Saving reunion data
+2025-04-06 09:16:26 - DEBUG - Attempting to call API for 05022025, R2
+2025-04-06 09:16:27 - DEBUG - Response 200 for reunions [2] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:27 - INFO - Saving reunion data
+2025-04-06 09:16:27 - DEBUG - Attempting to call API for 05022025, R3
+2025-04-06 09:16:27 - DEBUG - Response 200 for reunions [3] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:27 - INFO - Saving reunion data
+2025-04-06 09:16:27 - DEBUG - Attempting to call API for 05022025, R4
+2025-04-06 09:16:28 - DEBUG - Response 200 for reunions [4] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:28 - INFO - Saving hippodrome data
+2025-04-06 09:16:28 - INFO - Saving reunion data
+2025-04-06 09:16:28 - DEBUG - Attempting to call API for 05022025, R5
+2025-04-06 09:16:28 - DEBUG - Response 200 for reunions [5] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:28 - INFO - Saving reunion data
+2025-04-06 09:16:28 - DEBUG - Attempting to call API for 05022025, R6
+2025-04-06 09:16:29 - DEBUG - Response 200 for reunions [6] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:29 - INFO - Saving reunion data
+2025-04-06 09:16:29 - DEBUG - Attempting to call API for 05022025, R7
+2025-04-06 09:16:29 - DEBUG - Response 200 for reunions [7] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:29 - INFO - Saving reunion data
+2025-04-06 09:16:29 - DEBUG - Attempting to call API for 05022025, R8
+2025-04-06 09:16:30 - DEBUG - Response 200 for reunions [8] on 2025-02-05 09:13:13.678027
+2025-04-06 09:16:30 - INFO - Saving reunion data
+2025-04-06 09:16:30 - DEBUG - Attempting to call API for 05022025, R9
+2025-04-06 09:16:30 - INFO - No more reunion [9] on 2025-02-05 09:13:13.678027 : 204
+2025-04-06 09:16:30 - DEBUG - Attempting to call API for 06022025, R1
+2025-04-06 09:16:31 - DEBUG - Response 200 for reunions [1] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:31 - INFO - Saving reunion data
+2025-04-06 09:16:31 - DEBUG - Attempting to call API for 06022025, R2
+2025-04-06 09:16:31 - DEBUG - Response 200 for reunions [2] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:31 - INFO - Saving reunion data
+2025-04-06 09:16:31 - DEBUG - Attempting to call API for 06022025, R3
+2025-04-06 09:16:32 - DEBUG - Response 200 for reunions [3] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:32 - INFO - Saving hippodrome data
+2025-04-06 09:16:32 - INFO - Saving reunion data
+2025-04-06 09:16:32 - DEBUG - Attempting to call API for 06022025, R4
+2025-04-06 09:16:32 - DEBUG - Response 200 for reunions [4] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:32 - INFO - Saving reunion data
+2025-04-06 09:16:32 - DEBUG - Attempting to call API for 06022025, R5
+2025-04-06 09:16:33 - DEBUG - Response 200 for reunions [5] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:33 - INFO - Saving hippodrome data
+2025-04-06 09:16:33 - INFO - Saving reunion data
+2025-04-06 09:16:33 - DEBUG - Attempting to call API for 06022025, R6
+2025-04-06 09:16:33 - DEBUG - Response 200 for reunions [6] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:33 - INFO - Saving reunion data
+2025-04-06 09:16:33 - DEBUG - Attempting to call API for 06022025, R7
+2025-04-06 09:16:34 - DEBUG - Response 200 for reunions [7] on 2025-02-06 09:13:13.678027
+2025-04-06 09:16:34 - INFO - Saving reunion data
+2025-04-06 09:16:34 - DEBUG - Attempting to call API for 06022025, R8
+2025-04-06 09:16:34 - INFO - No more reunion [8] on 2025-02-06 09:13:13.678027 : 204
+2025-04-06 09:16:34 - DEBUG - Attempting to call API for 07022025, R1
+2025-04-06 09:16:35 - DEBUG - Response 200 for reunions [1] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:35 - INFO - Saving reunion data
+2025-04-06 09:16:35 - DEBUG - Attempting to call API for 07022025, R2
+2025-04-06 09:16:35 - DEBUG - Response 200 for reunions [2] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:35 - INFO - Saving reunion data
+2025-04-06 09:16:35 - DEBUG - Attempting to call API for 07022025, R3
+2025-04-06 09:16:36 - DEBUG - Response 200 for reunions [3] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:36 - INFO - Saving reunion data
+2025-04-06 09:16:36 - DEBUG - Attempting to call API for 07022025, R4
+2025-04-06 09:16:36 - DEBUG - Response 200 for reunions [4] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:36 - INFO - Saving reunion data
+2025-04-06 09:16:36 - DEBUG - Attempting to call API for 07022025, R5
+2025-04-06 09:16:37 - DEBUG - Response 200 for reunions [5] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:37 - INFO - Saving reunion data
+2025-04-06 09:16:37 - DEBUG - Attempting to call API for 07022025, R6
+2025-04-06 09:16:37 - DEBUG - Response 200 for reunions [6] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:37 - INFO - Saving reunion data
+2025-04-06 09:16:37 - DEBUG - Attempting to call API for 07022025, R7
+2025-04-06 09:16:38 - DEBUG - Response 200 for reunions [7] on 2025-02-07 09:13:13.678027
+2025-04-06 09:16:38 - INFO - Saving reunion data
+2025-04-06 09:16:38 - DEBUG - Attempting to call API for 07022025, R8
+2025-04-06 09:16:38 - INFO - No more reunion [8] on 2025-02-07 09:13:13.678027 : 204
+2025-04-06 09:16:38 - DEBUG - Attempting to call API for 08022025, R1
+2025-04-06 09:16:39 - DEBUG - Response 200 for reunions [1] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:39 - INFO - Saving reunion data
+2025-04-06 09:16:39 - DEBUG - Attempting to call API for 08022025, R2
+2025-04-06 09:16:40 - DEBUG - Response 200 for reunions [2] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:40 - INFO - Saving reunion data
+2025-04-06 09:16:40 - DEBUG - Attempting to call API for 08022025, R3
+2025-04-06 09:16:40 - DEBUG - Response 200 for reunions [3] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:40 - INFO - Saving reunion data
+2025-04-06 09:16:40 - DEBUG - Attempting to call API for 08022025, R4
+2025-04-06 09:16:41 - DEBUG - Response 200 for reunions [4] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:41 - INFO - Saving reunion data
+2025-04-06 09:16:41 - DEBUG - Attempting to call API for 08022025, R5
+2025-04-06 09:16:41 - DEBUG - Response 200 for reunions [5] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:41 - INFO - Saving reunion data
+2025-04-06 09:16:41 - DEBUG - Attempting to call API for 08022025, R6
+2025-04-06 09:16:42 - DEBUG - Response 200 for reunions [6] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:42 - INFO - Saving reunion data
+2025-04-06 09:16:42 - DEBUG - Attempting to call API for 08022025, R7
+2025-04-06 09:16:42 - DEBUG - Response 200 for reunions [7] on 2025-02-08 09:13:13.678027
+2025-04-06 09:16:42 - INFO - Saving reunion data
+2025-04-06 09:16:42 - DEBUG - Attempting to call API for 08022025, R8
+2025-04-06 09:16:48 - INFO - No more reunion [8] on 2025-02-08 09:13:13.678027 : 204
+2025-04-06 09:16:48 - DEBUG - Attempting to call API for 09022025, R1
+2025-04-06 09:16:49 - DEBUG - Response 200 for reunions [1] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:49 - INFO - Saving reunion data
+2025-04-06 09:16:49 - DEBUG - Attempting to call API for 09022025, R2
+2025-04-06 09:16:49 - DEBUG - Response 200 for reunions [2] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:49 - INFO - Saving reunion data
+2025-04-06 09:16:49 - DEBUG - Attempting to call API for 09022025, R3
+2025-04-06 09:16:50 - DEBUG - Response 200 for reunions [3] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:50 - INFO - Saving reunion data
+2025-04-06 09:16:50 - DEBUG - Attempting to call API for 09022025, R4
+2025-04-06 09:16:56 - DEBUG - Response 200 for reunions [4] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:56 - INFO - Saving reunion data
+2025-04-06 09:16:56 - DEBUG - Attempting to call API for 09022025, R5
+2025-04-06 09:16:56 - DEBUG - Response 200 for reunions [5] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:56 - INFO - Saving reunion data
+2025-04-06 09:16:56 - DEBUG - Attempting to call API for 09022025, R6
+2025-04-06 09:16:57 - DEBUG - Response 200 for reunions [6] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:57 - INFO - Saving reunion data
+2025-04-06 09:16:57 - DEBUG - Attempting to call API for 09022025, R7
+2025-04-06 09:16:57 - DEBUG - Response 200 for reunions [7] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:57 - INFO - Saving reunion data
+2025-04-06 09:16:57 - DEBUG - Attempting to call API for 09022025, R8
+2025-04-06 09:16:58 - DEBUG - Response 200 for reunions [8] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:58 - INFO - Saving hippodrome data
+2025-04-06 09:16:58 - INFO - Saving reunion data
+2025-04-06 09:16:58 - DEBUG - Attempting to call API for 09022025, R9
+2025-04-06 09:16:58 - DEBUG - Response 200 for reunions [9] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:58 - INFO - Saving reunion data
+2025-04-06 09:16:58 - DEBUG - Attempting to call API for 09022025, R10
+2025-04-06 09:16:59 - DEBUG - Response 200 for reunions [10] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:59 - INFO - Saving hippodrome data
+2025-04-06 09:16:59 - INFO - Saving reunion data
+2025-04-06 09:16:59 - DEBUG - Attempting to call API for 09022025, R11
+2025-04-06 09:16:59 - DEBUG - Response 200 for reunions [11] on 2025-02-09 09:13:13.678027
+2025-04-06 09:16:59 - INFO - Saving reunion data
+2025-04-06 09:16:59 - DEBUG - Attempting to call API for 09022025, R12
+2025-04-06 09:17:05 - DEBUG - Response 200 for reunions [12] on 2025-02-09 09:13:13.678027
+2025-04-06 09:17:05 - ERROR - Erreur lors de l'import initial des données: 'prochaineCourse' is an invalid keyword argument for PmuReunion

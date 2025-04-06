@@ -8,10 +8,9 @@ from datetime import datetime, timedelta
 import schedule
 import time
 
-# Import des modules personnalisés
-from scrapping.scrapping import call_api_between_dates
-from data_preparation.data_preparation import DataPreparation
-from model.prediction_model import PredictionModel
+# Import des modules mis à jour
+from data_preparation.enhanced_data_prep import EnhancedDataPreparation
+from model.dual_prediction_model import DualPredictionModel
 from analysis.historical_analysis import HistoricalAnalysis
 from model.model_evaluation import ModelEvaluation
 from batch_processing.batch_processor import BatchProcessor
@@ -30,11 +29,18 @@ class PMUOrchestrateur:
         # Charger la configuration
         self.config = self._load_config(config_path)
         
-        # Initialiser les composants
-        self.data_prep = DataPreparation(self.config.get('db_path', 'database/db/pmu_data.db'))
+        # Initialiser les composants avec les nouvelles classes
+        self.data_prep = EnhancedDataPreparation(self.config.get('db_path', 'pmu_ia'))
+        
+        # Initialiser le modèle double
+        self.model = DualPredictionModel(base_path=self.config.get('model_path', 'model/trained_models'))
+        
+        # Initialiser le batch processor
         self.batch_processor = BatchProcessor(
-            db_path=self.config.get('db_path', 'database/db/pmu_data.db'),
-            model_path=self.config.get('model_path', 'model/trained_models/horse_race_model.pkl')
+            data_prep=self.data_prep,
+            model=self.model,
+            db_path=self.config.get('db_path', 'pmu_ia'),
+            model_path=self.config.get('model_path', 'model/trained_models')
         )
     
     def _load_config(self, config_path):
@@ -53,10 +59,10 @@ class PMUOrchestrateur:
             return self._create_default_config(config_path)
     
     def _create_default_config(self, config_path):
-        """Crée une configuration par défaut."""
+        """Crée une configuration par défaut avec support pour les deux modèles."""
         config = {
-            'db_path': 'database/db/pmu_data.db',
-            'model_path': 'model/trained_models/horse_race_model.pkl',
+            'db_path': 'pmu_ia',  # Base de données MySQL
+            'model_path': 'model/trained_models',
             'scraping': {
                 'days_back': 7,
                 'schedule': {
@@ -82,7 +88,8 @@ class PMUOrchestrateur:
             'training': {
                 'days_back': 60,
                 'test_days': 14,
-                'model_type': 'xgboost',
+                'standard_model_type': 'xgboost',  # Type du modèle standard
+                'simulation_model_type': 'xgboost_ranking',  # Type du modèle de simulation
                 'schedule': {
                     'time': '01:00',  # 1h du matin
                     'frequency': 'monthly',
@@ -112,6 +119,8 @@ class PMUOrchestrateur:
             
             self.logger.info(f"Scraping des données du {start_date.strftime('%Y-%m-%d')} au {end_date.strftime('%Y-%m-%d')}")
             
+            # Importer ici pour éviter les dépendances circulaires
+            from scrapping.scrapping import call_api_between_dates
             call_api_between_dates(start_date, end_date)
             
             self.logger.info("Scraping des données terminé avec succès")
@@ -119,7 +128,7 @@ class PMUOrchestrateur:
             self.logger.error(f"Erreur lors du scraping des données: {str(e)}")
     
     def run_predictions(self):
-        """Exécute les prédictions pour les courses à venir."""
+        """Exécute les prédictions pour les courses à venir avec le modèle standard."""
         self.logger.info("Démarrage des prédictions pour les courses à venir")
         
         try:
@@ -127,7 +136,8 @@ class PMUOrchestrateur:
             
             self.logger.info(f"Prédiction des courses pour les {days_ahead} prochains jours")
             
-            predictions = self.batch_processor.predict_upcoming_races(days_ahead=days_ahead)
+            # Utiliser le nouveau batch processor avec le modèle standard
+            predictions = self.batch_processor.predict_upcoming_races_standard(days_ahead=days_ahead)
             
             if predictions:
                 self.logger.info(f"Prédictions générées pour {len(predictions)} courses")
@@ -157,40 +167,77 @@ class PMUOrchestrateur:
             self.logger.error(f"Erreur lors de l'évaluation: {str(e)}")
     
     def run_training(self):
-        """Entraîne un nouveau modèle sur les données historiques."""
-        self.logger.info("Démarrage de l'entraînement d'un nouveau modèle")
+        """Entraîne les deux modèles (standard et simulation) sur les données historiques."""
+        self.logger.info("Démarrage de l'entraînement des modèles")
         
         try:
             days_back = self.config.get('training', {}).get('days_back', 60)
             test_days = self.config.get('training', {}).get('test_days', 14)
-            model_type = self.config.get('training', {}).get('model_type', 'xgboost')
+            standard_model_type = self.config.get('training', {}).get('standard_model_type', 'xgboost')
+            simulation_model_type = self.config.get('training', {}).get('simulation_model_type', 'xgboost_ranking')
             
-            self.logger.info(f"Entraînement d'un modèle {model_type} sur les données des {days_back} derniers jours")
+            self.logger.info(f"Entraînement des modèles sur les données des {days_back} derniers jours")
             
-            result = self.batch_processor.batch_train_test(
+            # Entraîner les deux modèles
+            result = self.batch_processor.train_dual_models(
                 days_back=days_back,
                 test_days=test_days,
-                model_type=model_type
+                standard_model_type=standard_model_type,
+                simulation_model_type=simulation_model_type
             )
             
             if result:
-                self.logger.info(f"Modèle entraîné et sauvegardé dans {result['model_path']}")
+                self.logger.info(f"Modèles entraînés avec succès:")
+                self.logger.info(f"Modèle standard ({standard_model_type}): {result['standard_model_path']}")
+                self.logger.info(f"Précision: {result['standard_accuracy']:.4f}")
+                self.logger.info(f"Modèle de simulation ({simulation_model_type}): {result['simulation_model_path']}")
                 
-                if result['test_results']:
-                    self.logger.info(f"Résultats du test: {result['test_results']}")
-                
-                # Mettre à jour le chemin du modèle dans la configuration
-                self.config['model_path'] = result['model_path']
+                # Mettre à jour les chemins des modèles dans la configuration
+                self.config['standard_model_path'] = result['standard_model_path']
+                self.config['simulation_model_path'] = result['simulation_model_path']
                 
                 with open('config/config.json', 'w') as f:
                     json.dump(self.config, f, indent=2)
                 
-                self.logger.info("Configuration mise à jour avec le nouveau modèle")
+                self.logger.info("Configuration mise à jour avec les nouveaux modèles")
             else:
-                self.logger.warning("Échec de l'entraînement du modèle")
+                self.logger.warning("Échec de l'entraînement des modèles")
                 
         except Exception as e:
             self.logger.error(f"Erreur lors de l'entraînement: {str(e)}")
+    
+    def run_simulation(self, course_id, selected_horses, simulation_params=None):
+        """Exécute une simulation personnalisée pour une course."""
+        self.logger.info(f"Démarrage de la simulation pour la course {course_id}")
+        
+        try:
+            # Vérifier si le modèle de simulation est chargé
+            if not hasattr(self.model, 'simulation_model') or self.model.simulation_model is None:
+                self.logger.warning("Modèle de simulation non chargé. Tentative de chargement...")
+                simulation_model_path = self.config.get('simulation_model_path')
+                if simulation_model_path and os.path.exists(simulation_model_path):
+                    self.model.load_simulation_model(simulation_model_path)
+                else:
+                    self.logger.error("Impossible de charger le modèle de simulation")
+                    return None
+            
+            # Exécuter la simulation
+            results = self.batch_processor.simulate_race(
+                course_id=course_id,
+                selected_horses=selected_horses,
+                simulation_params=simulation_params
+            )
+            
+            if results is not None:
+                self.logger.info(f"Simulation réussie pour la course {course_id}")
+                return results
+            else:
+                self.logger.warning(f"Échec de la simulation pour la course {course_id}")
+                return None
+                
+        except Exception as e:
+            self.logger.error(f"Erreur lors de la simulation: {str(e)}")
+            return None
     
     def schedule_jobs(self):
         """Planifie les tâches selon la configuration."""
@@ -249,7 +296,13 @@ class PMUOrchestrateur:
             self.logger.info(f"Entraînement planifié tous les {day} à {training_time}")
         elif training_frequency == 'monthly':
             day = training_config.get('day', 1)
-            schedule.every().month.at(day).at(training_time).do(self.run_training)
+            # Pour les tâches mensuelles, il faut vérifier la date à chaque exécution
+            def monthly_training_check():
+                if datetime.now().day == day:
+                    self.run_training()
+            
+            # Exécuter la vérification tous les jours à l'heure spécifiée
+            schedule.every().day.at(training_time).do(monthly_training_check)
             self.logger.info(f"Entraînement planifié le {day} de chaque mois à {training_time}")
         
         self.logger.info("Toutes les tâches ont été planifiées")
@@ -277,8 +330,12 @@ class PMUOrchestrateur:
         self.run_scraping()
         
         # 2. Entraînement (si nécessaire)
-        if not os.path.exists(self.config.get('model_path')):
-            self.logger.info("Aucun modèle trouvé. Entraînement d'un nouveau modèle.")
+        standard_model_path = self.config.get('standard_model_path')
+        simulation_model_path = self.config.get('simulation_model_path')
+        
+        if (not standard_model_path or not os.path.exists(standard_model_path) or 
+            not simulation_model_path or not os.path.exists(simulation_model_path)):
+            self.logger.info("Modèles non trouvés. Entraînement de nouveaux modèles.")
             self.run_training()
         
         # 3. Prédictions
@@ -287,8 +344,6 @@ class PMUOrchestrateur:
         # 4. Évaluation
         self.run_evaluation()
         
-        self.logger.info("Toutes les tâches ont été exécutées")
-
 def parse_args():
     """Parse les arguments de ligne de commande."""
     parser = argparse.ArgumentParser(description='Orchestrateur du système de prédiction PMU')
@@ -296,14 +351,32 @@ def parse_args():
     parser.add_argument('--config', type=str, default='config/config.json',
                         help='Chemin vers le fichier de configuration')
     
-    parser.add_argument('--action', type=str, choices=['all', 'scrape', 'predict', 'evaluate', 'train', 'schedule'],
+    parser.add_argument('--action', type=str, 
+                        choices=['all', 'scrape', 'predict', 'evaluate', 'train', 'schedule', 'simulate'],
                         default='all', help='Action à exécuter')
     
+    # Arguments pour les actions spécifiques
     parser.add_argument('--days-back', type=int,
                         help='Nombre de jours en arrière pour le scraping ou l\'évaluation')
     
     parser.add_argument('--days-ahead', type=int,
                         help='Nombre de jours en avant pour les prédictions')
+    
+    # Arguments pour la simulation
+    parser.add_argument('--course-id', type=int,
+                        help='ID de la course à simuler')
+    
+    parser.add_argument('--horses', type=str,
+                        help='Liste des IDs de chevaux séparés par des virgules')
+    
+    parser.add_argument('--jockey-id', type=int,
+                        help='ID du jockey pour la simulation')
+    
+    parser.add_argument('--weight', type=int,
+                        help='Poids pour la simulation')
+    
+    parser.add_argument('--meteo', type=str, choices=['Ensoleillé', 'Nuageux', 'Pluie', 'Brouillard'],
+                        help='Condition météo pour la simulation')
     
     return parser.parse_args()
 
@@ -340,6 +413,46 @@ def main():
     
     elif args.action == 'schedule':
         orchestrateur.run_scheduler()
+        
+    elif args.action == 'simulate':
+        # Vérifier les arguments requis
+        if not args.course_id:
+            print("Erreur: l'argument --course-id est requis pour la simulation")
+            return
+        
+        if not args.horses:
+            print("Erreur: l'argument --horses est requis pour la simulation")
+            return
+        
+        # Convertir la liste de chevaux en liste d'entiers
+        selected_horses = [int(horse) for horse in args.horses.split(',')]
+        
+        # Construire les paramètres de simulation
+        simulation_params = {}
+        
+        if args.jockey_id:
+            simulation_params['jockey_id'] = args.jockey_id
+        
+        if args.weight:
+            simulation_params['poids'] = args.weight
+            
+        if args.meteo:
+            simulation_params['meteo'] = args.meteo
+        
+        # Exécuter la simulation
+        results = orchestrateur.run_simulation(
+            course_id=args.course_id,
+            selected_horses=selected_horses,
+            simulation_params=simulation_params
+        )
+        
+        if results is not None:
+            print(f"Résultats de la simulation pour la course {args.course_id}:")
+            print(f"Classement simulé:")
+            for i, row in results.iterrows():
+                print(f"{i+1}. {row['cheval_nom']} - Score: {row['predicted_score']:.4f}")
+        else:
+            print("La simulation a échoué. Consultez les logs pour plus de détails.")
 
 if __name__ == '__main__':
     main()
