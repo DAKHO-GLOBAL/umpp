@@ -1,0 +1,220 @@
+2025-04-05 23:46:49 - INFO - Démarrage de l'import initial des données PMU
+2025-04-05 23:46:49 - INFO - Collecte des données du 2025-01-05 au 2025-04-05
+2025-04-05 23:46:49 - DEBUG - Attempting to call API for 05012025, R1
+2025-04-05 23:46:55 - DEBUG - Response 200 for reunions [1] on 2025-01-05 23:46:49.729334
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:46:55 - DEBUG - Fetching participants for 05012025R1C1
+2025-04-05 23:47:01 - ERROR - Course not found in saved data: 05012025R1C1
+2025-04-05 23:47:01 - DEBUG - Fetching participants for 05012025R1C2
+2025-04-05 23:47:01 - ERROR - Course not found in saved data: 05012025R1C2
+2025-04-05 23:47:01 - DEBUG - Fetching participants for 05012025R1C3
+2025-04-05 23:47:02 - ERROR - Course not found in saved data: 05012025R1C3
+2025-04-05 23:47:02 - DEBUG - Fetching participants for 05012025R1C4
+2025-04-05 23:47:02 - ERROR - Course not found in saved data: 05012025R1C4
+2025-04-05 23:47:02 - DEBUG - Fetching participants for 05012025R1C5
+2025-04-05 23:47:03 - ERROR - Course not found in saved data: 05012025R1C5
+2025-04-05 23:47:03 - DEBUG - Fetching participants for 05012025R1C6
+2025-04-05 23:47:03 - ERROR - Course not found in saved data: 05012025R1C6
+2025-04-05 23:47:03 - DEBUG - Fetching participants for 05012025R1C7
+2025-04-05 23:47:04 - ERROR - Course not found in saved data: 05012025R1C7
+2025-04-05 23:47:04 - DEBUG - Fetching participants for 05012025R1C8
+2025-04-05 23:47:05 - ERROR - Course not found in saved data: 05012025R1C8
+2025-04-05 23:47:05 - DEBUG - Fetching participants for 05012025R1C9
+2025-04-05 23:47:05 - ERROR - Course not found in saved data: 05012025R1C9
+2025-04-05 23:47:05 - DEBUG - Attempting to call API for 05012025, R2
+2025-04-05 23:47:06 - DEBUG - Response 200 for reunions [2] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:06 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:06 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:06 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:06 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:06 - DEBUG - Fetching participants for 05012025R2C6
+2025-04-05 23:47:06 - ERROR - Course not found in saved data: 05012025R2C6
+2025-04-05 23:47:06 - DEBUG - Fetching participants for 05012025R2C7
+2025-04-05 23:47:07 - ERROR - Course not found in saved data: 05012025R2C7
+2025-04-05 23:47:07 - DEBUG - Fetching participants for 05012025R2C8
+2025-04-05 23:47:07 - ERROR - Course not found in saved data: 05012025R2C8
+2025-04-05 23:47:07 - DEBUG - Fetching participants for 05012025R2C9
+2025-04-05 23:47:08 - ERROR - Course not found in saved data: 05012025R2C9
+2025-04-05 23:47:08 - DEBUG - Attempting to call API for 05012025, R3
+2025-04-05 23:47:08 - DEBUG - Response 200 for reunions [3] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:08 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:08 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:08 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:08 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:08 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:08 - DEBUG - Fetching participants for 05012025R3C1
+2025-04-05 23:47:09 - ERROR - Course not found in saved data: 05012025R3C1
+2025-04-05 23:47:09 - DEBUG - Fetching participants for 05012025R3C2
+2025-04-05 23:47:09 - ERROR - Course not found in saved data: 05012025R3C2
+2025-04-05 23:47:09 - DEBUG - Fetching participants for 05012025R3C3
+2025-04-05 23:47:10 - ERROR - Course not found in saved data: 05012025R3C3
+2025-04-05 23:47:10 - DEBUG - Fetching participants for 05012025R3C4
+2025-04-05 23:47:16 - ERROR - Course not found in saved data: 05012025R3C4
+2025-04-05 23:47:16 - DEBUG - Fetching participants for 05012025R3C5
+2025-04-05 23:47:16 - ERROR - Course not found in saved data: 05012025R3C5
+2025-04-05 23:47:16 - DEBUG - Attempting to call API for 05012025, R4
+2025-04-05 23:47:17 - DEBUG - Response 200 for reunions [4] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:17 - DEBUG - Fetching participants for 05012025R4C1
+2025-04-05 23:47:17 - ERROR - Course not found in saved data: 05012025R4C1
+2025-04-05 23:47:17 - DEBUG - Fetching participants for 05012025R4C2
+2025-04-05 23:47:18 - ERROR - Course not found in saved data: 05012025R4C2
+2025-04-05 23:47:18 - DEBUG - Fetching participants for 05012025R4C3
+2025-04-05 23:47:18 - ERROR - Course not found in saved data: 05012025R4C3
+2025-04-05 23:47:18 - DEBUG - Fetching participants for 05012025R4C4
+2025-04-05 23:47:19 - ERROR - Course not found in saved data: 05012025R4C4
+2025-04-05 23:47:19 - DEBUG - Fetching participants for 05012025R4C5
+2025-04-05 23:47:25 - ERROR - Course not found in saved data: 05012025R4C5
+2025-04-05 23:47:25 - DEBUG - Fetching participants for 05012025R4C6
+2025-04-05 23:47:25 - ERROR - Course not found in saved data: 05012025R4C6
+2025-04-05 23:47:25 - DEBUG - Fetching participants for 05012025R4C7
+2025-04-05 23:47:26 - ERROR - Course not found in saved data: 05012025R4C7
+2025-04-05 23:47:26 - DEBUG - Attempting to call API for 05012025, R5
+2025-04-05 23:47:26 - DEBUG - Response 200 for reunions [5] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:26 - DEBUG - Fetching participants for 05012025R5C1
+2025-04-05 23:47:27 - ERROR - Course not found in saved data: 05012025R5C1
+2025-04-05 23:47:27 - DEBUG - Fetching participants for 05012025R5C2
+2025-04-05 23:47:28 - ERROR - Course not found in saved data: 05012025R5C2
+2025-04-05 23:47:28 - DEBUG - Fetching participants for 05012025R5C3
+2025-04-05 23:47:28 - ERROR - Course not found in saved data: 05012025R5C3
+2025-04-05 23:47:28 - DEBUG - Fetching participants for 05012025R5C4
+2025-04-05 23:47:29 - ERROR - Course not found in saved data: 05012025R5C4
+2025-04-05 23:47:29 - DEBUG - Fetching participants for 05012025R5C5
+2025-04-05 23:47:29 - ERROR - Course not found in saved data: 05012025R5C5
+2025-04-05 23:47:29 - DEBUG - Fetching participants for 05012025R5C6
+2025-04-05 23:47:30 - ERROR - Course not found in saved data: 05012025R5C6
+2025-04-05 23:47:30 - DEBUG - Fetching participants for 05012025R5C7
+2025-04-05 23:47:30 - ERROR - Course not found in saved data: 05012025R5C7
+2025-04-05 23:47:30 - DEBUG - Attempting to call API for 05012025, R6
+2025-04-05 23:47:31 - DEBUG - Response 200 for reunions [6] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:31 - DEBUG - Fetching participants for 05012025R6C1
+2025-04-05 23:47:31 - ERROR - Course not found in saved data: 05012025R6C1
+2025-04-05 23:47:31 - DEBUG - Fetching participants for 05012025R6C2
+2025-04-05 23:47:32 - ERROR - Course not found in saved data: 05012025R6C2
+2025-04-05 23:47:32 - DEBUG - Fetching participants for 05012025R6C3
+2025-04-05 23:47:32 - ERROR - Course not found in saved data: 05012025R6C3
+2025-04-05 23:47:32 - DEBUG - Fetching participants for 05012025R6C4
+2025-04-05 23:47:33 - ERROR - Course not found in saved data: 05012025R6C4
+2025-04-05 23:47:33 - DEBUG - Fetching participants for 05012025R6C5
+2025-04-05 23:47:33 - ERROR - Course not found in saved data: 05012025R6C5
+2025-04-05 23:47:33 - DEBUG - Fetching participants for 05012025R6C6
+2025-04-05 23:47:34 - ERROR - Course not found in saved data: 05012025R6C6
+2025-04-05 23:47:34 - DEBUG - Fetching participants for 05012025R6C7
+2025-04-05 23:47:34 - ERROR - Course not found in saved data: 05012025R6C7
+2025-04-05 23:47:34 - DEBUG - Fetching participants for 05012025R6C8
+2025-04-05 23:47:35 - ERROR - Course not found in saved data: 05012025R6C8
+2025-04-05 23:47:35 - DEBUG - Fetching participants for 05012025R6C9
+2025-04-05 23:47:35 - ERROR - Course not found in saved data: 05012025R6C9
+2025-04-05 23:47:35 - DEBUG - Fetching participants for 05012025R6C10
+2025-04-05 23:47:36 - ERROR - Course not found in saved data: 05012025R6C10
+2025-04-05 23:47:36 - DEBUG - Attempting to call API for 05012025, R7
+2025-04-05 23:47:36 - DEBUG - Response 200 for reunions [7] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:36 - DEBUG - Fetching participants for 05012025R7C4
+2025-04-05 23:47:37 - ERROR - Course not found in saved data: 05012025R7C4
+2025-04-05 23:47:37 - DEBUG - Fetching participants for 05012025R7C5
+2025-04-05 23:47:42 - ERROR - Course not found in saved data: 05012025R7C5
+2025-04-05 23:47:42 - DEBUG - Fetching participants for 05012025R7C6
+2025-04-05 23:47:43 - ERROR - Course not found in saved data: 05012025R7C6
+2025-04-05 23:47:43 - DEBUG - Fetching participants for 05012025R7C7
+2025-04-05 23:47:43 - ERROR - Course not found in saved data: 05012025R7C7
+2025-04-05 23:47:43 - DEBUG - Fetching participants for 05012025R7C8
+2025-04-05 23:47:44 - ERROR - Course not found in saved data: 05012025R7C8
+2025-04-05 23:47:44 - DEBUG - Fetching participants for 05012025R7C9
+2025-04-05 23:47:44 - ERROR - Course not found in saved data: 05012025R7C9
+2025-04-05 23:47:44 - DEBUG - Fetching participants for 05012025R7C10
+2025-04-05 23:47:45 - ERROR - Course not found in saved data: 05012025R7C10
+2025-04-05 23:47:45 - DEBUG - Attempting to call API for 05012025, R8
+2025-04-05 23:47:45 - DEBUG - Response 200 for reunions [8] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:45 - DEBUG - Fetching participants for 05012025R8C1
+2025-04-05 23:47:46 - ERROR - Course not found in saved data: 05012025R8C1
+2025-04-05 23:47:46 - DEBUG - Fetching participants for 05012025R8C2
+2025-04-05 23:47:46 - ERROR - Course not found in saved data: 05012025R8C2
+2025-04-05 23:47:46 - DEBUG - Fetching participants for 05012025R8C3
+2025-04-05 23:47:47 - ERROR - Course not found in saved data: 05012025R8C3
+2025-04-05 23:47:47 - DEBUG - Fetching participants for 05012025R8C4
+2025-04-05 23:47:48 - ERROR - Course not found in saved data: 05012025R8C4
+2025-04-05 23:47:48 - DEBUG - Fetching participants for 05012025R8C5
+2025-04-05 23:47:48 - ERROR - Course not found in saved data: 05012025R8C5
+2025-04-05 23:47:48 - DEBUG - Fetching participants for 05012025R8C6
+2025-04-05 23:47:49 - ERROR - Course not found in saved data: 05012025R8C6
+2025-04-05 23:47:49 - DEBUG - Fetching participants for 05012025R8C7
+2025-04-05 23:47:49 - ERROR - Course not found in saved data: 05012025R8C7
+2025-04-05 23:47:49 - DEBUG - Attempting to call API for 05012025, R9
+2025-04-05 23:47:49 - DEBUG - Response 200 for reunions [9] on 2025-01-05 23:46:49.729334
+2025-04-05 23:47:49 - DEBUG - Attempting to call API for 05012025, R10
+2025-04-05 23:47:50 - INFO - No more reunion [10] on 2025-01-05 23:46:49.729334 : 204
+2025-04-05 23:47:50 - DEBUG - Attempting to call API for 06012025, R1
+2025-04-05 23:47:55 - DEBUG - Response 200 for reunions [1] on 2025-01-06 23:46:49.729334
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - ERROR - Error saving course: Entity namespace for "pmu_courses" has no property "date_heure"
+2025-04-05 23:47:55 - DEBUG - Fetching participants for 06012025R1C1
+2025-04-05 23:47:56 - ERROR - Course not found in saved data: 06012025R1C1
+2025-04-05 23:47:56 - DEBUG - Fetching participants for 06012025R1C2
+2025-04-05 23:47:57 - ERROR - Course not found in saved data: 06012025R1C2
+2025-04-05 23:47:57 - DEBUG - Fetching participants for 06012025R1C3
+2025-04-05 23:47:57 - ERROR - Course not found in saved data: 06012025R1C3
+2025-04-05 23:47:57 - DEBUG - Fetching participants for 06012025R1C4
+2025-04-05 23:47:58 - ERROR - Course not found in saved data: 06012025R1C4
+2025-04-05 23:47:58 - DEBUG - Fetching participants for 06012025R1C5
+2025-04-05 23:47:58 - ERROR - Course not found in saved data: 06012025R1C5
+2025-04-05 23:47:58 - DEBUG - Fetching participants for 06012025R1C6
+2025-04-05 23:47:59 - ERROR - Course not found in saved data: 06012025R1C6
+2025-04-05 23:47:59 - DEBUG - Fetching participants for 06012025R1C7
+2025-04-05 23:47:59 - ERROR - Course not found in saved data: 06012025R1C7
+2025-04-05 23:47:59 - DEBUG - Fetching participants for 06012025R1C8
+2025-04-05 23:51:39 - INFO - Démarrage de l'import initial des données PMU
+2025-04-05 23:51:39 - INFO - Collecte des données du 2025-01-05 au 2025-04-05
+2025-04-05 23:51:39 - DEBUG - Attempting to call API for 05012025, R1
+2025-04-05 23:51:45 - DEBUG - Response 200 for reunions [1] on 2025-01-05 23:51:39.470564
+2025-04-05 23:51:45 - ERROR - Erreur lors de l'import initial des données: 'date_heure'

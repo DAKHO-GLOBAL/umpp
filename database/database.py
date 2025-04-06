@@ -3,7 +3,11 @@ from datetime import datetime, timedelta
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from database.setup_database import Cheval, CoteEvolution, CoteHistorique, Jockey, Participant, Participation, Prediction, engine, Hippodrome, Pays, Reunion, Course
+from database.setup_database import (
+    Cheval, CoteHistorique, Jockey, Participation, 
+    Prediction, engine, Hippodrome, Pays, Reunion, Course,
+    PmuCourse, PmuParticipant, PmuCoteEvolution as CoteEvolution
+)
 
 
 def save_pays(pays_data):
@@ -76,7 +80,7 @@ def save_course(course_data):
     try:
         # Vérifier si la course existe déjà
         existing_course = session.query(Course).filter_by(
-            date_heure=course_data['date_heure'],
+            heureDepart=course_data['heureDepart'],
             num_course=course_data['num_course'],
             lieu=course_data['lieu']
         ).first()
@@ -335,6 +339,39 @@ def save_prediction(course_id, predictions_data, confidence):
     except SQLAlchemyError as e:
         session.rollback()
         logging.error(f"Error saving prediction: {str(e)}")
+        return None
+    
+    finally:
+        session.close()
+
+def save_pmu_course(course_data):
+    """Sauvegarde une course PMU et retourne son ID"""
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    
+    try:
+        # Vérifier si la course existe déjà
+        existing_course = session.query(PmuCourse).filter_by(
+            heureDepart=course_data['heureDepart'],
+            numReunion=course_data['numReunion'],
+            numOrdre=course_data['numOrdre']
+        ).first()
+        
+        if existing_course:
+            logging.info(f"Course already exists: {course_data['libelle']} at {course_data['heureDepart']}")
+            return existing_course.id
+        
+        # Créer une nouvelle course
+        new_course = PmuCourse(**course_data)
+        session.add(new_course)
+        session.commit()
+        
+        logging.info(f"Saved course: {course_data['libelle']} with ID {new_course.id}")
+        return new_course.id
+    
+    except SQLAlchemyError as e:
+        session.rollback()
+        logging.error(f"Error saving course: {str(e)}")
         return None
     
     finally:
