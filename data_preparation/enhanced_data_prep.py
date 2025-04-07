@@ -177,7 +177,10 @@ class EnhancedDataPreparation:
         # Combiner tous les participants
         training_data = pd.concat(all_participants, ignore_index=True)
         
-        return training_data    
+        # CORRECTION : Réinitialiser l'index pour éviter les problèmes de duplicate labels
+        training_data = training_data.reset_index(drop=True)
+        
+        return training_data
 
     def _parse_musique(self, musique_str):
         """Interprète la chaîne de musique d'un cheval (historique des performances)"""
@@ -257,6 +260,10 @@ class EnhancedDataPreparation:
     def create_advanced_features(self, df):
         """Crée des features avancées basées sur les données historiques et enrichies"""
         self.logger.info(f"Creating advanced features for {len(df)} rows")
+
+        if df.index.duplicated().sum() > 0:
+            self.logger.warning(f"Duplicated indexes found in dataframe: {df.index.duplicated().sum()}")
+            df = df.reset_index(drop=True)
         
         # Préparation des données issues de pmu_participants
         # Traiter la musique si disponible mais pas encore parsée
@@ -448,6 +455,8 @@ class EnhancedDataPreparation:
             if df[col].isna().any():
                 df[col].fillna(df[col].median(), inplace=True)
         
+        df =df.reset_index(drop=True)
+        
         return df
     
     
@@ -521,6 +530,8 @@ class EnhancedDataPreparation:
         # Si en mode entraînement, sauvegarder les encodeurs
         if is_training:
             self.save_encoders()
+
+        df = df.reset_index(drop=True)
         
         return df
     
@@ -564,6 +575,8 @@ class EnhancedDataPreparation:
         
         # Encoder pour le modèle (en mode inférence)
         prepared_data = self.encode_features_for_model(enhanced_data, is_training=False)
+
+        prepared_data = prepared_data.reset_index(drop=True)
         
         return prepared_data
 

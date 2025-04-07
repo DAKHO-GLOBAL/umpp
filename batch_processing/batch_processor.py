@@ -155,7 +155,9 @@ class BatchProcessor:
             'simulation_model_path': simulation_path,
             'simulation_metrics': simulation_metrics,
             'samples_used': len(final_data)
-        }    
+        }
+    
+        
     def predict_upcoming_races_standard(self, days_ahead=1, output_dir='predictions'):
         """Prédit les résultats pour toutes les courses à venir avec le modèle standard."""
         if self.model.standard_model is None:

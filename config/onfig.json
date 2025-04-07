@@ -1,5 +1,5 @@
 {
-    "db_path": "database/db/pmu_data.db",
+    "db_path": "database/db/pmu_ia.db",
     "model_path": "model/trained_models/horse_race_model.pkl",
     "scraping": {
       "days_back": 7,

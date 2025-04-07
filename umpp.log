@@ -2182,3 +2182,65 @@ Stack trace:
 2025-04-07 11:59:30 - INFO - Entraînement des modèles sur toutes les données disponibles
 2025-04-07 11:59:30 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
 2025-04-07 11:59:31 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:01:19 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:01:19 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:01:19 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:01:19 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 12:01:19 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 12:01:19 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 12:01:42 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:10:52 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:10:52 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:10:52 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:10:52 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 12:10:52 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 12:10:52 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 12:10:53 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:13:00 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:13:00 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:13:00 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:13:00 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 12:13:00 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 12:13:00 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 12:13:02 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:13:59 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:13:59 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:13:59 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:13:59 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 12:13:59 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 12:13:59 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 12:14:00 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:28:27 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:28:27 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:28:27 - INFO - Starting model training with <__main__.PMUOrchestrateur object at 0x7f78dcd53ee0> days of data
+2025-04-07 12:36:39 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:36:39 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:36:39 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:36:39 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:36:39 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:36:39 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 12:36:40 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:36:56 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:36:56 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:36:56 - INFO - Starting model training with <__main__.PMUOrchestrateur object at 0x7f059a094eb0> days of data
+2025-04-07 12:44:40 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:44:40 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:44:40 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:44:40 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:44:40 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:44:40 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 12:44:41 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:47:40 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:47:40 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:47:40 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:47:40 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:47:40 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:47:40 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 12:47:41 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 12:52:59 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 12:52:59 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 12:52:59 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 12:52:59 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:52:59 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 12:52:59 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 12:52:59 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels

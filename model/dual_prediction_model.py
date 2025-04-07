@@ -693,6 +693,11 @@ class DualPredictionModel:
             self.logger.error("position column not found in dataframe")
             return df
         
+        # CORRECTION : Vérifier et résoudre les index dupliqués
+        if df.index.duplicated().sum() > 0:
+            self.logger.warning(f"Duplicated indexes found in dataframe: {df.index.duplicated().sum()}")
+            df = df.reset_index(drop=True)
+        
         # Pour la classification binaire (dans le top 3 ou non)
         df['target_place'] = df['position'].apply(lambda x: 1 if x <= 3 else 0)
         
@@ -744,9 +749,11 @@ class DualPredictionModel:
         if self.standard_model is None:
             self.initialize_standard_model()
         
-        # Créer la variable cible si elle n'existe pas
         if 'target_place' not in df.columns:
             df = self.create_target_variables(df)
+        
+        # CORRECTION : Réinitialiser l'index pour éviter les problèmes de duplicate labels
+        df = df.reset_index(drop=True)
         
         # Sélectionner les features
         feature_cols = self.select_features(df, 'target_place')
@@ -763,7 +770,9 @@ class DualPredictionModel:
                     X[col] = X[col].fillna(0)
                 else:
                     X[col] = X[col].fillna(median_value)
-        
+
+        X = X.reset_index(drop=True)
+        y = y.reset_index(drop=True)
         # Diviser en ensembles d'entraînement et de test
         from sklearn.model_selection import train_test_split
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
@@ -850,15 +859,27 @@ class DualPredictionModel:
         if self.simulation_model is None:
             self.initialize_simulation_model()
         
+
         # Créer les variables cibles si elles n'existent pas
         if 'target_position_score' not in df.columns:
             df = self.create_target_variables(df)
+        
+        # CORRECTION : Réinitialiser l'index pour éviter les problèmes de duplicate labels
+        df = df.reset_index(drop=True)
         
         # Sélectionner les features
         feature_cols = self.select_features(df, 'target_position_score')
         
         # Séparer les features et la cible
         X = df[feature_cols]
+        
+        # Remplir les valeurs manquantes
+        for col in X.columns:
+            if X[col].isna().any():
+                X[col] = X[col].fillna(X[col].median() if not pd.isna(X[col].median()) else 0)
+                
+        # Réinitialiser les index pour éviter les problèmes de reindexation
+        X = X.reset_index(drop=True)
         
         # Selon le type de modèle, nous utiliserons une cible différente
         if 'ranking' in self.simulation_model_type:

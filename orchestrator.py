@@ -86,8 +86,8 @@ class PMUOrchestrateur:
                 }
             },
             'training': {
-                'days_back': 60,
-                'test_days': 14,
+                'days_back': 300,
+                'test_days': 65,
                 'standard_model_type': 'xgboost',  # Type du modèle standard
                 'simulation_model_type': 'xgboost_ranking',  # Type du modèle de simulation
                 'schedule': {
@@ -171,17 +171,17 @@ class PMUOrchestrateur:
         self.logger.info("Démarrage de l'entraînement des modèles")
         
         try:
-            #days_back = self.config.get('training', {}).get('days_back', 60)
-            days_back=None
-            test_days = self.config.get('training', {}).get('test_days', 14)
+            # Récupérer les valeurs depuis la configuration
+            days_back = self.config.get('training', {}).get('days_back', 300)
+            test_days = self.config.get('training', {}).get('test_days', 60)
             standard_model_type = self.config.get('training', {}).get('standard_model_type', 'xgboost')
             simulation_model_type = self.config.get('training', {}).get('simulation_model_type', 'xgboost_ranking')
             
             self.logger.info(f"Entraînement des modèles sur les données des {days_back} derniers jours")
             
-            # Entraîner les deux modèles
+            # Entraîner les deux modèles - Passez les arguments correctement
             result = self.batch_processor.train_dual_models(
-                days_back=days_back,
+                days_back=days_back,  # Utilisez la valeur numérique depuis la config
                 test_days=test_days,
                 standard_model_type=standard_model_type,
                 simulation_model_type=simulation_model_type
@@ -203,7 +203,7 @@ class PMUOrchestrateur:
                 self.logger.info("Configuration mise à jour avec les nouveaux modèles")
             else:
                 self.logger.warning("Échec de l'entraînement des modèles")
-                
+                    
         except Exception as e:
             self.logger.error(f"Erreur lors de l'entraînement: {str(e)}")
     
@@ -344,6 +344,73 @@ class PMUOrchestrateur:
         
         # 4. Évaluation
         self.run_evaluation()
+
+    def train_models(days_back=360, test_size=0.2, standard_model_type='xgboost', simulation_model_type='xgboost_ranking'):
+        """Entraîne les deux modèles avec les données des derniers jours"""
+        logger = logging.getLogger(__name__)
+        logger.info(f"Starting model training with {days_back} days of data")
+        
+        # Préparer les données
+        data_prep = EnhancedDataPreparation()
+        
+        # Définir la période d'entraînement
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=days_back) if days_back else None
+        
+        if start_date:
+            logger.info(f"Getting training data from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
+        else:
+            logger.info(f"Getting all available training data up to {end_date.strftime('%Y-%m-%d')}")
+        
+        # Récupérer les données
+        start_date_str = start_date.strftime("%Y-%m-%d") if start_date else None
+        training_data = data_prep.get_training_data(
+            start_date=start_date_str,
+            end_date=end_date.strftime("%Y-%m-%d")
+        )
+        
+        if training_data.empty:
+            logger.error("No training data found")
+            return False
+        
+        # CORRECTION : S'assurer que l'index est réinitialisé dès le départ
+        training_data = training_data.reset_index(drop=True)
+        
+        logger.info(f"Retrieved {len(training_data)} samples for training")
+        
+        # Créer des features avancées
+        enhanced_data = data_prep.create_advanced_features(training_data)
+        enhanced_data = enhanced_data.reset_index(drop=True)
+        
+        # Encoder pour le modèle
+        prepared_data = data_prep.encode_features_for_model(enhanced_data, is_training=True)
+        prepared_data = prepared_data.reset_index(drop=True)
+        
+        # Initialiser les modèles
+        model = DualPredictionModel()
+        
+        # Entraîner le modèle standard
+        logger.info(f"Training standard model with {standard_model_type}")
+        standard_accuracy, standard_path = model.train_standard_model(prepared_data, test_size=test_size)
+        
+        # Entraîner le modèle de simulation
+        logger.info(f"Training simulation model with {simulation_model_type}")
+        simulation_metrics, simulation_path = model.train_simulation_model(prepared_data, test_size=test_size)
+        
+        logger.info("Model training completed")
+        logger.info(f"Standard model accuracy: {standard_accuracy:.4f}")
+        logger.info(f"Simulation model metrics: {simulation_metrics}")
+        
+        return {
+            'standard_model': {
+                'accuracy': standard_accuracy,
+                'path': standard_path
+            },
+            'simulation_model': {
+                'metrics': simulation_metrics,
+                'path': simulation_path
+            }
+        }
         
 def parse_args():
     """Parse les arguments de ligne de commande."""

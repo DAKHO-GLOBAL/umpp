@@ -16,7 +16,7 @@
     }
   },
   "evaluation": {
-    "days_back": 30,
+    "days_back": 65,
     "schedule": {
       "time": "23:00",
       "frequency": "weekly",
@@ -24,8 +24,8 @@
     }
   },
   "training": {
-    "days_back": 60,
-    "test_days": 14,
+    "days_back": 300,
+    "test_days": 65,
     "standard_model_type": "xgboost",
     "simulation_model_type": "xgboost_ranking",
     "schedule": {
