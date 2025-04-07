@@ -1910,3 +1910,205 @@
 2025-04-06 09:16:59 - DEBUG - Attempting to call API for 09022025, R12
 2025-04-06 09:17:05 - DEBUG - Response 200 for reunions [12] on 2025-02-09 09:13:13.678027
 2025-04-06 09:17:05 - ERROR - Erreur lors de l'import initial des données: 'prochaineCourse' is an invalid keyword argument for PmuReunion
+2025-04-06 21:56:53 - WARNING - Fichier de configuration config/config.json non trouvé. Utilisation des valeurs par défaut.
+2025-04-06 21:56:53 - INFO - Configuration par défaut créée et sauvegardée dans config/config.json
+2025-04-06 21:56:53 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 21:56:53 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 21:56:53 - INFO - Entraînement des modèles sur les données des 60 derniers jours
+2025-04-06 21:56:53 - INFO - Entraînement des modèles sur les données des 60 derniers jours
+2025-04-06 21:56:53 - INFO - Récupération des données du 2025-02-05 au 2025-04-06
+2025-04-06 21:56:53 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 21:59:54 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 21:59:54 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 21:59:54 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 21:59:54 - INFO - Entraînement des modèles sur les données des 60 derniers jours
+2025-04-06 21:59:54 - INFO - Entraînement des modèles sur les données des 60 derniers jours
+2025-04-06 21:59:54 - INFO - Récupération des données du 2025-02-05 au 2025-04-06
+2025-04-06 21:59:54 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 22:14:10 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 22:14:10 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 22:14:10 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 22:14:10 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:14:10 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:14:10 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 22:14:10 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 22:14:10 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 22:21:53 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 22:21:53 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 22:21:53 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 22:21:53 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:21:53 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:21:53 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 22:21:53 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 22:21:53 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 22:26:46 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 22:26:46 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 22:26:46 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 22:26:46 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:26:46 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:26:46 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 22:26:46 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 22:26:46 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 22:30:44 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 22:30:44 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 22:30:44 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 22:30:44 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:30:44 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:30:44 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 22:30:44 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 22:30:44 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 22:33:18 - ERROR - Erreur lors du chargement de la configuration: Expecting ',' delimiter: line 9 column 5 (char 168)
+2025-04-06 22:33:18 - INFO - Configuration par défaut créée et sauvegardée dans config/config.json
+2025-04-06 22:33:18 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 22:33:18 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 22:33:18 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:33:18 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:33:18 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 22:33:18 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 22:33:18 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 22:39:50 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 22:39:50 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 22:39:50 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 22:39:50 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:39:50 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 22:39:50 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 22:39:50 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 22:39:50 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 23:17:17 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 23:17:17 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 23:17:17 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 23:17:17 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:17:17 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:17:17 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 23:17:17 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 23:17:17 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 23:25:46 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 23:25:46 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 23:25:46 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 23:25:46 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:25:46 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:25:46 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 23:25:46 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 23:25:46 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 23:26:22 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 23:26:22 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 23:26:22 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 23:26:22 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:26:22 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:26:22 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 23:26:22 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 23:26:22 - ERROR - Erreur lors de l'entraînement: (MySQLdb.OperationalError) (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-06 23:30:35 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 23:30:35 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 23:30:35 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 23:30:35 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:30:35 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:30:35 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 23:30:35 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 23:30:35 - WARNING - No courses found with results
+2025-04-06 23:30:35 - ERROR - Aucune donnée d'entraînement trouvée
+2025-04-06 23:30:35 - WARNING - Échec de l'entraînement des modèles
+2025-04-06 23:36:43 - INFO - Configuration chargée depuis config/config.json
+2025-04-06 23:36:43 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-06 23:36:43 - INFO - Démarrage de l'entraînement des modèles
+2025-04-06 23:36:43 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:36:43 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-06 23:36:43 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-06 23:36:43 - INFO - Récupération de toutes les données jusqu'au 2025-04-06
+2025-04-06 23:36:44 - INFO - Données récupérées: 2391 échantillons
+2025-04-06 23:36:44 - INFO - Creating advanced features
+2025-04-06 23:36:51 - INFO - Encoding features for modeling
+2025-04-06 23:36:51 - INFO - Encoders saved successfully
+2025-04-06 23:36:51 - INFO - Initialized standard model with type xgboost
+2025-04-06 23:36:51 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-06 23:36:52 - INFO - Created multiple target variables for different modeling approaches
+2025-04-06 23:36:52 - ERROR - Erreur lors de l'entraînement: unsupported operand type(s) for /: 'int' and 'NoneType'
+2025-04-07 00:13:34 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 00:13:34 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 00:13:34 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 00:13:34 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 00:13:34 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 00:13:34 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 00:13:34 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 00:13:35 - INFO - Données récupérées: 2391 échantillons
+2025-04-07 00:13:35 - INFO - Creating advanced features
+2025-04-07 00:13:42 - INFO - Encoding features for modeling
+2025-04-07 00:13:42 - INFO - Encoders saved successfully
+2025-04-07 00:13:42 - INFO - Initialized standard model with type xgboost
+2025-04-07 00:13:42 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 00:13:42 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 00:13:42 - ERROR - Erreur lors de l'entraînement: unsupported operand type(s) for /: 'int' and 'NoneType'
+2025-04-07 00:20:42 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 00:20:42 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 00:20:42 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 00:20:42 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 00:20:42 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 00:20:42 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 00:20:42 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 00:20:43 - INFO - Données récupérées: 2391 échantillons
+2025-04-07 00:20:43 - INFO - Creating advanced features
+2025-04-07 00:20:50 - INFO - Encoding features for modeling
+2025-04-07 00:20:50 - INFO - Encoders saved successfully
+2025-04-07 00:20:50 - INFO - Initialized standard model with type xgboost
+2025-04-07 00:20:50 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 00:20:50 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 00:20:50 - ERROR - Erreur lors de l'entraînement: unsupported operand type(s) for /: 'int' and 'NoneType'
+2025-04-07 00:38:25 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 00:38:25 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 00:38:25 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 00:38:25 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 00:38:25 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 00:38:25 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 00:38:27 - INFO - Données récupérées: 2391 échantillons
+2025-04-07 00:38:27 - INFO - Creating advanced features
+2025-04-07 00:38:33 - INFO - Encoding features for modeling
+2025-04-07 00:38:33 - INFO - Encoders saved successfully
+2025-04-07 00:38:33 - INFO - Initialized standard model with type xgboost
+2025-04-07 00:38:33 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 00:38:33 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 00:38:33 - INFO - Entraînement du modèle standard (xgboost) avec test_size=0.2
+2025-04-07 00:38:33 - INFO - Selected 18 features for modeling
+2025-04-07 00:38:33 - INFO - Training standard model on 1912 samples
+2025-04-07 00:38:34 - INFO - Standard model performance:
+2025-04-07 00:38:34 - INFO - Accuracy: 0.7349, Precision: 0.4940
+2025-04-07 00:38:34 - INFO - Recall: 0.6640, F1 Score: 0.5666
+2025-04-07 00:38:34 - INFO - Top 10 important features:
+2025-04-07 00:38:34 - INFO - cote_actuelle_norm: 0.1607
+2025-04-07 00:38:34 - INFO - normalized_odds_norm: 0.0800
+2025-04-07 00:38:34 - INFO - type_course_TROT_MONTE: 0.0726
+2025-04-07 00:38:34 - INFO - jockey_win_rate_norm: 0.0684
+2025-04-07 00:38:34 - INFO - jockey_recent_form_norm: 0.0676
+2025-04-07 00:38:34 - INFO - jockey_nom_encoded: 0.0635
+2025-04-07 00:38:34 - INFO - age_norm: 0.0619
+2025-04-07 00:38:34 - INFO - poids_norm: 0.0613
+2025-04-07 00:38:34 - INFO - sexe_FEMELLES: 0.0594
+2025-04-07 00:38:34 - INFO - lieu_encoded: 0.0593
+2025-04-07 00:38:34 - INFO - Standard model saved to model/trained_models/standard_xgboost_20250407_003834.pkl
+2025-04-07 00:38:34 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 00:38:34 - INFO - Entraînement du modèle de simulation (xgboost_ranking) avec test_size=0.2
+2025-04-07 00:38:34 - INFO - Selected 18 features for modeling
+2025-04-07 00:38:34 - INFO - Training simulation ranking model on 1911 samples
+2025-04-07 00:38:34 - ERROR - Erreur lors de l'entraînement: [00:38:34] /workspace/src/data/data.cc:762: Check failed: group_ptr_.back() == num_row_ (248882 vs. 1911) : Invalid query group structure. The number of rows obtained from group doesn't equal to the actual number of rows given by data.
+Stack trace:
+  [bt] (0) /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/xgboost/lib/libxgboost.so(+0x25c1ac) [0x7f4175e5c1ac]
+  [bt] (1) /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/xgboost/lib/libxgboost.so(+0x4d7dc6) [0x7f41760d7dc6]
+  [bt] (2) /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/xgboost/lib/libxgboost.so(+0x5f0f2f) [0x7f41761f0f2f]
+  [bt] (3) /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/xgboost/lib/libxgboost.so(+0x5f8a39) [0x7f41761f8a39]
+  [bt] (4) /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/xgboost/lib/libxgboost.so(XGBoosterUpdateOneIter+0x6f) [0x7f4175d65a1f]
+  [bt] (5) /home/dakho/exit/envs/tf_gpu/lib/python3.9/lib-dynload/../../libffi.so.8(+0xa052) [0x7f41b70dd052]
+  [bt] (6) /home/dakho/exit/envs/tf_gpu/lib/python3.9/lib-dynload/../../libffi.so.8(+0x8925) [0x7f41b70db925]
+  [bt] (7) /home/dakho/exit/envs/tf_gpu/lib/python3.9/lib-dynload/../../libffi.so.8(ffi_call+0xde) [0x7f41b70dc06e]
+  [bt] (8) /home/dakho/exit/envs/tf_gpu/lib/python3.9/lib-dynload/_ctypes.cpython-39-x86_64-linux-gnu.so(+0x91e0) [0x7f41b47a91e0]
+
+

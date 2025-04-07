@@ -754,6 +754,15 @@ class DualPredictionModel:
         # Séparer les features et la cible
         X = df[feature_cols]
         y = df['target_place']
+        X = X.fillna(X.median())
+
+        for col in X.columns:
+            if X[col].isna().any():
+                median_value = X[col].median()
+                if pd.isna(median_value):  # Si la médiane est aussi NaN
+                    X[col] = X[col].fillna(0)
+                else:
+                    X[col] = X[col].fillna(median_value)
         
         # Diviser en ensembles d'entraînement et de test
         from sklearn.model_selection import train_test_split

@@ -171,7 +171,8 @@ class PMUOrchestrateur:
         self.logger.info("Démarrage de l'entraînement des modèles")
         
         try:
-            days_back = self.config.get('training', {}).get('days_back', 60)
+            #days_back = self.config.get('training', {}).get('days_back', 60)
+            days_back=None
             test_days = self.config.get('training', {}).get('test_days', 14)
             standard_model_type = self.config.get('training', {}).get('standard_model_type', 'xgboost')
             simulation_model_type = self.config.get('training', {}).get('simulation_model_type', 'xgboost_ranking')

@@ -6,15 +6,31 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 # Configuration de la base de données
+import json
+import os
+
+# Charger la configuration
+config_path = 'config/config.json'
 db_config = {
     "host": "localhost",
     "user": "root",
     "password": "",
     "database": "pmu_ia",
     "port": "3306",
+    "connector": "pymysql"
 }
-engine = create_engine(f"mysql+mysqlconnector://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 
+if os.path.exists(config_path):
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+            if 'db_config' in config:
+                db_config = config['db_config']
+    except Exception as e:
+        print(f"Error loading config: {e}")
+
+# Modifier la chaîne de connexion
+engine = create_engine(f"mysql+{db_config.get('connector', 'pymysql')}://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 # Tables essentielles pour le scraping PMU
 
 class Utilisateur(Base):
@@ -280,6 +296,7 @@ class CoteHistorique(Base):
     # Relation
     participation = relationship("Participation", back_populates="cotes_historique")
 
+# Modifiez la classe Prediction comme ceci:
 class Prediction(Base):
     __tablename__ = 'predictions'
     
@@ -292,10 +309,11 @@ class Prediction(Base):
     
     # Relations
     course = relationship("Course", back_populates="predictions")
-    model_version = relationship("ModelVersion", back_populates="predictions")
+    # Utiliser un backref au lieu de back_populates pour éviter le conflit circulaire
+    model_version = relationship("ModelVersion")
+
 
 class ModelVersion(Base):
-    """Classe représentant une version de modèle"""
     __tablename__ = 'model_versions'
     
     id = Column(Integer, primary_key=True)
@@ -319,9 +337,11 @@ class ModelVersion(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
+    # Supprimez cette ligne:
+    # predictions = relationship("Prediction", back_populates="model_version")
+    
     def __repr__(self):
         return f"<ModelVersion(id={self.id}, model_type={self.model_type}, model_category={self.model_category}, is_active={self.is_active})>"
-
 
 class Incident(Base):
     __tablename__ = 'incidents'

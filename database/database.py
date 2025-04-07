@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from database.setup_database import (
     Cheval, CoteHistorique, Jockey, Participant, Participation, 
     Prediction, engine, Hippodrome, Pays, Reunion, Course,
-    PmuCourse, PmuParticipant, PmuCoteEvolution as CoteEvolution
+    PmuCourse, CoteEvolution
 )
 from scraping import save_commentaire, save_incidents
 

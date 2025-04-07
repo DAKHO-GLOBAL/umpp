@@ -13,6 +13,31 @@ from data_preparation.enhanced_data_prep import EnhancedDataPreparation
 from model.dual_prediction_model import DualPredictionModel
 from database.database import save_prediction
 
+import json
+import os
+
+# Charger la configuration
+config_path = 'config/config.json'
+db_config = {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "pmu_ia",
+    "port": "3306",
+    "connector": "pymysql"
+}
+
+if os.path.exists(config_path):
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+            if 'db_config' in config:
+                db_config = config['db_config']
+    except Exception as e:
+        print(f"Error loading config: {e}")
+
+# Modifier la chaîne de connexion
+#engine = create_engine(f"mysql+{db_config.get('connector', 'pymysql')}://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 class BatchProcessor:
     """Classe pour le traitement par lots des prédictions de courses, avec support pour les deux modèles."""
     
@@ -22,9 +47,14 @@ class BatchProcessor:
         self.db_path = db_path
         self.model_path = model_path
         
+        
         # Initialiser une connexion à la base de données
         try:
-            self.engine = create_engine(f'mysql://root:@localhost/{db_path}')
+            #self.engine = create_engine(f"mysql+mysqlconnector://{self.db_config['user']}:{self.db_config['password']}@{self.db_config['host']}:{self.db_config['port']}/{self.db_config['database']}")
+            self.engine = create_engine(f"mysql+{db_config.get('connector', 'pymysql')}://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
+
+
+
             self.logger.info(f"Connexion à la base de données {db_path} établie")
         except Exception as e:
             self.logger.error(f"Erreur de connexion à la BD: {e}")
@@ -53,21 +83,38 @@ class BatchProcessor:
             else:
                 self.logger.warning(f"Modèle de simulation non trouvé à {simulation_model_path}")
     
-    def train_dual_models(self, days_back=60, test_days=14, 
-                          standard_model_type='xgboost', simulation_model_type='xgboost_ranking'):
+    def train_dual_models(self, days_back=None, test_days=14, 
+                        standard_model_type='xgboost', simulation_model_type='xgboost_ranking'):
         """Entraîne les deux modèles (standard et simulation)."""
-        self.logger.info(f"Entraînement des modèles sur les données des {days_back} derniers jours")
         
-        # Préparer les données d'entraînement
+        # Définir un test_size fixe, indépendant de days_back et test_days
+        test_size = 0.2
+        
+        if days_back is None:
+            self.logger.info("Entraînement des modèles sur toutes les données disponibles")
+        else:
+            self.logger.info(f"Entraînement des modèles sur les données des {days_back} derniers jours")
+        
+        # Préparer les dates de début et fin
         end_date = datetime.now()
-        start_date = end_date - timedelta(days=days_back)
+        start_date_str = None
         
-        self.logger.info(f"Récupération des données du {start_date.strftime('%Y-%m-%d')} au {end_date.strftime('%Y-%m-%d')}")
+        if days_back is not None:
+            start_date = end_date - timedelta(days=days_back)
+            start_date_str = start_date.strftime("%Y-%m-%d")
+        
+        end_date_str = end_date.strftime("%Y-%m-%d")
+        
+        # Log informatif
+        if start_date_str:
+            self.logger.info(f"Récupération des données du {start_date_str} au {end_date_str}")
+        else:
+            self.logger.info(f"Récupération de toutes les données jusqu'au {end_date_str}")
         
         # Récupérer les données d'entraînement
         training_data = self.data_prep.get_training_data(
-            start_date=start_date.strftime("%Y-%m-%d"),
-            end_date=end_date.strftime("%Y-%m-%d")
+            start_date=start_date_str,
+            end_date=end_date_str
         )
         
         if training_data.empty:
@@ -92,15 +139,12 @@ class BatchProcessor:
         # Créer les variables cibles
         final_data = self.model.create_target_variables(prepared_data)
         
-        # Calculer la taille du test set
-        test_size = test_days / days_back
-        
-        # Entraîner le modèle standard
-        self.logger.info(f"Entraînement du modèle standard ({standard_model_type})")
+        # Entraîner le modèle standard avec un test_size fixe
+        self.logger.info(f"Entraînement du modèle standard ({standard_model_type}) avec test_size={test_size}")
         standard_accuracy, standard_path = self.model.train_standard_model(final_data, test_size=test_size)
         
-        # Entraîner le modèle de simulation
-        self.logger.info(f"Entraînement du modèle de simulation ({simulation_model_type})")
+        # Entraîner le modèle de simulation avec le même test_size fixe
+        self.logger.info(f"Entraînement du modèle de simulation ({simulation_model_type}) avec test_size={test_size}")
         simulation_metrics, simulation_path = self.model.train_simulation_model(final_data, test_size=test_size)
         
         self.logger.info("Entraînement des modèles terminé")
@@ -111,8 +155,7 @@ class BatchProcessor:
             'simulation_model_path': simulation_path,
             'simulation_metrics': simulation_metrics,
             'samples_used': len(final_data)
-        }
-    
+        }    
     def predict_upcoming_races_standard(self, days_ahead=1, output_dir='predictions'):
         """Prédit les résultats pour toutes les courses à venir avec le modèle standard."""
         if self.model.standard_model is None:

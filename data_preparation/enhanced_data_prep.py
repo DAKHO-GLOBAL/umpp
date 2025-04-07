@@ -14,12 +14,39 @@ import logging
 import joblib
 import os
 
+import json
+import os
+
+# Charger la configuration
+config_path = 'config/config.json'
+db_config = {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "pmu_ia",
+    "port": "3306",
+    "connector": "pymysql"
+}
+
+if os.path.exists(config_path):
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+            if 'db_config' in config:
+                db_config = config['db_config']
+    except Exception as e:
+        print(f"Error loading config: {e}")
+
+# Modifier la chaîne de connexion
+#engine = create_engine(f"mysql+{db_config.get('connector', 'pymysql')}://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
+
 class EnhancedDataPreparation:
     """Version améliorée de la classe DataPreparation avec des fonctionnalités supplémentaires"""
     
     def __init__(self, db_path='pmu_ia'):
         """Initialise la connexion à la base de données et les encodeurs."""
-        self.engine = create_engine(f'mysql://root:@localhost/{db_path}')
+        self.engine = create_engine(f"mysql+{db_config.get('connector', 'pymysql')}://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
+
         self.label_encoders = {}
         self.one_hot_encoders = {}
         self.scaler = StandardScaler()
@@ -60,10 +87,16 @@ class EnhancedDataPreparation:
     def get_training_data(self, start_date=None, end_date=None, limit=None):
         """Récupère un ensemble de données pour l'entraînement avec résultats connus"""
         # Récupérer les courses terminées
+        # courses_query = """
+        # SELECT c.*, h.libelleLong AS hippodrome_nom 
+        # FROM courses c
+        # LEFT JOIN pmu_hippodromes h ON c.lieu = h.libelleLong
+        # WHERE c.ordreArrivee IS NOT NULL
+        # """
         courses_query = """
-        SELECT c.* 
+        SELECT c.*, h.libelleLong AS hippodrome_nom 
         FROM courses c
-        WHERE c.ordreArrivee IS NOT NULL
+        LEFT JOIN pmu_hippodromes h ON c.lieu = h.libelleLong
         """
         
         conditions = []

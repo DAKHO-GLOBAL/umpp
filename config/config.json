@@ -1,0 +1,37 @@
+{
+  "db_path": "pmu_ia",
+  "model_path": "model/trained_models",
+  "scraping": {
+    "days_back": 7,
+    "schedule": {
+      "time": "00:00",
+      "frequency": "daily"
+    }
+  },
+  "prediction": {
+    "days_ahead": 1,
+    "schedule": {
+      "time": "07:00",
+      "frequency": "daily"
+    }
+  },
+  "evaluation": {
+    "days_back": 30,
+    "schedule": {
+      "time": "23:00",
+      "frequency": "weekly",
+      "day": "sunday"
+    }
+  },
+  "training": {
+    "days_back": 60,
+    "test_days": 14,
+    "standard_model_type": "xgboost",
+    "simulation_model_type": "xgboost_ranking",
+    "schedule": {
+      "time": "01:00",
+      "frequency": "monthly",
+      "day": 1
+    }
+  }
+}
