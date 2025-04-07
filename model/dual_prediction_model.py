@@ -874,10 +874,12 @@ class DualPredictionModel:
             X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
             y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
             groups_train = groups.iloc[train_idx]
+            groups_array = np.array([sum(groups_train == g) for g in np.unique(groups_train)])
             
             # Entraîner le modèle
             self.logger.info(f"Training simulation ranking model on {len(X_train)} samples")
-            self.simulation_model.fit(X_train, y_train, group=groups_train)
+            #self.simulation_model.fit(X_train, y_train, group=groups_train)
+            self.simulation_model.fit(X_train, y_train, group=groups_array)
             
             # Évaluer avec des métriques spécifiques au ranking
             from sklearn.metrics import ndcg_score

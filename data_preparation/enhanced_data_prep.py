@@ -83,22 +83,25 @@ class EnhancedDataPreparation:
         
         except Exception as e:
             self.logger.error(f"Error saving encoders: {str(e)}")
+
+
     
     def get_training_data(self, start_date=None, end_date=None, limit=None):
-        """Récupère un ensemble de données pour l'entraînement avec résultats connus"""
-        # Récupérer les courses terminées
-        # courses_query = """
-        # SELECT c.*, h.libelleLong AS hippodrome_nom 
-        # FROM courses c
-        # LEFT JOIN pmu_hippodromes h ON c.lieu = h.libelleLong
-        # WHERE c.ordreArrivee IS NOT NULL
-        # """
+        """Récupère un ensemble de données pour l'entraînement avec résultats connus et données enrichies"""
+        # Récupérer les courses terminées qui ont un lien avec pmu_courses
         courses_query = """
-        SELECT c.*, h.libelleLong AS hippodrome_nom 
+        SELECT 
+            c.*, 
+            h.libelleLong AS hippodrome_nom, 
+            pc.ordreArrivee as pmu_ordreArrivee,
+            pc.id as pmu_course_id
         FROM courses c
         LEFT JOIN pmu_hippodromes h ON c.lieu = h.libelleLong
+        INNER JOIN pmu_courses pc ON c.pmu_course_id = pc.id
+        WHERE pc.ordreArrivee IS NOT NULL
         """
         
+        # Ajouter les conditions de date si spécifiées
         conditions = []
         if start_date:
             conditions.append(f"c.date_heure >= '{start_date}'")
@@ -115,16 +118,18 @@ class EnhancedDataPreparation:
             
         courses_df = pd.read_sql_query(courses_query, self.engine)
         
-        if courses_df.empty:
-            self.logger.warning("No courses found with results")
-            return pd.DataFrame()
-        
-        # Récupérer les participants pour ces courses
+        # Récupérer les participants pour ces courses avec les données enrichies
         all_participants = []
         
         for _, course in courses_df.iterrows():
+            # Requête pour récupérer les données de participations
             participants_query = f"""
-            SELECT p.*, c.nom AS cheval_nom, c.age, c.sexe, j.nom AS jockey_nom 
+            SELECT 
+                p.*,
+                c.nom AS cheval_nom, 
+                c.age, 
+                c.sexe, 
+                j.nom AS jockey_nom
             FROM participations p
             JOIN chevaux c ON p.id_cheval = c.id
             JOIN jockeys j ON p.id_jockey = j.id
@@ -133,28 +138,143 @@ class EnhancedDataPreparation:
             
             participants = pd.read_sql_query(participants_query, self.engine)
             
+            # Si des participants ont été trouvés, récupérer les données complémentaires de pmu_participants
             if not participants.empty:
                 # Ajouter les infos de la course
                 for col in course.index:
                     if col not in participants.columns:
                         participants[col] = course[col]
                 
+                # Pour chaque participant, récupérer les données de pmu_participants
+                pmu_course_id = course['pmu_course_id']
+                
+                for idx, participant in participants.iterrows():
+                    if 'numPmu' in participant and not pd.isna(participant['numPmu']):
+                        pmu_participant_query = f"""
+                        SELECT 
+                            musique,
+                            handicapPoids,
+                            incident,
+                            dernierRapportDirect,
+                            dernierRapportReference,
+                            entraineur
+                        FROM pmu_participants
+                        WHERE id_course = {pmu_course_id} AND numPmu = {participant['numPmu']}
+                        LIMIT 1
+                        """
+                        
+                        pmu_participant = pd.read_sql_query(pmu_participant_query, self.engine)
+                        
+                        if not pmu_participant.empty:
+                            for col in pmu_participant.columns:
+                                participants.at[idx, col] = pmu_participant.iloc[0][col]
+                
                 all_participants.append(participants)
         
         if not all_participants:
-            self.logger.warning("No participants found for the courses")
             return pd.DataFrame()
         
         # Combiner tous les participants
         training_data = pd.concat(all_participants, ignore_index=True)
         
-        return training_data
+        return training_data    
+
+    def _parse_musique(self, musique_str):
+        """Interprète la chaîne de musique d'un cheval (historique des performances)"""
+        if pd.isna(musique_str) or not musique_str:
+            return []
+        
+        # Expressions régulières pour extraire les informations
+        import re
+        
+        # Extraire tous les chiffres et lettres spéciales (p=placé, a=arrêté, d=distancé, etc.)
+        performances = re.findall(r'(\d+|[pPaAtTdDrR])', musique_str)
+        
+        # Convertir en valeurs numériques
+        numeric_values = []
+        for perf in performances:
+            if perf.isdigit():
+                numeric_values.append(int(perf))
+            elif perf.lower() == 'p':  # placé
+                numeric_values.append(4)  # Valeur arbitraire pour "placé"
+            else:
+                numeric_values.append(0)  # 0 pour les non-finishes (arrêté, disqualifié, etc.)
+        
+        return numeric_values[:10]  # Limiter aux 10 dernières performances
+
+    def _extract_rapport_from_json(self, json_str):
+        """Extrait le rapport (cote) à partir d'une chaîne JSON"""
+        if pd.isna(json_str) or not json_str:
+            return None
+        
+        try:
+            # Si c'est déjà un dictionnaire
+            if isinstance(json_str, dict):
+                data = json_str
+            else:
+                # Sinon, tenter de parser le JSON
+                import json
+                data = json.loads(json_str)
+            
+            # Extraire le rapport s'il existe
+            if 'rapport' in data:
+                return float(data['rapport'])
+            
+            return None
+        except:
+            return None
+
+    def _calculate_trend(self, performances):
+        """Calcule la tendance entre les performances récentes et anciennes"""
+        if len(performances) < 3:
+            return np.nan
+        
+        # Ne prendre que les valeurs valides (courses terminées)
+        valid_perfs = [p for p in performances if p > 0]
+        if len(valid_perfs) < 3:
+            return np.nan
+        
+        # Diviser en performances récentes et anciennes
+        mid_point = len(valid_perfs) // 2
+        recent = valid_perfs[:mid_point]
+        old = valid_perfs[mid_point:]
+        
+        if not recent or not old:
+            return np.nan
+        
+        recent_avg = np.mean(recent)
+        old_avg = np.mean(old)
+        
+        # Calculer la tendance (amélioration = positive, dégradation = négative)
+        # Remarque: pour les positions, un chiffre plus bas est meilleur
+        if old_avg > 0:
+            return (old_avg - recent_avg) / old_avg
+        
+        return np.nan
+
+
     
     def create_advanced_features(self, df):
-        """Crée des features avancées basées sur les données historiques"""
-        self.logger.info("Creating advanced features")
+        """Crée des features avancées basées sur les données historiques et enrichies"""
+        self.logger.info(f"Creating advanced features for {len(df)} rows")
         
-        # Récupérer les historiques pour chaque cheval et jockey
+        # Préparation des données issues de pmu_participants
+        # Traiter la musique si disponible mais pas encore parsée
+        if 'musique' in df.columns and 'musique_parsed' not in df.columns:
+            df['musique_parsed'] = df['musique'].apply(lambda x: self._parse_musique(x))
+        
+        # Traiter les cotes JSON si disponibles
+        if 'dernierRapportDirect' in df.columns and 'cote_detail' not in df.columns:
+            df['cote_detail'] = df['dernierRapportDirect'].apply(
+                lambda x: self._extract_rapport_from_json(x)
+            )
+        
+        if 'dernierRapportReference' in df.columns and 'cote_ref_detail' not in df.columns:
+            df['cote_ref_detail'] = df['dernierRapportReference'].apply(
+                lambda x: self._extract_rapport_from_json(x)
+            )
+        
+        # Une seule boucle pour traiter l'historique par cheval/jockey
         for index, row in df.iterrows():
             # Exclure la course actuelle pour éviter les fuites de données
             history_query = f"""
@@ -166,14 +286,16 @@ class EnhancedDataPreparation:
             ORDER BY c.date_heure DESC
             LIMIT 10
             """
-            
             history = pd.read_sql_query(history_query, self.engine)
             
             if not history.empty:
-                # Calculer les features avancées de tendance
+                # Calculer les statistiques de performance
+                df.at[index, 'nb_courses_total'] = len(history)
+                df.at[index, 'win_rate'] = (history['position'] == 1).mean() * 100
+                df.at[index, 'place_rate'] = (history['position'] <= 3).mean() * 100
                 df.at[index, 'recent_form'] = history['position'].mean()
                 
-                # Tendance de performance (amélioration ou dégradation)
+                # Calculer la tendance (amélioration ou dégradation)
                 if len(history) >= 3:
                     recent_avg = history.iloc[:3]['position'].mean()
                     older_avg = history.iloc[3:]['position'].mean() if len(history) > 3 else None
@@ -194,17 +316,32 @@ class EnhancedDataPreparation:
                 
                 if not similar_races.empty:
                     df.at[index, 'similar_races_perf'] = similar_races['position'].mean()
+                    df.at[index, 'similar_races_count'] = len(similar_races)
                 else:
                     df.at[index, 'similar_races_perf'] = np.nan
+                    df.at[index, 'similar_races_count'] = 0
                 
                 # Performance sur le même hippodrome
                 same_venue = history[history['lieu'] == row['lieu']]
                 if not same_venue.empty:
                     df.at[index, 'same_venue_perf'] = same_venue['position'].mean()
+                    df.at[index, 'same_venue_count'] = len(same_venue)
                 else:
                     df.at[index, 'same_venue_perf'] = np.nan
+                    df.at[index, 'same_venue_count'] = 0
+            else:
+                # Valeurs par défaut si pas d'historique
+                df.at[index, 'nb_courses_total'] = 0
+                df.at[index, 'win_rate'] = 0
+                df.at[index, 'place_rate'] = 0
+                df.at[index, 'recent_form'] = np.nan
+                df.at[index, 'trend'] = 0
+                df.at[index, 'similar_races_perf'] = np.nan
+                df.at[index, 'similar_races_count'] = 0
+                df.at[index, 'same_venue_perf'] = np.nan
+                df.at[index, 'same_venue_count'] = 0
             
-            # Ajouter les features du jockey
+            # Statistiques du jockey
             jockey_query = f"""
             SELECT p.position
             FROM participations p
@@ -218,16 +355,88 @@ class EnhancedDataPreparation:
             jockey_history = pd.read_sql_query(jockey_query, self.engine)
             
             if not jockey_history.empty:
-                df.at[index, 'jockey_recent_form'] = jockey_history.iloc[:10]['position'].mean() if len(jockey_history) >= 10 else jockey_history['position'].mean()
                 df.at[index, 'jockey_win_rate'] = (jockey_history['position'] == 1).mean() * 100
+                df.at[index, 'jockey_place_rate'] = (jockey_history['position'] <= 3).mean() * 100
+                df.at[index, 'jockey_avg_position'] = jockey_history['position'].mean()
+                df.at[index, 'jockey_races_count'] = len(jockey_history)
             else:
-                df.at[index, 'jockey_recent_form'] = np.nan
                 df.at[index, 'jockey_win_rate'] = 0
+                df.at[index, 'jockey_place_rate'] = 0
+                df.at[index, 'jockey_avg_position'] = np.nan
+                df.at[index, 'jockey_races_count'] = 0
+        
+        # Traitements des données enrichies après la boucle
+        
+        # 1. Features basées sur la musique (si disponible)
+        if 'musique_parsed' in df.columns:
+            # Calculer la moyenne des performances passées
+            df['musique_mean'] = df['musique_parsed'].apply(
+                lambda x: np.mean([v for v in x if v > 0]) if len(x) > 0 and any(v > 0 for v in x) else np.nan
+            )
+            
+            # Calculer la tendance récente vs ancienne
+            df['musique_trend'] = df['musique_parsed'].apply(
+                lambda x: self._calculate_trend(x) if len(x) >= 3 else np.nan
+            )
+            
+            # Volatilité des performances (écart-type)
+            df['musique_volatility'] = df['musique_parsed'].apply(
+                lambda x: np.std([v for v in x if v > 0]) if len(x) >= 2 and sum(v > 0 for v in x) >= 2 else np.nan
+            )
+            
+            # Compteur de victoires dans l'historique
+            df['musique_wins'] = df['musique_parsed'].apply(
+                lambda x: sum(1 for v in x if v == 1)
+            )
+            
+            # Ratio de courses terminées (non abandonnées/disqualifiées)
+            df['musique_completion_ratio'] = df['musique_parsed'].apply(
+                lambda x: sum(1 for v in x if v > 0) / len(x) if len(x) > 0 else np.nan
+            )
+        
+        # 2. Features basées sur le handicap
+        if 'handicapPoids' in df.columns:
+            # Normaliser le handicap au sein de chaque course
+            df['handicap_normalized'] = df.groupby('id_course')['handicapPoids'].transform(
+                lambda x: (x - x.mean()) / x.std() if x.std() > 0 else 0
+            )
+            
+            # Si l'âge est disponible, créer un ratio handicap/âge
+            if 'age' in df.columns:
+                df['handicap_age_ratio'] = df['handicapPoids'] / df['age']
+        
+        # 3. Features basées sur les incidents
+        if 'incident' in df.columns:
+            # Créer un indicateur binaire pour la présence d'incidents
+            df['has_incident'] = df['incident'].notna() & (df['incident'] != '')
+            
+            # Catégoriser les types d'incidents les plus courants
+            incident_types = ['chute', 'gêné', 'arrêté', 'rétrogradé', 'disqualifié']
+            for incident_type in incident_types:
+                df[f'incident_{incident_type}'] = df['incident'].str.contains(
+                    incident_type, case=False, na=False
+                ).astype(int)
+        
+        # 4. Features avancées basées sur les cotes
+        if 'cote_detail' in df.columns and 'cote_ref_detail' in df.columns:
+            # Calculer la variation entre cote de référence et cote actuelle
+            df['cote_variation'] = df.apply(
+                lambda row: (row['cote_detail'] - row['cote_ref_detail']) / row['cote_ref_detail'] 
+                if pd.notna(row['cote_detail']) and pd.notna(row['cote_ref_detail']) and row['cote_ref_detail'] > 0 
+                else np.nan,
+                axis=1
+            )
+            
+            # Identifier les chevaux dont la cote s'est améliorée significativement
+            df['cote_improved'] = df['cote_variation'] < -0.1  # Une réduction de 10% ou plus
+            
+            # Identifier les chevaux dont la cote s'est dégradée significativement
+            df['cote_worsened'] = df['cote_variation'] > 0.1  # Une augmentation de 10% ou plus
         
         # Normaliser les cotes dans le contexte de la course
         if 'cote_actuelle' in df.columns:
             df['normalized_odds'] = df.groupby('id_course')['cote_actuelle'].transform(
-                lambda x: x / x.mean()
+                lambda x: x / x.mean() if x.mean() > 0 else 1
             )
             
             # Rang des favoris
@@ -241,6 +450,9 @@ class EnhancedDataPreparation:
         
         return df
     
+    
+
+
     def encode_features_for_model(self, df, is_training=True):
         """Encode les features pour le ML, avec support pour l'inférence"""
         self.logger.info("Encoding features for modeling")
@@ -354,5 +566,6 @@ class EnhancedDataPreparation:
         prepared_data = self.encode_features_for_model(enhanced_data, is_training=False)
         
         return prepared_data
+
 
 

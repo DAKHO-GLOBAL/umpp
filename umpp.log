@@ -2112,3 +2112,73 @@ Stack trace:
   [bt] (8) /home/dakho/exit/envs/tf_gpu/lib/python3.9/lib-dynload/_ctypes.cpython-39-x86_64-linux-gnu.so(+0x91e0) [0x7f41b47a91e0]
 
 
+2025-04-07 00:46:53 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 00:46:53 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 00:46:53 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 00:46:53 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 00:46:53 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 00:46:53 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 00:46:55 - INFO - Données récupérées: 2391 échantillons
+2025-04-07 00:46:55 - INFO - Creating advanced features
+2025-04-07 00:47:01 - INFO - Encoding features for modeling
+2025-04-07 00:47:02 - INFO - Encoders saved successfully
+2025-04-07 00:47:02 - INFO - Initialized standard model with type xgboost
+2025-04-07 00:47:02 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 00:47:02 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 00:47:02 - INFO - Entraînement du modèle standard (xgboost) avec test_size=0.2
+2025-04-07 00:47:02 - INFO - Selected 18 features for modeling
+2025-04-07 00:47:02 - INFO - Training standard model on 1912 samples
+2025-04-07 00:47:02 - INFO - Standard model performance:
+2025-04-07 00:47:02 - INFO - Accuracy: 0.7349, Precision: 0.4940
+2025-04-07 00:47:02 - INFO - Recall: 0.6640, F1 Score: 0.5666
+2025-04-07 00:47:02 - INFO - Top 10 important features:
+2025-04-07 00:47:02 - INFO - cote_actuelle_norm: 0.1607
+2025-04-07 00:47:02 - INFO - normalized_odds_norm: 0.0800
+2025-04-07 00:47:02 - INFO - type_course_TROT_MONTE: 0.0726
+2025-04-07 00:47:02 - INFO - jockey_win_rate_norm: 0.0684
+2025-04-07 00:47:02 - INFO - jockey_recent_form_norm: 0.0676
+2025-04-07 00:47:02 - INFO - jockey_nom_encoded: 0.0635
+2025-04-07 00:47:02 - INFO - age_norm: 0.0619
+2025-04-07 00:47:02 - INFO - poids_norm: 0.0613
+2025-04-07 00:47:02 - INFO - sexe_FEMELLES: 0.0594
+2025-04-07 00:47:02 - INFO - lieu_encoded: 0.0593
+2025-04-07 00:47:02 - INFO - Standard model saved to model/trained_models/standard_xgboost_20250407_004702.pkl
+2025-04-07 00:47:02 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 00:47:02 - INFO - Entraînement du modèle de simulation (xgboost_ranking) avec test_size=0.2
+2025-04-07 00:47:02 - INFO - Selected 18 features for modeling
+2025-04-07 00:47:02 - INFO - Training simulation ranking model on 1911 samples
+2025-04-07 00:47:02 - INFO - Simulation model performance (NDCG): 0.7916
+2025-04-07 00:47:03 - INFO - Winner prediction accuracy: 0.2791
+2025-04-07 00:47:03 - INFO - Top 10 important features for simulation:
+2025-04-07 00:47:03 - INFO - normalized_odds_norm: 0.0878
+2025-04-07 00:47:03 - INFO - type_course_OBSTACLE: 0.0804
+2025-04-07 00:47:03 - INFO - cote_actuelle_norm: 0.0777
+2025-04-07 00:47:03 - INFO - jockey_win_rate_norm: 0.0776
+2025-04-07 00:47:03 - INFO - jockey_nom_encoded: 0.0749
+2025-04-07 00:47:03 - INFO - type_course_TROT_MONTE: 0.0716
+2025-04-07 00:47:03 - INFO - jockey_recent_form_norm: 0.0707
+2025-04-07 00:47:03 - INFO - poids_norm: 0.0653
+2025-04-07 00:47:03 - INFO - lieu_encoded: 0.0624
+2025-04-07 00:47:03 - INFO - age_norm: 0.0600
+2025-04-07 00:47:03 - INFO - Simulation model saved to model/trained_models/simulation_xgboost_ranking_20250407_004703.pkl
+2025-04-07 00:47:03 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 00:47:03 - INFO - Entraînement des modèles terminé
+2025-04-07 00:47:03 - INFO - Modèles entraînés avec succès:
+2025-04-07 00:47:03 - INFO - Modèle standard (xgboost): model/trained_models/standard_xgboost_20250407_004702.pkl
+2025-04-07 00:47:03 - INFO - Précision: 0.7349
+2025-04-07 00:47:03 - INFO - Modèle de simulation (xgboost_ranking): model/trained_models/simulation_xgboost_ranking_20250407_004703.pkl
+2025-04-07 00:47:03 - INFO - Configuration mise à jour avec les nouveaux modèles
+2025-04-07 11:58:20 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 11:58:20 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 11:58:20 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 11:58:20 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 11:58:20 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 11:58:20 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 11:58:22 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 11:59:30 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 11:59:30 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 11:59:30 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 11:59:30 - INFO - Entraînement des modèles sur les données des None derniers jours
+2025-04-07 11:59:30 - INFO - Entraînement des modèles sur toutes les données disponibles
+2025-04-07 11:59:30 - INFO - Récupération de toutes les données jusqu'au 2025-04-07
+2025-04-07 11:59:31 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
