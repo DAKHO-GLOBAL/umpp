@@ -1,0 +1,17 @@
+{
+    "model_type": "xgboost_ranking",
+    "metrics": {
+        "ndcg_score": 0.0,
+        "winner_accuracy": 0.0,
+        "top3_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top7_accuracy": 0.0,
+        "error": "0",
+        "total_races_evaluated": 0
+    },
+    "training_size": 5056,
+    "test_size": 1345,
+    "timestamp": "20250408_025507",
+    "feature_count": 30,
+    "top7_optimized": true
+}

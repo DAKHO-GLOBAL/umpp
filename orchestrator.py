@@ -638,12 +638,14 @@ class PMUOrchestrateur:
             
             if optimize_for_top7:
                 # Utiliser la méthode d'entraînement améliorée avec sélection de features enrichie
+                # Assurez-vous d'appeler la méthode du modèle, pas celle de data_prep
                 standard_accuracy, standard_path = self.model.train_with_enhanced_features(
                     prepared_data, 
                     target_col='target_place',
                     test_size=test_size,
-                    top_n_features=top_n_features
-                )
+                    top_n_features=top_n_features,
+                    data_prep=self.data_prep
+)
             else:
                 # Utiliser la méthode d'entraînement standard existante
                 standard_accuracy, standard_path = self.model.train_standard_model(prepared_data, test_size=test_size)
@@ -656,7 +658,8 @@ class PMUOrchestrateur:
                 simulation_metrics, simulation_path = self.model.train_top7_simulation_model(
                     prepared_data,
                     test_size=test_size,
-                    top_n_features=top_n_features
+                    top_n_features=top_n_features,
+                    data_prep=self.data_prep  # Ajouter cette ligne
                 )
             else:
                 # Utiliser la méthode d'entraînement de simulation standard

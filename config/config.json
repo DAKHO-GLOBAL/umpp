@@ -24,8 +24,8 @@
     }
   },
   "training": {
-    "days_back": 300,
-    "test_days": 65,
+    "days_back": 15,
+    "test_days": 7,
     "standard_model_type": "xgboost",
     "simulation_model_type": "xgboost_ranking",
     "schedule": {
@@ -35,5 +35,7 @@
     }
   },
   "standard_model_path": "model/trained_models/standard_xgboost_20250407_162424.pkl",
-  "simulation_model_path": "model/trained_models/simulation_xgboost_ranking_20250407_162533.pkl"
+  "simulation_model_path": "model/trained_models/simulation_xgboost_ranking_20250407_162533.pkl",
+  "standard_enhanced_model_path": "model/trained_models/enhanced_xgboost_20250408_101026.pkl",
+  "simulation_top7_model_path": "model/trained_models/simulation_top7_xgboost_ranking_20250408_101051.pkl"
 }

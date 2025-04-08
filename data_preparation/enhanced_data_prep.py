@@ -926,7 +926,7 @@ class EnhancedDataPreparation:
 
 
     # Intégrer cette sélection de features à la méthode train du modèle
-    def train_with_enhanced_features(self, df, target_col='target_place', test_size=0.2, top_n_features=25):
+    # def train_with_enhanced_features(self, df, target_col='target_place', test_size=0.2, top_n_features=25):
         """
         Entraîne le modèle avec la sélection améliorée de features.
         """

@@ -760,38 +760,38 @@ class DualPredictionModel:
         
         return correct / total if total > 0 else 0
     
-    def select_features(self, df, target_col, exclude_cols=None):
-        """Sélectionne les features pertinentes pour la modélisation"""
-        if exclude_cols is None:
-            exclude_cols = []
+    # def select_features(self, df, target_col, exclude_cols=None):
+    #     """Sélectionne les features pertinentes pour la modélisation"""
+    #     if exclude_cols is None:
+    #         exclude_cols = []
             
-        # Colonnes à exclure par défaut
-        default_exclude = [
-            'id', 'id_course', 'id_cheval', 'id_jockey', 'cheval_nom', 'jockey_nom',
-            'position', 'date_heure', 'lieu', 'type_course', 'statut', 'est_forfait',
-            'target_place', 'target_win', 'target_rank', 'target_position_score',
-            'musique', 'musique_parsed', 'commentaire', 'dernierRapportDirect', 'dernierRapportReference'
-        ]
+    #     # Colonnes à exclure par défaut
+    #     default_exclude = [
+    #         'id', 'id_course', 'id_cheval', 'id_jockey', 'cheval_nom', 'jockey_nom',
+    #         'position', 'date_heure', 'lieu', 'type_course', 'statut', 'est_forfait',
+    #         'target_place', 'target_win', 'target_rank', 'target_position_score',
+    #         'musique', 'musique_parsed', 'commentaire', 'dernierRapportDirect', 'dernierRapportReference'
+    #     ]
         
-        # Ne pas exclure la colonne cible
-        exclude_cols = list(set(exclude_cols + default_exclude) - {target_col})
+    #     # Ne pas exclure la colonne cible
+    #     exclude_cols = list(set(exclude_cols + default_exclude) - {target_col})
         
-        # Inclure seulement les colonnes encodées et normalisées
-        feature_cols = [col for col in df.columns if 
-                       (col.endswith('_encoded') or 
-                        col.endswith('_norm') or 
-                        col.startswith('sexe_') or 
-                        col.startswith('type_course_') or
-                        col.startswith('corde_') or
-                        col.startswith('distance_cat_') or
-                        col.startswith('perf_') and col != 'perf_mean') and 
-                       col not in exclude_cols]
+    #     # Inclure seulement les colonnes encodées et normalisées
+    #     feature_cols = [col for col in df.columns if 
+    #                    (col.endswith('_encoded') or 
+    #                     col.endswith('_norm') or 
+    #                     col.startswith('sexe_') or 
+    #                     col.startswith('type_course_') or
+    #                     col.startswith('corde_') or
+    #                     col.startswith('distance_cat_') or
+    #                     col.startswith('perf_') and col != 'perf_mean') and 
+    #                    col not in exclude_cols]
         
-        self.logger.info(f"Selected {len(feature_cols)} features for modeling")
-        self.logger.debug("Liste exacte des features sélectionnées :")
-        for col in sorted(feature_cols):
-            self.logger.debug(f"- {col}")
-        return feature_cols
+    #     self.logger.info(f"Selected {len(feature_cols)} features for modeling")
+    #     self.logger.debug("Liste exacte des features sélectionnées :")
+    #     for col in sorted(feature_cols):
+    #         self.logger.debug(f"- {col}")
+    #     return feature_cols
     
     def train_standard_model(self, df, test_size=0.2):
         """Entraîne le modèle pour les prédictions standard (classification: dans le top 3 ou non)"""
@@ -1279,9 +1279,7 @@ class DualPredictionModel:
 
 
     def initialize_top7_simulation_model(self):
-        """
-        Initialise un modèle de simulation optimisé pour le Top 7 (pour les paris quinté).
-        """
+        """Initialise un modèle de simulation optimisé pour le Top 7."""
         self.simulation_model_type = 'xgboost_ranking'
         
         self.simulation_model = XGBRanker(
@@ -1290,19 +1288,19 @@ class DualPredictionModel:
             learning_rate=0.03,
             subsample=0.85,
             colsample_bytree=0.75,
-            objective='rank:ndcg',  # Optimisation NDCG pour le top-k
+            objective='rank:ndcg',  # Optimisation pour le ranking
             gamma=1.0,
             min_child_weight=2,
             max_delta_step=1,
-            lambda_=1.5,  # Lambda doit être spécifié comme lambda_
-            random_state=42,
-            ndcg_at=[1,3,5,7,10]  # Optimisation spécifique pour le top 7
+            reg_lambda=1.5,  # Utilisez reg_lambda au lieu de lambda_
+            random_state=42
+            # Supprimez ndcg_at s'il n'est pas supporté
         )
         
         self.logger.info(f"Initialized Top-7 simulation model with XGBoost Ranking")
         return self.simulation_model
 
-    def train_top7_simulation_model(self, df, test_size=0.2, top_n_features=30):
+    def train_top7_simulation_model(self, df, test_size=0.2, top_n_features=30, data_prep=None):
         """
         Entraîne le modèle de simulation optimisé pour le Top 7 avec features améliorées.
         """
@@ -1314,10 +1312,20 @@ class DualPredictionModel:
             self.logger.error("Position column required for training simulation model")
             return None, None
         
+        # Vérifier si les données sont déjà encodées
+        encoded_columns = [col for col in df.columns if col.endswith('_encoded') or col.endswith('_norm')]
+        if not encoded_columns and data_prep:
+            self.logger.info("Encodage des données pour le modèle de simulation")
+            df = data_prep.encode_features_for_model(df, is_training=False)
+        
         # Utiliser la sélection améliorée de features
-        feature_cols = self.data_prep.select_enhanced_features(
-            df, target_col='position', top_n=top_n_features
-        )
+        feature_cols = self.select_features_enhanced(df, target_col='position')
+        
+        # Limiter aux top_n_features si nécessaire
+        if len(feature_cols) > top_n_features:
+            feature_cols = feature_cols[:top_n_features]
+        
+        self.logger.info(f"Training simulation model with {len(feature_cols)} features")
         
         # Séparer les features et la cible
         X = df[feature_cols]
@@ -1399,103 +1407,141 @@ class DualPredictionModel:
         
         return metrics, model_path
 
-    def evaluate_top7_performance(self, X_test, y_test, groups_test, unique_test_groups):
-        """
-        Évalue la performance du modèle de simulation pour le Top 7.
-        Calcule des métriques spécifiques pour les paris de type quinté.
-        """
-        from sklearn.metrics import ndcg_score
-        
-        ndcg_scores = []
-        winners_correct = 0
-        top3_correct = 0
-        top5_correct = 0
-        top7_correct = 0
-        quinte_exact_count = 0  # Prédiction exacte des 5 premiers dans l'ordre
-        quinte_desordre_count = 0  # Prédiction des 5 premiers sans ordre
-        total_races = 0
-        
-        for group in unique_test_groups:
-            # Filtrer pour cette course
-            group_mask = groups_test == group
-            X_group = X_test[group_mask].copy()
-            y_group = y_test[group_mask].copy()
-            
-            if len(X_group) > 4:  # Besoin d'au moins 5 chevaux pour le quinté
-                # Prédire les positions
-                y_pred = self.simulation_model.predict(X_group)
-                
-                # Trier par score prédit (plus petit = meilleur)
-                y_pred_sorted_idx = np.argsort(y_pred)
-                
-                # Trier par position réelle (plus petit = meilleur)
-                y_true_sorted_idx = np.argsort(y_group)
-                
-                # NDCG score pour cette course
-                try:
-                    # Pour ndcg_score, inverser les positions (plus petit = meilleur)
-                    max_pos = y_group.max()
-                    y_true_ndcg = max_pos - y_group + 1
-                    score = ndcg_score([y_true_ndcg], [y_pred])
-                    ndcg_scores.append(score)
-                except:
-                    pass
-                
-                # Vérifier si le gagnant est correctement prédit
-                if y_true_sorted_idx[0] == y_pred_sorted_idx[0]:
-                    winners_correct += 1
-                
-                # Vérifier le Top 3
-                pred_top3 = set(y_pred_sorted_idx[:3])
-                true_top3 = set(y_true_sorted_idx[:3])
-                if len(pred_top3.intersection(true_top3)) >= 2:  # Au moins 2 sur 3 corrects
-                    top3_correct += 1
-                
-                # Vérifier le Top 5 (Quinté)
-                pred_top5 = set(y_pred_sorted_idx[:5])
-                true_top5 = set(y_true_sorted_idx[:5])
-                if len(pred_top5.intersection(true_top5)) >= 3:  # Au moins 3 sur 5 corrects
-                    top5_correct += 1
-                    
-                    # Quinté dans le désordre (tous les 5 chevaux sans ordre)
-                    if len(pred_top5.intersection(true_top5)) == 5:
-                        quinte_desordre_count += 1
-                        
-                        # Quinté exact (5 dans l'ordre)
-                        if all(y_pred_sorted_idx[i] == y_true_sorted_idx[i] for i in range(5)):
-                            quinte_exact_count += 1
-                
-                # Vérifier le Top 7
-                pred_top7 = set(y_pred_sorted_idx[:7])
-                true_top7 = set(y_true_sorted_idx[:7])
-                if len(pred_top7.intersection(true_top7)) >= 4:  # Au moins 4 sur 7 corrects
-                    top7_correct += 1
-                
-                total_races += 1
-        
-        # Calculer les métriques finales
-        metrics = {
-            'ndcg_score': float(np.mean(ndcg_scores)) if ndcg_scores else 0,
-            'winner_accuracy': float(winners_correct / total_races) if total_races > 0 else 0,
-            'top3_accuracy': float(top3_correct / total_races) if total_races > 0 else 0,
-            'top5_accuracy': float(top5_correct / total_races) if total_races > 0 else 0,
-            'top7_accuracy': float(top7_correct / total_races) if total_races > 0 else 0,
-            'quinte_exact_rate': float(quinte_exact_count / total_races) if total_races > 0 else 0,
-            'quinte_desordre_rate': float(quinte_desordre_count / total_races) if total_races > 0 else 0,
-            'total_races_evaluated': total_races
-        }
-        
-        self.logger.info(f"Top-7 Model Performance:")
-        self.logger.info(f"NDCG Score: {metrics['ndcg_score']:.4f}")
-        self.logger.info(f"Winner Accuracy: {metrics['winner_accuracy']:.4f}")
-        self.logger.info(f"Top-3 Accuracy: {metrics['top3_accuracy']:.4f}")
-        self.logger.info(f"Top-5 (Quinté) Accuracy: {metrics['top5_accuracy']:.4f}")
-        self.logger.info(f"Top-7 Accuracy: {metrics['top7_accuracy']:.4f}")
-        self.logger.info(f"Quinté Exact Rate: {metrics['quinte_exact_rate']:.4f}")
-        self.logger.info(f"Quinté Désordre Rate: {metrics['quinte_desordre_rate']:.4f}")
-        
-        return metrics
 
+    def evaluate_top7_performance(self, X_test, y_test, groups_test, unique_test_groups):
+        """Évalue la performance du modèle pour le Top 7."""
+        try:
+            from sklearn.metrics import ndcg_score
+            
+            ndcg_scores = []
+            winners_correct = 0
+            top3_correct = 0
+            top5_correct = 0
+            top7_correct = 0
+            quinte_exact_count = 0    # Cette variable était manquante
+            quinte_desordre_count = 0 # Cette variable était manquante
+            total_races = 0
+            
+            for group in unique_test_groups:
+                # Filtrer pour cette course
+                group_mask = groups_test == group
+                X_group = X_test[group_mask].copy()
+                y_group = y_test[group_mask].copy()
+                
+                if len(X_group) > 4:  # Besoin d'au moins 5 chevaux
+                    # Prédire les positions
+                    y_pred = self.simulation_model.predict(X_group)
+                    
+                    # Convertir en indices pour le tri
+                    y_pred_with_idx = [(i, pred) for i, pred in enumerate(y_pred)]
+                    y_true_with_idx = [(i, true) for i, true in enumerate(y_group)]
+                    
+                    # Trier par score prédit (plus petit = meilleur)
+                    y_pred_sorted = sorted(y_pred_with_idx, key=lambda x: x[1])
+                    y_pred_sorted_idx = [idx for idx, _ in y_pred_sorted]
+                    
+                    # Trier par position réelle (plus petit = meilleur)
+                    y_true_sorted = sorted(y_true_with_idx, key=lambda x: x[1])
+                    y_true_sorted_idx = [idx for idx, _ in y_true_sorted]
+                    
+                    # NDCG score pour cette course
+                    try:
+                        # Pour ndcg_score, inverser les positions (plus petit = meilleur)
+                        max_pos = y_group.max()
+                        y_true_ndcg = max_pos - y_group.values + 1  # Assurez-vous d'avoir des valeurs
+                        score = ndcg_score([y_true_ndcg.tolist()], [y_pred.tolist()])
+                        ndcg_scores.append(score)
+                    except Exception as ndcg_error:
+                        self.logger.debug(f"Erreur calcul NDCG: {ndcg_error}")
+                        # Continue même si le calcul NDCG échoue
+                    
+                    # Vérifier si le gagnant est correctement prédit
+                    if len(y_true_sorted_idx) > 0 and len(y_pred_sorted_idx) > 0:
+                        if y_true_sorted_idx[0] == y_pred_sorted_idx[0]:
+                            winners_correct += 1
+                    
+                    # Vérifier le Top 3
+                    if len(y_true_sorted_idx) >= 3 and len(y_pred_sorted_idx) >= 3:
+                        pred_top3 = set(y_pred_sorted_idx[:3])
+                        true_top3 = set(y_true_sorted_idx[:3])
+                        if len(pred_top3.intersection(true_top3)) >= 2:  # Au moins 2 sur 3 corrects
+                            top3_correct += 1
+                    
+                    # Vérifier le Top 5 (Quinté)
+                    if len(y_true_sorted_idx) >= 5 and len(y_pred_sorted_idx) >= 5:
+                        pred_top5 = set(y_pred_sorted_idx[:5])
+                        true_top5 = set(y_true_sorted_idx[:5])
+                        if len(pred_top5.intersection(true_top5)) >= 3:  # Au moins 3 sur 5 corrects
+                            top5_correct += 1
+                            
+                            # Quinté dans le désordre (tous les 5 chevaux sans ordre)
+                            if len(pred_top5.intersection(true_top5)) == 5:
+                                quinte_desordre_count += 1
+                                
+                                # Quinté exact (5 dans l'ordre)
+                                if all(y_pred_sorted_idx[i] == y_true_sorted_idx[i] for i in range(5)):
+                                    quinte_exact_count += 1
+                    
+                    # Vérifier le Top 7
+                    if len(y_true_sorted_idx) >= 7 and len(y_pred_sorted_idx) >= 7:
+                        pred_top7 = set(y_pred_sorted_idx[:7])
+                        true_top7 = set(y_true_sorted_idx[:7])
+                        if len(pred_top7.intersection(true_top7)) >= 4:  # Au moins 4 sur 7 corrects
+                            top7_correct += 1
+                    
+                    total_races += 1
+        
+            # S'assurer que total_races n'est pas zéro pour éviter la division par zéro
+            if total_races == 0:
+                self.logger.warning("Aucune course valide pour l'évaluation")
+                return {
+                    'ndcg_score': 0.0,
+                    'winner_accuracy': 0.0,
+                    'top3_accuracy': 0.0,
+                    'top5_accuracy': 0.0,
+                    'top7_accuracy': 0.0,
+                    'quinte_exact_rate': 0.0,
+                    'quinte_desordre_rate': 0.0,
+                    'total_races_evaluated': 0
+                }
+            
+            # Calculer les métriques finales
+            metrics = {
+                'ndcg_score': float(np.mean(ndcg_scores)) if ndcg_scores else 0.0,
+                'winner_accuracy': float(winners_correct / total_races),
+                'top3_accuracy': float(top3_correct / total_races),
+                'top5_accuracy': float(top5_correct / total_races),
+                'top7_accuracy': float(top7_correct / total_races),
+                'quinte_exact_rate': float(quinte_exact_count / total_races),
+                'quinte_desordre_rate': float(quinte_desordre_count / total_races),
+                'total_races_evaluated': total_races
+            }
+            
+            # Afficher les métriques dans les logs
+            self.logger.info(f"Résultats d'évaluation Top-7:")
+            for metric, value in metrics.items():
+                if isinstance(value, float):
+                    self.logger.info(f"{metric}: {value:.4f}")
+                else:
+                    self.logger.info(f"{metric}: {value}")
+            
+            return metrics
+        
+        except Exception as e:
+            self.logger.error(f"Erreur dans l'évaluation: {str(e)}")
+            # Retourner des métriques par défaut en cas d'erreur
+            return {
+                'ndcg_score': 0.0,
+                'winner_accuracy': 0.0,
+                'top3_accuracy': 0.0,
+                'top5_accuracy': 0.0,
+                'top7_accuracy': 0.0,
+                'quinte_exact_rate': 0.0,
+                'quinte_desordre_rate': 0.0,
+                'error': str(e),
+                'total_races_evaluated': 0
+            }
+        
     def predict_top7(self, data):
         """
         Effectue une prédiction du Top 7 pour une course donnée.
@@ -1561,6 +1607,205 @@ class DualPredictionModel:
         
         return results
 
+    def train_with_enhanced_features(self, df, target_col='target_place', test_size=0.2, top_n_features=30, data_prep=None):
+
+        """
+        Entraîne le modèle avec la sélection améliorée de features.
+        
+        Args:
+            df: DataFrame avec les données préparées
+            target_col: Colonne cible (par défaut 'target_place')
+            test_size: Proportion des données pour le test (par défaut 0.2)
+            top_n_features: Nombre de features importantes à sélectionner (par défaut 30)
+            
+        Returns:
+            tuple: (accuracy, model_path) pour le modèle standard
+        """
+
+        if self.standard_model is None:
+            self.initialize_standard_model()
+        
+        # Vérifier que la variable cible existe
+        if target_col not in df.columns:
+            self.logger.error(f"La colonne cible {target_col} n'existe pas dans les données")
+            return None, None
+        
+        # Vérifier si les données sont déjà encodées
+        encoded_columns = [col for col in df.columns if col.endswith('_encoded') or col.endswith('_norm')]
+        if not encoded_columns:
+            self.logger.info("Les données ne sont pas encore encodées, application de l'encodage")
+            # Vous devez avoir accès à data_prep ou implémenter l'encodage ici
+            # Par exemple: df = self.data_prep.encode_features_for_model(df)
+            # Si vous n'avez pas accès à data_prep, vous pouvez utiliser une approche de secours
+
+        if data_prep and not encoded_columns:
+            self.logger.info("Encodage des données avec data_prep")
+            df = data_prep.encode_features_for_model(df)
+        
+        # Méthode de sélection de features modifiée pour s'assurer qu'elle trouve toujours quelque chose
+        feature_cols = self.select_features_enhanced(df, target_col)
+        
+        if not feature_cols:
+            self.logger.warning("Aucune feature trouvée avec la méthode habituelle, utilisation d'une méthode de secours")
+            # Sélectionner toutes les colonnes numériques sauf les exclusions
+            exclude_cols = ['id', 'id_course', 'id_cheval', 'id_jockey', 'position', 
+                            'target_place', 'target_win', 'target_rank', 'target_position_score']
+            feature_cols = [col for col in df.columns 
+                            if pd.api.types.is_numeric_dtype(df[col]) and col not in exclude_cols]
+        
+        self.logger.info(f"Entraînement avec {len(feature_cols)} features")
+        
+        # Limiter aux top_n_features si nécessaire
+        if len(feature_cols) > top_n_features:
+            # Utiliser les top_n_features les plus importantes si disponibles
+            if hasattr(self, 'feature_importances') and 'standard' in self.feature_importances:
+                # Trier les features par importance
+                sorted_features = sorted(
+                    self.feature_importances['standard'].items(), 
+                    key=lambda x: x[1], 
+                    reverse=True
+                )
+                # Prendre les top_n_features
+                feature_cols = [f for f, _ in sorted_features[:top_n_features] if f in feature_cols]
+            else:
+                # Sinon juste prendre les premières
+                feature_cols = feature_cols[:top_n_features]
+        
+        # Séparer les features et la cible
+        X = df[feature_cols]
+        y = df[target_col]
+        
+        # Gérer les valeurs manquantes
+        for col in X.columns:
+            if X[col].isna().any():
+                median_value = X[col].median()
+                if pd.isna(median_value):  # Si la médiane est aussi NaN
+                    X[col] = X[col].fillna(0)
+                else:
+                    X[col] = X[col].fillna(median_value)
+        
+        # Diviser en ensembles d'entraînement et de test
+        from sklearn.model_selection import train_test_split
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+        
+        # Entraîner le modèle
+        self.logger.info(f"Training enhanced model on {len(X_train)} samples with {len(feature_cols)} features")
+        self.standard_model.fit(X_train, y_train)
+        
+        # Évaluer le modèle
+        from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+        y_pred = self.standard_model.predict(X_test)
+        
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred)
+        recall = recall_score(y_test, y_pred)
+        f1 = f1_score(y_test, y_pred)
+        
+        self.logger.info(f"Enhanced model performance:")
+        self.logger.info(f"Accuracy: {accuracy:.4f}, Precision: {precision:.4f}")
+        self.logger.info(f"Recall: {recall:.4f}, F1 Score: {f1:.4f}")
+        
+        # Sauvegarder les importances de features
+        if hasattr(self.standard_model, 'feature_importances_'):
+            feature_importances = {
+                feature: float(importance)
+                for feature, importance in zip(feature_cols, self.standard_model.feature_importances_)
+            }
+            
+            self.feature_importances['enhanced'] = feature_importances
+            
+            # Afficher les 10 features les plus importantes
+            top_features = sorted(feature_importances.items(), key=lambda x: x[1], reverse=True)[:10]
+            self.logger.info("Top 10 important features with enhanced selection:")
+            for feature, importance in top_features:
+                self.logger.info(f"{feature}: {importance:.4f}")
+        
+        # Sauvegarder le modèle
+        import os
+        from datetime import datetime
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        model_path = f"{self.base_path}/enhanced_{self.standard_model_type}_{timestamp}.pkl"
+        
+        # Créer le répertoire si nécessaire
+        os.makedirs(os.path.dirname(model_path), exist_ok=True)
+        
+        # Sauvegarder le modèle
+        import joblib
+        joblib.dump(self.standard_model, model_path)
+        
+        # Sauvegarder les importances de features si disponibles
+        if 'enhanced' in self.feature_importances:
+            import json
+            importance_path = model_path.replace('.pkl', '_importance.json')
+            with open(importance_path, 'w') as f:
+                json.dump(self.feature_importances['enhanced'], f, indent=4)
+        
+        # Sauvegarder les informations de performance
+        model_info = {
+            'model_type': self.standard_model_type,
+            'accuracy': float(accuracy),
+            'precision': float(precision),
+            'recall': float(recall),
+            'f1_score': float(f1),
+            'training_size': len(X_train),
+            'test_size': len(X_test),
+            'timestamp': timestamp,
+            'feature_count': len(feature_cols),
+            'enhanced': True
+        }
+        
+        info_path = model_path.replace('.pkl', '_info.json')
+        with open(info_path, 'w') as f:
+            json.dump(model_info, f, indent=4)
+        
+        self.logger.info(f"Enhanced model saved to {model_path}")
+        
+        return accuracy, model_path
+    
+    def select_features_enhanced(self, df, target_col='target_place', exclude_cols=None):
+        """
+        Version améliorée de select_features qui utilise toutes les colonnes numériques disponibles
+        """
+        if exclude_cols is None:
+            exclude_cols = []
+            
+        # Colonnes à exclure par défaut
+        default_exclude = [
+            'id', 'id_course', 'id_cheval', 'id_jockey', 'cheval_nom', 'jockey_nom',
+            'position', 'date_heure', 'lieu', 'type_course', 'statut', 'est_forfait',
+            'target_place', 'target_win', 'target_rank', 'target_position_score',  # Toutes les variables cibles
+            'musique', 'musique_parsed', 'commentaire', 'dernierRapportDirect', 'dernierRapportReference'
+        ]
+        
+        # Ne pas exclure la colonne cible
+        #exclude_cols = list(set(exclude_cols + default_exclude) - {target_col})
+        exclude_cols = list(set(exclude_cols + default_exclude))
+        
+        # Sélectionner toutes les colonnes numériques qui ne sont pas dans la liste d'exclusion
+        numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
+        feature_cols = [col for col in numeric_cols if col not in exclude_cols]
+        
+        # Ajouter également les colonnes catégorielles encodées (si elles existent)
+        encoded_cols = [col for col in df.columns if 
+                    (col.endswith('_encoded') or 
+                        col.startswith('sexe_') or 
+                        col.startswith('type_course_') or
+                        col.startswith('corde_') or
+                        col.startswith('distance_cat_')) and
+                    col not in exclude_cols]
+        
+        # Combiner les deux listes de colonnes
+        feature_cols = list(set(feature_cols + encoded_cols))
+        
+        self.logger.info(f"Selected {len(feature_cols)} features for modeling")
+        #self.logger.info(f"Types of features selected: numeric={len(numeric_cols & set(feature_cols))}, encoded={len(set(encoded_cols) & set(feature_cols))}")
+        self.logger.info(f"Types of features selected: numeric={len(set(numeric_cols).intersection(set(feature_cols)))}, encoded={len(set(encoded_cols).intersection(set(feature_cols)))}")
+        
+        if len(feature_cols) > 0:
+            sample_size = min(10, len(feature_cols))
+            self.logger.info(f"Sample features: {sorted(feature_cols)[:sample_size]}...")
+        
+        return feature_cols
 
 # 3. ORCHESTRATION DU SYSTÈME
 # ------------------------------
