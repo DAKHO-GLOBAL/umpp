@@ -1,3 +1,4 @@
+#j'ai deja # api/services/course_service.py implementé oubien il y a une incoerence et tu veux reprendre ? sinon fait seulement les partie manquantes selon le shema etabli
 # api/services/course_service.py
 import json
 import logging
