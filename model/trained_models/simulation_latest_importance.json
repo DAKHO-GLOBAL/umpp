@@ -1,0 +1,21 @@
+{
+    "lieu_encoded": 0.029258348047733307,
+    "jockey_nom_encoded": 0.03288678824901581,
+    "sexe_FEMELLES": 0.022917568683624268,
+    "sexe_HONGRES": 0.03258921951055527,
+    "sexe_MALES": 0.038299061357975006,
+    "type_course_OBSTACLE": 0.034540001302957535,
+    "type_course_PLAT": 0.028032498434185982,
+    "type_course_TROT_ATTELE": 0.026936983689665794,
+    "type_course_TROT_MONTE": 0.024140454828739166,
+    "age_norm": 0.028696119785308838,
+    "poids_norm": 0.039267998188734055,
+    "cote_actuelle_norm": 0.2836862802505493,
+    "normalized_odds_norm": 0.1388722062110901,
+    "win_rate_norm": 0.029070472344756126,
+    "place_rate_norm": 0.05820401385426521,
+    "recent_form_norm": 0.050752684473991394,
+    "trend_norm": 0.03591034561395645,
+    "jockey_win_rate_norm": 0.03445592150092125,
+    "similar_races_perf_norm": 0.03148302435874939
+}

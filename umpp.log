@@ -2244,3 +2244,261 @@ Stack trace:
 2025-04-07 12:52:59 - INFO - Entraînement des modèles sur les données des 300 derniers jours
 2025-04-07 12:52:59 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
 2025-04-07 12:52:59 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 13:08:08 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 13:08:08 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 13:08:08 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 13:08:08 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:08:08 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:08:08 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 13:08:08 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 13:18:28 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 13:18:28 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 13:18:28 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 13:18:28 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:18:28 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:18:28 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 13:18:29 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 13:22:38 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 13:22:38 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 13:22:38 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 13:22:38 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:22:38 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:22:38 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 13:22:39 - ERROR - Erreur lors de l'entraînement: 'date_heure'
+2025-04-07 13:25:54 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 13:25:54 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 13:25:54 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 13:25:54 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:25:54 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 13:25:54 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 13:25:55 - ERROR - Erreur lors de l'entraînement: 'Series' object has no attribute 'columns'
+2025-04-07 15:33:37 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 15:33:37 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 15:33:37 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 15:33:37 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:33:37 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:33:37 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 15:33:38 - ERROR - Erreur lors de l'entraînement: 'date_heure'
+2025-04-07 15:37:52 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 15:37:52 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 15:37:52 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 15:37:52 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:37:52 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:37:52 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 15:37:53 - ERROR - Erreur lors de l'entraînement: 'Series' object has no attribute 'columns'
+2025-04-07 15:42:38 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 15:42:38 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 15:42:38 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 15:42:38 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:42:38 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:42:38 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 15:42:39 - ERROR - Aucune donnée d'entraînement trouvée
+2025-04-07 15:42:39 - WARNING - Échec de l'entraînement des modèles
+2025-04-07 15:45:36 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 15:45:36 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 15:45:36 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 15:45:36 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:45:36 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:45:36 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 15:45:37 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 15:52:29 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 15:52:29 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 15:52:29 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 15:52:29 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:52:29 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 15:52:29 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 15:52:30 - ERROR - Erreur lors de l'entraînement: cannot reindex on an axis with duplicate labels
+2025-04-07 16:01:22 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 16:01:22 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 16:01:22 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 16:01:22 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 16:01:22 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 16:01:22 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 16:01:23 - ERROR - Erreur lors de l'entraînement: (pymysql.err.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '16854\npmu_course_id    16854\nName: 1, dtype: object AND numPmu = 1\n          ...' at line 9")
+[SQL: 
+                            SELECT 
+                                musique,
+                                handicapPoids,
+                                incident,
+                                dernierRapportDirect,
+                                dernierRapportReference,
+                                entraineur
+                            FROM pmu_participants
+                            WHERE id_course = pmu_course_id    16854
+pmu_course_id    16854
+Name: 1, dtype: object AND numPmu = 1
+                            LIMIT 1
+                            ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-04-07 16:05:43 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 16:05:43 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 16:05:43 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 16:05:43 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 16:05:43 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 16:05:43 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 16:07:09 - INFO - Données récupérées: 123756 échantillons
+2025-04-07 16:07:09 - INFO - Creating advanced features for 123756 rows
+2025-04-07 16:24:23 - INFO - Encoding features for modeling
+2025-04-07 16:24:23 - INFO - Encoders saved successfully
+2025-04-07 16:24:23 - INFO - Initialized standard model with type xgboost
+2025-04-07 16:24:23 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 16:24:23 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 16:24:23 - INFO - Entraînement du modèle standard (xgboost) avec test_size=0.2
+2025-04-07 16:24:23 - INFO - Selected 19 features for modeling
+2025-04-07 16:24:24 - INFO - Training standard model on 99004 samples
+2025-04-07 16:24:24 - INFO - Standard model performance:
+2025-04-07 16:24:24 - INFO - Accuracy: 0.6893, Precision: 0.4349
+2025-04-07 16:24:24 - INFO - Recall: 0.7232, F1 Score: 0.5432
+2025-04-07 16:24:24 - INFO - Top 10 important features:
+2025-04-07 16:24:24 - INFO - cote_actuelle_norm: 0.4452
+2025-04-07 16:24:24 - INFO - normalized_odds_norm: 0.1554
+2025-04-07 16:24:24 - INFO - place_rate_norm: 0.0593
+2025-04-07 16:24:24 - INFO - jockey_win_rate_norm: 0.0360
+2025-04-07 16:24:24 - INFO - recent_form_norm: 0.0303
+2025-04-07 16:24:24 - INFO - sexe_MALES: 0.0234
+2025-04-07 16:24:24 - INFO - sexe_HONGRES: 0.0228
+2025-04-07 16:24:24 - INFO - trend_norm: 0.0224
+2025-04-07 16:24:24 - INFO - poids_norm: 0.0219
+2025-04-07 16:24:24 - INFO - win_rate_norm: 0.0206
+2025-04-07 16:24:24 - INFO - Standard model saved to model/trained_models/standard_xgboost_20250407_162424.pkl
+2025-04-07 16:24:24 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 16:24:24 - INFO - Entraînement du modèle de simulation (xgboost_ranking) avec test_size=0.2
+2025-04-07 16:24:24 - INFO - Selected 19 features for modeling
+2025-04-07 16:25:01 - INFO - Training simulation ranking model on 98938 samples
+2025-04-07 16:25:19 - INFO - Simulation model performance (NDCG): 0.7689
+2025-04-07 16:25:33 - INFO - Winner prediction accuracy: 0.3234
+2025-04-07 16:25:33 - INFO - Top 10 important features for simulation:
+2025-04-07 16:25:33 - INFO - cote_actuelle_norm: 0.2837
+2025-04-07 16:25:33 - INFO - normalized_odds_norm: 0.1389
+2025-04-07 16:25:33 - INFO - place_rate_norm: 0.0582
+2025-04-07 16:25:33 - INFO - recent_form_norm: 0.0508
+2025-04-07 16:25:33 - INFO - poids_norm: 0.0393
+2025-04-07 16:25:33 - INFO - sexe_MALES: 0.0383
+2025-04-07 16:25:33 - INFO - trend_norm: 0.0359
+2025-04-07 16:25:33 - INFO - type_course_OBSTACLE: 0.0345
+2025-04-07 16:25:33 - INFO - jockey_win_rate_norm: 0.0345
+2025-04-07 16:25:33 - INFO - jockey_nom_encoded: 0.0329
+2025-04-07 16:25:33 - INFO - Simulation model saved to model/trained_models/simulation_xgboost_ranking_20250407_162533.pkl
+2025-04-07 16:25:33 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 16:25:33 - INFO - Entraînement des modèles terminé
+2025-04-07 16:25:33 - INFO - Modèles entraînés avec succès:
+2025-04-07 16:25:33 - INFO - Modèle standard (xgboost): model/trained_models/standard_xgboost_20250407_162424.pkl
+2025-04-07 16:25:33 - INFO - Précision: 0.6893
+2025-04-07 16:25:33 - INFO - Modèle de simulation (xgboost_ranking): model/trained_models/simulation_xgboost_ranking_20250407_162533.pkl
+2025-04-07 16:25:33 - INFO - Configuration mise à jour avec les nouveaux modèles
+2025-04-07 17:05:49 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 17:05:49 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 17:05:49 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 17:05:49 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 17:05:49 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 17:05:49 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 17:07:07 - INFO - Données récupérées: 123756 échantillons
+2025-04-07 17:07:07 - INFO - Creating advanced features for 123756 rows
+2025-04-07 17:23:47 - INFO - Encoding features for modeling
+2025-04-07 17:23:47 - INFO - Encoders saved successfully
+2025-04-07 17:23:47 - INFO - Initialized standard model with type xgboost
+2025-04-07 17:23:47 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 17:23:47 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 17:23:47 - INFO - Entraînement du modèle standard (xgboost) avec test_size=0.2
+2025-04-07 17:23:47 - INFO - Selected 19 features for modeling
+2025-04-07 17:23:48 - INFO - Training standard model on 99004 samples
+2025-04-07 17:23:54 - INFO - Standard model performance:
+2025-04-07 17:23:54 - INFO - Accuracy: 0.6706, Precision: 0.4188
+2025-04-07 17:23:54 - INFO - Recall: 0.7469, F1 Score: 0.5367
+2025-04-07 17:23:54 - INFO - Top 10 important features:
+2025-04-07 17:23:54 - INFO - cote_actuelle_norm: 0.2358
+2025-04-07 17:23:54 - INFO - normalized_odds_norm: 0.0686
+2025-04-07 17:23:54 - INFO - recent_form_norm: 0.0491
+2025-04-07 17:23:54 - INFO - place_rate_norm: 0.0487
+2025-04-07 17:23:54 - INFO - type_course_TROT_MONTE: 0.0446
+2025-04-07 17:23:54 - INFO - trend_norm: 0.0436
+2025-04-07 17:23:54 - INFO - jockey_win_rate_norm: 0.0424
+2025-04-07 17:23:54 - INFO - sexe_MALES: 0.0424
+2025-04-07 17:23:54 - INFO - poids_norm: 0.0414
+2025-04-07 17:23:54 - INFO - jockey_nom_encoded: 0.0414
+2025-04-07 17:23:54 - INFO - Standard model saved to model/trained_models/standard_xgboost_20250407_172354.pkl
+2025-04-07 17:23:54 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 17:23:54 - INFO - Entraînement du modèle de simulation (xgboost_ranking) avec test_size=0.2
+2025-04-07 17:23:54 - INFO - Selected 19 features for modeling
+2025-04-07 17:24:33 - INFO - Training simulation ranking model on 98938 samples
+2025-04-07 17:25:08 - INFO - Simulation model performance (NDCG): 0.7711
+2025-04-07 17:25:24 - INFO - Winner prediction accuracy: 0.3154
+2025-04-07 17:25:24 - ERROR - Erreur lors de l'entraînement: boolean index did not match indexed array along dimension 0; dimension is 10 but corresponding boolean dimension is 24818
+2025-04-07 18:08:55 - INFO - Configuration chargée depuis config/config.json
+2025-04-07 18:08:55 - INFO - Connexion à la base de données pmu_ia établie
+2025-04-07 18:08:55 - INFO - Démarrage de l'entraînement des modèles
+2025-04-07 18:08:55 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 18:08:55 - INFO - Entraînement des modèles sur les données des 300 derniers jours
+2025-04-07 18:08:55 - INFO - Récupération des données du 2024-06-11 au 2025-04-07
+2025-04-07 18:10:46 - INFO - Données récupérées: 123756 échantillons
+2025-04-07 18:10:46 - INFO - Creating advanced features for 123756 rows
+2025-04-07 18:34:46 - INFO - Encoding features for modeling
+2025-04-07 18:34:46 - INFO - Encoders saved successfully
+2025-04-07 18:34:46 - INFO - Initialized standard model with type xgboost
+2025-04-07 18:34:46 - INFO - Initialized simulation model with type xgboost_ranking
+2025-04-07 18:34:46 - INFO - Created multiple target variables for different modeling approaches
+2025-04-07 18:34:46 - INFO - Entraînement du modèle standard (xgboost) avec test_size=0.2
+2025-04-07 18:34:47 - INFO - Selected 19 features for modeling
+2025-04-07 18:34:47 - DEBUG - Liste exacte des features sélectionnées :
+2025-04-07 18:34:47 - DEBUG - - age_norm
+2025-04-07 18:34:47 - DEBUG - - cote_actuelle_norm
+2025-04-07 18:34:47 - DEBUG - - jockey_nom_encoded
+2025-04-07 18:34:47 - DEBUG - - jockey_win_rate_norm
+2025-04-07 18:34:47 - DEBUG - - lieu_encoded
+2025-04-07 18:34:47 - DEBUG - - normalized_odds_norm
+2025-04-07 18:34:47 - DEBUG - - place_rate_norm
+2025-04-07 18:34:47 - DEBUG - - poids_norm
+2025-04-07 18:34:47 - DEBUG - - recent_form_norm
+2025-04-07 18:34:47 - DEBUG - - sexe_FEMELLES
+2025-04-07 18:34:47 - DEBUG - - sexe_HONGRES
+2025-04-07 18:34:47 - DEBUG - - sexe_MALES
+2025-04-07 18:34:47 - DEBUG - - similar_races_perf_norm
+2025-04-07 18:34:47 - DEBUG - - trend_norm
+2025-04-07 18:34:47 - DEBUG - - type_course_OBSTACLE
+2025-04-07 18:34:47 - DEBUG - - type_course_PLAT
+2025-04-07 18:34:47 - DEBUG - - type_course_TROT_ATTELE
+2025-04-07 18:34:47 - DEBUG - - type_course_TROT_MONTE
+2025-04-07 18:34:47 - DEBUG - - win_rate_norm
+2025-04-07 18:34:47 - INFO - Training standard model on 99004 samples
+2025-04-07 18:34:58 - INFO - Standard model performance:
+2025-04-07 18:34:58 - INFO - Accuracy: 0.6706, Precision: 0.4188
+2025-04-07 18:34:58 - INFO - Recall: 0.7469, F1 Score: 0.5367
+2025-04-07 18:34:58 - INFO - Top 10 important features:
+2025-04-07 18:34:58 - INFO - cote_actuelle_norm: 0.2358
+2025-04-07 18:34:58 - INFO - normalized_odds_norm: 0.0686
+2025-04-07 18:34:58 - INFO - recent_form_norm: 0.0491
+2025-04-07 18:34:58 - INFO - place_rate_norm: 0.0487
+2025-04-07 18:34:58 - INFO - type_course_TROT_MONTE: 0.0446
+2025-04-07 18:34:58 - INFO - trend_norm: 0.0436
+2025-04-07 18:34:58 - INFO - jockey_win_rate_norm: 0.0424
+2025-04-07 18:34:58 - INFO - sexe_MALES: 0.0424
+2025-04-07 18:34:58 - INFO - poids_norm: 0.0414
+2025-04-07 18:34:58 - INFO - jockey_nom_encoded: 0.0414
+2025-04-07 18:34:58 - INFO - Standard model saved to model/trained_models/standard_xgboost_20250407_183458.pkl
+2025-04-07 18:34:58 - ERROR - Error saving model information to database: Textual SQL expression '\n            UPDATE model...' should be explicitly declared as text('\n            UPDATE model...')
+2025-04-07 18:34:58 - INFO - Entraînement du modèle de simulation (xgboost_ranking) avec test_size=0.2
+2025-04-07 18:34:59 - INFO - Selected 19 features for modeling
+2025-04-07 18:34:59 - DEBUG - Liste exacte des features sélectionnées :
+2025-04-07 18:34:59 - DEBUG - - age_norm
+2025-04-07 18:34:59 - DEBUG - - cote_actuelle_norm
+2025-04-07 18:34:59 - DEBUG - - jockey_nom_encoded
+2025-04-07 18:34:59 - DEBUG - - jockey_win_rate_norm
+2025-04-07 18:34:59 - DEBUG - - lieu_encoded
+2025-04-07 18:34:59 - DEBUG - - normalized_odds_norm
+2025-04-07 18:34:59 - DEBUG - - place_rate_norm
+2025-04-07 18:34:59 - DEBUG - - poids_norm
+2025-04-07 18:34:59 - DEBUG - - recent_form_norm
+2025-04-07 18:34:59 - DEBUG - - sexe_FEMELLES
+2025-04-07 18:34:59 - DEBUG - - sexe_HONGRES
+2025-04-07 18:34:59 - DEBUG - - sexe_MALES
+2025-04-07 18:34:59 - DEBUG - - similar_races_perf_norm
+2025-04-07 18:34:59 - DEBUG - - trend_norm
+2025-04-07 18:34:59 - DEBUG - - type_course_OBSTACLE
+2025-04-07 18:34:59 - DEBUG - - type_course_PLAT
+2025-04-07 18:34:59 - DEBUG - - type_course_TROT_ATTELE
+2025-04-07 18:34:59 - DEBUG - - type_course_TROT_MONTE
+2025-04-07 18:34:59 - DEBUG - - win_rate_norm
+2025-04-07 18:35:55 - INFO - Training simulation ranking model on 98938 samples
+2025-04-07 18:37:19 - INFO - Simulation model performance (NDCG): 0.7711
+2025-04-07 18:37:43 - INFO - Winner prediction accuracy: 0.3154
+2025-04-07 18:37:43 - ERROR - Erreur lors de l'entraînement: boolean index did not match indexed array along dimension 0; dimension is 10 but corresponding boolean dimension is 24818

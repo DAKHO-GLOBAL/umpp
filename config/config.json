@@ -34,6 +34,6 @@
       "day": 1
     }
   },
-  "standard_model_path": "model/trained_models/standard_xgboost_20250407_004702.pkl",
-  "simulation_model_path": "model/trained_models/simulation_xgboost_ranking_20250407_004703.pkl"
+  "standard_model_path": "model/trained_models/standard_xgboost_20250407_162424.pkl",
+  "simulation_model_path": "model/trained_models/simulation_xgboost_ranking_20250407_162533.pkl"
 }

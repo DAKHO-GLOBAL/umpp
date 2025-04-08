@@ -5,6 +5,7 @@ from logging.config import fileConfig
 import os
 import json
 from datetime import datetime, timedelta
+import pandas as pd
 import schedule
 import time
 
@@ -15,12 +16,11 @@ from analysis.historical_analysis import HistoricalAnalysis
 from model.model_evaluation import ModelEvaluation
 from batch_processing.batch_processor import BatchProcessor
 
-# Configuration du logging
-fileConfig('logger/logging_config.ini')
-logger = logging.getLogger(__name__)
-
 class PMUOrchestrateur:
-    """Orchestrateur pour le système de prédiction de courses PMU."""
+    """
+    Orchestrateur amélioré pour le système de prédiction PMU,
+    optimisé pour les paris de type Top 7 (Quinté).
+    """
     
     def __init__(self, config_path='config/config.json'):
         """Initialise l'orchestrateur avec la configuration."""
@@ -29,19 +29,17 @@ class PMUOrchestrateur:
         # Charger la configuration
         self.config = self._load_config(config_path)
         
-        # Initialiser les composants avec les nouvelles classes
+        # Initialiser la préparation des données avec fonctionnalités améliorées
         self.data_prep = EnhancedDataPreparation(self.config.get('db_path', 'pmu_ia'))
         
-        # Initialiser le modèle double
+        # Charger les encodeurs si disponibles
+        self.data_prep.load_encoders()
+        
+        # Initialiser le modèle dual avec support pour le Top 7
         self.model = DualPredictionModel(base_path=self.config.get('model_path', 'model/trained_models'))
         
-        # Initialiser le batch processor
-        self.batch_processor = BatchProcessor(
-            data_prep=self.data_prep,
-            model=self.model,
-            db_path=self.config.get('db_path', 'pmu_ia'),
-            model_path=self.config.get('model_path', 'model/trained_models')
-        )
+        # Charger les modèles existants
+        self._load_models()
     
     def _load_config(self, config_path):
         """Charge la configuration depuis un fichier JSON."""
@@ -59,39 +57,42 @@ class PMUOrchestrateur:
             return self._create_default_config(config_path)
     
     def _create_default_config(self, config_path):
-        """Crée une configuration par défaut avec support pour les deux modèles."""
+        """Crée une configuration par défaut avec support pour le Top 7."""
         config = {
-            'db_path': 'pmu_ia',  # Base de données MySQL
+            'db_path': 'pmu_ia',
             'model_path': 'model/trained_models',
             'scraping': {
                 'days_back': 7,
                 'schedule': {
-                    'time': '00:00',  # Minuit
+                    'time': '00:00',
                     'frequency': 'daily'
                 }
             },
             'prediction': {
                 'days_ahead': 1,
+                'top_n_features': 30,
                 'schedule': {
-                    'time': '07:00',  # 7h du matin
+                    'time': '07:00',
                     'frequency': 'daily'
                 }
             },
             'evaluation': {
                 'days_back': 30,
+                'include_top7': True,
                 'schedule': {
-                    'time': '23:00',  # 23h du soir
+                    'time': '23:00',
                     'frequency': 'weekly',
                     'day': 'sunday'
                 }
             },
             'training': {
-                'days_back': 300,
-                'test_days': 65,
-                'standard_model_type': 'xgboost',  # Type du modèle standard
-                'simulation_model_type': 'xgboost_ranking',  # Type du modèle de simulation
+                'days_back': 180,
+                'test_size': 0.2,
+                'standard_model_type': 'xgboost',
+                'simulation_model_type': 'xgboost_ranking',
+                'top_n_features': 30,
                 'schedule': {
-                    'time': '01:00',  # 1h du matin
+                    'time': '01:00',
                     'frequency': 'monthly',
                     'day': 1
                 }
@@ -108,310 +109,585 @@ class PMUOrchestrateur:
         self.logger.info(f"Configuration par défaut créée et sauvegardée dans {config_path}")
         return config
     
-    def run_scraping(self):
-        """Exécute le scraping des données PMU."""
-        self.logger.info("Démarrage du scraping des données PMU")
-        
-        try:
-            days_back = self.config.get('scraping', {}).get('days_back', 7)
-            end_date = datetime.now()
-            start_date = end_date - timedelta(days=days_back)
-            
-            self.logger.info(f"Scraping des données du {start_date.strftime('%Y-%m-%d')} au {end_date.strftime('%Y-%m-%d')}")
-            
-            # Importer ici pour éviter les dépendances circulaires
-            from scrapping.scrapping import call_api_between_dates
-            call_api_between_dates(start_date, end_date)
-            
-            self.logger.info("Scraping des données terminé avec succès")
-        except Exception as e:
-            self.logger.error(f"Erreur lors du scraping des données: {str(e)}")
-    
-    def run_predictions(self):
-        """Exécute les prédictions pour les courses à venir avec le modèle standard."""
-        self.logger.info("Démarrage des prédictions pour les courses à venir")
-        
-        try:
-            days_ahead = self.config.get('prediction', {}).get('days_ahead', 1)
-            
-            self.logger.info(f"Prédiction des courses pour les {days_ahead} prochains jours")
-            
-            # Utiliser le nouveau batch processor avec le modèle standard
-            predictions = self.batch_processor.predict_upcoming_races_standard(days_ahead=days_ahead)
-            
-            if predictions:
-                self.logger.info(f"Prédictions générées pour {len(predictions)} courses")
-            else:
-                self.logger.warning("Aucune prédiction générée")
-                
-        except Exception as e:
-            self.logger.error(f"Erreur lors des prédictions: {str(e)}")
-    
-    def run_evaluation(self):
-        """Évalue les prédictions passées."""
-        self.logger.info("Démarrage de l'évaluation des prédictions passées")
-        
-        try:
-            days_back = self.config.get('evaluation', {}).get('days_back', 30)
-            
-            self.logger.info(f"Évaluation des prédictions des {days_back} derniers jours")
-            
-            summary = self.batch_processor.evaluate_past_predictions(days_back=days_back)
-            
-            if summary:
-                self.logger.info(f"Résultats de l'évaluation: {summary}")
-            else:
-                self.logger.warning("Aucun résultat d'évaluation disponible")
-                
-        except Exception as e:
-            self.logger.error(f"Erreur lors de l'évaluation: {str(e)}")
-    
-    def run_training(self):
-        """Entraîne les deux modèles (standard et simulation) sur les données historiques."""
-        self.logger.info("Démarrage de l'entraînement des modèles")
-        
-        try:
-            # Récupérer les valeurs depuis la configuration
-            days_back = self.config.get('training', {}).get('days_back', 300)
-            test_days = self.config.get('training', {}).get('test_days', 60)
-            standard_model_type = self.config.get('training', {}).get('standard_model_type', 'xgboost')
-            simulation_model_type = self.config.get('training', {}).get('simulation_model_type', 'xgboost_ranking')
-            
-            self.logger.info(f"Entraînement des modèles sur les données des {days_back} derniers jours")
-            
-            # Entraîner les deux modèles - Passez les arguments correctement
-            result = self.batch_processor.train_dual_models(
-                days_back=days_back,  # Utilisez la valeur numérique depuis la config
-                test_days=test_days,
-                standard_model_type=standard_model_type,
-                simulation_model_type=simulation_model_type
-            )
-            
-            if result:
-                self.logger.info(f"Modèles entraînés avec succès:")
-                self.logger.info(f"Modèle standard ({standard_model_type}): {result['standard_model_path']}")
-                self.logger.info(f"Précision: {result['standard_accuracy']:.4f}")
-                self.logger.info(f"Modèle de simulation ({simulation_model_type}): {result['simulation_model_path']}")
-                
-                # Mettre à jour les chemins des modèles dans la configuration
-                self.config['standard_model_path'] = result['standard_model_path']
-                self.config['simulation_model_path'] = result['simulation_model_path']
-                
-                with open('config/config.json', 'w') as f:
-                    json.dump(self.config, f, indent=2)
-                
-                self.logger.info("Configuration mise à jour avec les nouveaux modèles")
-            else:
-                self.logger.warning("Échec de l'entraînement des modèles")
-                    
-        except Exception as e:
-            self.logger.error(f"Erreur lors de l'entraînement: {str(e)}")
-    
-    def run_simulation(self, course_id, selected_horses, simulation_params=None):
-        """Exécute une simulation personnalisée pour une course."""
-        self.logger.info(f"Démarrage de la simulation pour la course {course_id}")
-        
-        try:
-            # Vérifier si le modèle de simulation est chargé
-            if not hasattr(self.model, 'simulation_model') or self.model.simulation_model is None:
-                self.logger.warning("Modèle de simulation non chargé. Tentative de chargement...")
-                simulation_model_path = self.config.get('simulation_model_path')
-                if simulation_model_path and os.path.exists(simulation_model_path):
-                    self.model.load_simulation_model(simulation_model_path)
-                else:
-                    self.logger.error("Impossible de charger le modèle de simulation")
-                    return None
-            
-            # Exécuter la simulation
-            results = self.batch_processor.simulate_race(
-                course_id=course_id,
-                selected_horses=selected_horses,
-                simulation_params=simulation_params
-            )
-            
-            if results is not None:
-                self.logger.info(f"Simulation réussie pour la course {course_id}")
-                return results
-            else:
-                self.logger.warning(f"Échec de la simulation pour la course {course_id}")
-                return None
-                
-        except Exception as e:
-            self.logger.error(f"Erreur lors de la simulation: {str(e)}")
-            return None
-    
-    def schedule_jobs(self):
-        """Planifie les tâches selon la configuration."""
-        self.logger.info("Planification des tâches récurrentes")
-        
-        # Scraping
-        scraping_config = self.config.get('scraping', {}).get('schedule', {})
-        scraping_time = scraping_config.get('time', '00:00')
-        scraping_frequency = scraping_config.get('frequency', 'daily')
-        
-        if scraping_frequency == 'daily':
-            schedule.every().day.at(scraping_time).do(self.run_scraping)
-            self.logger.info(f"Scraping planifié tous les jours à {scraping_time}")
-        elif scraping_frequency == 'weekly':
-            day = scraping_config.get('day', 'monday').lower()
-            getattr(schedule.every(), day).at(scraping_time).do(self.run_scraping)
-            self.logger.info(f"Scraping planifié tous les {day} à {scraping_time}")
-        
-        # Prédictions
-        prediction_config = self.config.get('prediction', {}).get('schedule', {})
-        prediction_time = prediction_config.get('time', '07:00')
-        prediction_frequency = prediction_config.get('frequency', 'daily')
-        
-        if prediction_frequency == 'daily':
-            schedule.every().day.at(prediction_time).do(self.run_predictions)
-            self.logger.info(f"Prédictions planifiées tous les jours à {prediction_time}")
-        elif prediction_frequency == 'weekly':
-            day = prediction_config.get('day', 'monday').lower()
-            getattr(schedule.every(), day).at(prediction_time).do(self.run_predictions)
-            self.logger.info(f"Prédictions planifiées tous les {day} à {prediction_time}")
-        
-        # Évaluation
-        evaluation_config = self.config.get('evaluation', {}).get('schedule', {})
-        evaluation_time = evaluation_config.get('time', '23:00')
-        evaluation_frequency = evaluation_config.get('frequency', 'weekly')
-        
-        if evaluation_frequency == 'daily':
-            schedule.every().day.at(evaluation_time).do(self.run_evaluation)
-            self.logger.info(f"Évaluation planifiée tous les jours à {evaluation_time}")
-        elif evaluation_frequency == 'weekly':
-            day = evaluation_config.get('day', 'sunday').lower()
-            getattr(schedule.every(), day).at(evaluation_time).do(self.run_evaluation)
-            self.logger.info(f"Évaluation planifiée tous les {day} à {evaluation_time}")
-        
-        # Entraînement
-        training_config = self.config.get('training', {}).get('schedule', {})
-        training_time = training_config.get('time', '01:00')
-        training_frequency = training_config.get('frequency', 'monthly')
-        
-        if training_frequency == 'daily':
-            schedule.every().day.at(training_time).do(self.run_training)
-            self.logger.info(f"Entraînement planifié tous les jours à {training_time}")
-        elif training_frequency == 'weekly':
-            day = training_config.get('day', 'monday').lower()
-            getattr(schedule.every(), day).at(training_time).do(self.run_training)
-            self.logger.info(f"Entraînement planifié tous les {day} à {training_time}")
-        elif training_frequency == 'monthly':
-            day = training_config.get('day', 1)
-            # Pour les tâches mensuelles, il faut vérifier la date à chaque exécution
-            def monthly_training_check():
-                if datetime.now().day == day:
-                    self.run_training()
-            
-            # Exécuter la vérification tous les jours à l'heure spécifiée
-            schedule.every().day.at(training_time).do(monthly_training_check)
-            self.logger.info(f"Entraînement planifié le {day} de chaque mois à {training_time}")
-        
-        self.logger.info("Toutes les tâches ont été planifiées")
-    
-    def run_scheduler(self):
-        """Lance le planificateur de tâches."""
-        self.logger.info("Démarrage du planificateur de tâches")
-        
-        # Planifier les tâches
-        self.schedule_jobs()
-        
-        # Boucle principale du planificateur
-        try:
-            while True:
-                schedule.run_pending()
-                time.sleep(60)  # Vérifier toutes les minutes
-        except KeyboardInterrupt:
-            self.logger.info("Arrêt du planificateur de tâches")
-    
-    def run_all(self):
-        """Exécute toutes les tâches principales en séquence."""
-        self.logger.info("Exécution de toutes les tâches principales")
-        
-        # 1. Scraping
-        self.run_scraping()
-        
-        # 2. Entraînement (si nécessaire)
+    def _load_models(self):
+        """Charge les modèles existants."""
+        # Chercher le modèle standard le plus récent
         standard_model_path = self.config.get('standard_model_path')
-        simulation_model_path = self.config.get('simulation_model_path')
-        
-        if (not standard_model_path or not os.path.exists(standard_model_path) or 
-            not simulation_model_path or not os.path.exists(simulation_model_path)):
-            self.logger.info("Modèles non trouvés. Entraînement de nouveaux modèles.")
-            self.run_training()
-        
-        # 3. Prédictions
-        self.run_predictions()
-        
-        # 4. Évaluation
-        self.run_evaluation()
-
-    def train_models(days_back=360, test_size=0.2, standard_model_type='xgboost', simulation_model_type='xgboost_ranking'):
-        """Entraîne les deux modèles avec les données des derniers jours"""
-        logger = logging.getLogger(__name__)
-        logger.info(f"Starting model training with {days_back} days of data")
-        
-        # Préparer les données
-        data_prep = EnhancedDataPreparation()
-        
-        # Définir la période d'entraînement
-        end_date = datetime.now()
-        start_date = end_date - timedelta(days=days_back) if days_back else None
-        
-        if start_date:
-            logger.info(f"Getting training data from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
+        if standard_model_path and os.path.exists(standard_model_path):
+            self.model.load_standard_model(standard_model_path)
         else:
-            logger.info(f"Getting all available training data up to {end_date.strftime('%Y-%m-%d')}")
+            # Chercher automatiquement le modèle standard le plus récent
+            model_dir = self.config.get('model_path', 'model/trained_models')
+            standard_models = [f for f in os.listdir(model_dir) if f.startswith('standard_') and f.endswith('.pkl')]
+            if standard_models:
+                latest_model = sorted(standard_models)[-1]
+                self.model.load_standard_model(os.path.join(model_dir, latest_model))
+                self.logger.info(f"Modèle standard chargé automatiquement: {latest_model}")
+        
+        # Chercher le modèle de simulation Top 7 le plus récent
+        simulation_model_path = self.config.get('simulation_top7_model_path')
+        if simulation_model_path and os.path.exists(simulation_model_path):
+            self.model.load_simulation_model(simulation_model_path)
+        else:
+            # Chercher automatiquement le modèle de simulation Top 7 le plus récent
+            model_dir = self.config.get('model_path', 'model/trained_models')
+            simulation_models = [f for f in os.listdir(model_dir) if f.startswith('simulation_top7_') and f.endswith('.pkl')]
+            if simulation_models:
+                latest_model = sorted(simulation_models)[-1]
+                self.model.load_simulation_model(os.path.join(model_dir, latest_model))
+                self.logger.info(f"Modèle de simulation Top 7 chargé automatiquement: {latest_model}")
+            else:
+                # Essayer de charger un modèle de simulation standard
+                simulation_models = [f for f in os.listdir(model_dir) if f.startswith('simulation_') and f.endswith('.pkl')]
+                if simulation_models:
+                    latest_model = sorted(simulation_models)[-1]
+                    self.model.load_simulation_model(os.path.join(model_dir, latest_model))
+                    self.logger.info(f"Modèle de simulation standard chargé: {latest_model}")
+    
+    def train_enhanced_models(self):
+        """Entraîne les modèles avec les features améliorées."""
+        self.logger.info("Démarrage de l'entraînement des modèles améliorés")
+        
+        # Récupérer les paramètres d'entraînement
+        days_back = self.config.get('training', {}).get('days_back', 180)
+        test_size = self.config.get('training', {}).get('test_size', 0.2)
+        top_n_features = self.config.get('training', {}).get('top_n_features', 30)
         
         # Récupérer les données
-        start_date_str = start_date.strftime("%Y-%m-%d") if start_date else None
-        training_data = data_prep.get_training_data(
-            start_date=start_date_str,
-            end_date=end_date.strftime("%Y-%m-%d")
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=days_back)
+        
+        self.logger.info(f"Récupération des données du {start_date.strftime('%Y-%m-%d')} au {end_date.strftime('%Y-%m-%d')}")
+        
+        # Obtenir les données d'entraînement
+        training_data = self.data_prep.get_training_data(
+            start_date=start_date.strftime('%Y-%m-%d'),
+            end_date=end_date.strftime('%Y-%m-%d')
         )
         
         if training_data.empty:
-            logger.error("No training data found")
-            return False
+            self.logger.error("Aucune donnée d'entraînement trouvée")
+            return None
         
-        # CORRECTION : S'assurer que l'index est réinitialisé dès le départ
-        training_data = training_data.reset_index(drop=True)
+        self.logger.info(f"Données récupérées: {len(training_data)} échantillons")
         
-        logger.info(f"Retrieved {len(training_data)} samples for training")
+        # Créer des features avancées avec l'implémentation améliorée
+        enhanced_data = self.data_prep.create_enhanced_features(training_data)
         
-        # Créer des features avancées
-        enhanced_data = data_prep.create_advanced_features(training_data)
-        enhanced_data = enhanced_data.reset_index(drop=True)
+        # Créer les variables cibles
+        prepared_data = self.model.create_target_variables(enhanced_data)
         
-        # Encoder pour le modèle
-        prepared_data = data_prep.encode_features_for_model(enhanced_data, is_training=True)
-        prepared_data = prepared_data.reset_index(drop=True)
+        # Entraîner le modèle standard amélioré
+        self.logger.info(f"Entraînement du modèle standard amélioré")
+        standard_metrics, standard_path = self.model.train_with_enhanced_features(
+            prepared_data, 
+            target_col='target_place',
+            test_size=test_size,
+            top_n_features=top_n_features
+        )
         
-        # Initialiser les modèles
-        model = DualPredictionModel()
+        # Entraîner le modèle de simulation optimisé pour le Top 7
+        self.logger.info(f"Entraînement du modèle de simulation optimisé pour le Top 7")
+        simulation_metrics, simulation_path = self.model.train_top7_simulation_model(
+            prepared_data,
+            test_size=test_size,
+            top_n_features=top_n_features
+        )
         
-        # Entraîner le modèle standard
-        logger.info(f"Training standard model with {standard_model_type}")
-        standard_accuracy, standard_path = model.train_standard_model(prepared_data, test_size=test_size)
+        # Mettre à jour la configuration avec les nouveaux chemins de modèles
+        self.config['standard_model_path'] = standard_path
+        self.config['simulation_top7_model_path'] = simulation_path
         
-        # Entraîner le modèle de simulation
-        logger.info(f"Training simulation model with {simulation_model_type}")
-        simulation_metrics, simulation_path = model.train_simulation_model(prepared_data, test_size=test_size)
+        with open('config/config.json', 'w') as f:
+            json.dump(self.config, f, indent=2)
         
-        logger.info("Model training completed")
-        logger.info(f"Standard model accuracy: {standard_accuracy:.4f}")
-        logger.info(f"Simulation model metrics: {simulation_metrics}")
+        self.logger.info("Configuration mise à jour avec les nouveaux modèles")
         
         return {
             'standard_model': {
-                'accuracy': standard_accuracy,
-                'path': standard_path
+                'path': standard_path,
+                'accuracy': standard_metrics
             },
             'simulation_model': {
-                'metrics': simulation_metrics,
-                'path': simulation_path
+                'path': simulation_path,
+                'metrics': simulation_metrics
+            }
+        }
+    
+    def predict_course_top7(self, course_id):
+        """
+        Prédit les 7 premiers chevaux pour une course spécifique,
+        optimisé pour les paris de type Quinté.
+        """
+        self.logger.info(f"Prédiction Top 7 pour la course {course_id}")
+        
+        # Vérifier si le modèle de simulation est chargé
+        if self.model.simulation_model is None:
+            self.logger.error("Modèle de simulation non chargé. Impossible de faire des prédictions Top 7.")
+            return None
+        
+        # Préparer les données pour la prédiction
+        try:
+            # Récupérer les participants
+            participants_data = self.data_prep.get_participant_data(course_id=course_id)
+            
+            if participants_data is None or participants_data.empty:
+                self.logger.error(f"Pas de participants trouvés pour la course {course_id}")
+                return None
+            
+            # Créer des features avancées
+            enhanced_data = self.data_prep.create_enhanced_features(participants_data)
+            
+            # Faire la prédiction Top 7
+            results = self.model.predict_top7(enhanced_data)
+            
+            if results is None:
+                self.logger.error(f"Échec de la prédiction Top 7 pour la course {course_id}")
+                return None
+            
+            # Sauvegarder les prédictions
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            output_dir = 'predictions'
+            os.makedirs(output_dir, exist_ok=True)
+            output_file = f"{output_dir}/prediction_top7_{course_id}_{timestamp}.json"
+            
+            # Convertir en format JSON
+            prediction_dict = {
+                'course_id': course_id,
+                'date_prediction': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'predictions': results.to_dict(orient='records'),
+                'model_type': 'simulation_top7'
+            }
+            
+            # Sauvegarder au format JSON
+            with open(output_file, 'w') as f:
+                json.dump(prediction_dict, f, indent=2)
+            
+            self.logger.info(f"Prédiction Top 7 pour la course {course_id} sauvegardée dans {output_file}")
+            
+            return results
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors de la prédiction Top 7 pour la course {course_id}: {str(e)}")
+            return None
+    
+    def simulate_custom_top7(self, course_id, selected_horses=None, simulation_params=None):
+        """
+        Simule une course personnalisée avec prédiction des 7 premiers chevaux.
+        
+        Args:
+            course_id: ID de la course
+            selected_horses: Liste des IDs de chevaux sélectionnés (None = tous les chevaux)
+            simulation_params: Paramètres personnalisés pour la simulation
+        """
+        self.logger.info(f"Simulation Top 7 personnalisée pour la course {course_id}")
+        
+        # Vérifier si le modèle de simulation est chargé
+        if self.model.simulation_model is None:
+            self.logger.error("Modèle de simulation non chargé. Impossible de faire des simulations.")
+            return None
+        
+        try:
+            # Récupérer les participants
+            participants_data = self.data_prep.get_participant_data(course_id=course_id)
+            
+            if participants_data is None or participants_data.empty:
+                self.logger.error(f"Pas de participants trouvés pour la course {course_id}")
+                return None
+            
+            # Filtrer pour ne garder que les chevaux sélectionnés
+            if selected_horses:
+                participants_data = participants_data[participants_data['id_cheval'].isin(selected_horses)]
+                
+                if participants_data.empty:
+                    self.logger.error(f"Aucun des chevaux sélectionnés n'est inscrit dans cette course")
+                    return None
+            
+            # Modifier les paramètres de simulation si fournis
+            if simulation_params:
+                for param, value in simulation_params.items():
+                    if param in participants_data.columns:
+                        participants_data[param] = value
+            
+            # Créer des features avancées
+            enhanced_data = self.data_prep.create_enhanced_features(participants_data)
+            
+            # Faire la simulation Top 7
+            results = self.model.predict_top7(enhanced_data)
+            
+            if results is None:
+                self.logger.error(f"Échec de la simulation Top 7 pour la course {course_id}")
+                return None
+            
+            # Sauvegarder les résultats de simulation
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            output_dir = 'simulations'
+            os.makedirs(output_dir, exist_ok=True)
+            output_file = f"{output_dir}/simulation_top7_{course_id}_{timestamp}.json"
+            
+            # Convertir en format JSON
+            simulation_dict = {
+                'course_id': course_id,
+                'date_simulation': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'selected_horses': selected_horses,
+                'simulation_params': simulation_params,
+                'results': results.to_dict(orient='records'),
+                'model_type': 'simulation_top7'
+            }
+            
+            # Sauvegarder au format JSON
+            with open(output_file, 'w') as f:
+                json.dump(simulation_dict, f, indent=2)
+            
+            self.logger.info(f"Simulation Top 7 pour la course {course_id} sauvegardée dans {output_file}")
+            
+            return results
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors de la simulation Top 7 pour la course {course_id}: {str(e)}")
+            return None
+    
+    def get_upcoming_races(self, days_ahead=1):
+        """
+        Récupère les courses à venir dans les prochains jours.
+        """
+        self.logger.info(f"Récupération des courses pour les {days_ahead} prochains jours")
+        
+        now = datetime.now()
+        end_date = now + timedelta(days=days_ahead)
+        
+        # Récupérer les courses à venir
+        query = f"""
+        SELECT c.*, h.libelleLong AS hippodrome_nom 
+        FROM courses c
+        LEFT JOIN pmu_hippodromes h ON c.lieu = h.libelleLong
+        WHERE c.date_heure BETWEEN '{now.strftime('%Y-%m-%d')}' AND '{end_date.strftime('%Y-%m-%d')}'
+        ORDER BY c.date_heure ASC
+        """
+        
+        try:
+            upcoming_races = pd.read_sql_query(query, self.data_prep.engine)
+            
+            if upcoming_races.empty:
+                self.logger.info(f"Aucune course trouvée pour les {days_ahead} prochains jours")
+                return []
+            
+            self.logger.info(f"Trouvé {len(upcoming_races)} courses à venir")
+            return upcoming_races
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors de la récupération des courses à venir: {str(e)}")
+            return []
+    
+    def batch_predict_top7(self, days_ahead=1):
+        """
+        Exécute des prédictions Top 7 par lot pour toutes les courses à venir.
+        """
+        self.logger.info(f"Prédiction par lot Top 7 pour les {days_ahead} prochains jours")
+        
+        # Récupérer les courses à venir
+        upcoming_races = self.get_upcoming_races(days_ahead)
+        
+        if not len(upcoming_races):
+            return []
+        
+        # Stocker les résultats
+        all_predictions = []
+        
+        # Traiter chaque course
+        for idx, race in upcoming_races.iterrows():
+            race_id = race['id']
+            self.logger.info(f"Traitement de la course {race_id} - {race['lieu'] if 'lieu' in race else 'Unknown'} ({idx+1}/{len(upcoming_races)})")
+            
+            # Faire la prédiction Top 7
+            predictions = self.predict_course_top7(race_id)
+            
+            if predictions is not None:
+                all_predictions.append({
+                    'course_id': race_id,
+                    'lieu': race['lieu'] if 'lieu' in race else 'Unknown',
+                    'date_heure': str(race['date_heure']) if 'date_heure' in race else None,
+                    'predictions': predictions.to_dict(orient='records')
+                })
+        
+        self.logger.info(f"Prédictions par lot Top 7 terminées. {len(all_predictions)} prédictions générées.")
+        return all_predictions
+    
+    def run_course_analysis(self, course_id):
+        """
+        Analyse détaillée d'une course spécifique avec tous les indicateurs disponibles.
+        """
+        self.logger.info(f"Analyse détaillée de la course {course_id}")
+        
+        try:
+            # Récupérer les informations de la course
+            course_query = f"""
+            SELECT c.*, h.libelleLong AS hippodrome_nom,
+                   pc.montantPrix, pc.categorieParticularite,
+                   pc.corde, pc.categorieStatut
+            FROM courses c
+            LEFT JOIN pmu_hippodromes h ON c.lieu = h.libelleLong
+            LEFT JOIN pmu_courses pc ON c.pmu_course_id = pc.id
+            WHERE c.id = {course_id}
+            """
+            
+            course_data = pd.read_sql_query(course_query, self.data_prep.engine)
+            
+            if course_data.empty:
+                self.logger.error(f"Course {course_id} non trouvée")
+                return None
+            
+            course_info = course_data.iloc[0].to_dict()
+            
+            # Récupérer les participants
+            participants_data = self.data_prep.get_participant_data(course_id=course_id)
+            
+            if participants_data is None or participants_data.empty:
+                self.logger.error(f"Pas de participants trouvés pour la course {course_id}")
+                return None
+            
+            # Créer des features avancées
+            enhanced_data = self.data_prep.create_enhanced_features(participants_data)
+            
+            # Faire la prédiction Top 7
+            top7_predictions = self.model.predict_top7(enhanced_data)
+            
+            # Faire la prédiction standard (Top 3)
+            top3_predictions = None
+            if self.model.standard_model is not None:
+                # Encoder pour le modèle standard
+                prepared_data = self.data_prep.encode_features_for_model(enhanced_data, is_training=False)
+                top3_predictions = self.model.predict_standard(prepared_data)
+            
+            # Récupérer les commentaires et informations supplémentaires
+            commentaire_query = f"""
+            SELECT texte FROM commentaires_course
+            WHERE id_course = {course_id}
+            """
+            
+            commentaires = pd.read_sql_query(commentaire_query, self.data_prep.engine)
+            
+            # Construire le rapport d'analyse
+            analysis_report = {
+                'course': course_info,
+                'nombre_participants': len(participants_data),
+                'top7_predictions': top7_predictions.to_dict(orient='records') if top7_predictions is not None else None,
+                'top3_predictions': top3_predictions.to_dict(orient='records') if top3_predictions is not None else None,
+                'commentaires': commentaires['texte'].tolist() if not commentaires.empty else [],
+                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            }
+            
+            # Générer des suggestions de paris
+            bets_suggestions = self._generate_betting_suggestions(top7_predictions)
+            analysis_report['paris_suggeres'] = bets_suggestions
+            
+            # Sauvegarder le rapport
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            output_dir = 'analyses'
+            os.makedirs(output_dir, exist_ok=True)
+            output_file = f"{output_dir}/analyse_{course_id}_{timestamp}.json"
+            
+            with open(output_file, 'w') as f:
+                json.dump(analysis_report, f, indent=2)
+            
+            self.logger.info(f"Analyse de la course {course_id} sauvegardée dans {output_file}")
+            
+            return analysis_report
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors de l'analyse de la course {course_id}: {str(e)}")
+            return None
+    
+    def _generate_betting_suggestions(self, predictions):
+        """
+        Génère des suggestions de paris basées sur les prédictions.
+        """
+        if predictions is None or len(predictions) < 7:
+            return None
+        
+        # Récupérer les chevaux dans l'ordre prédit
+        top_horses = predictions.sort_values('predicted_rank').head(7)
+        
+        # Suggestions pour différents types de paris
+        betting_suggestions = {
+            'simple_gagnant': {
+                'type': 'Simple Gagnant',
+                'description': 'Pari sur le cheval gagnant uniquement',
+                'selection': [int(top_horses.iloc[0]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top1_prob'])
+            },
+            'simple_place': {
+                'type': 'Simple Placé',
+                'description': 'Pari sur un cheval finissant dans les 3 premiers',
+                'selection': [int(top_horses.iloc[0]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top3_prob'])
+            },
+            'couple_ordre': {
+                'type': 'Couplé Ordre',
+                'description': 'Pari sur les 2 premiers chevaux dans l\'ordre exact',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top1_prob'] * top_horses.iloc[1]['in_top3_prob'] * 0.8)
+            },
+            'couple_desordre': {
+                'type': 'Couplé Désordre',
+                'description': 'Pari sur les 2 premiers chevaux dans n\'importe quel ordre',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top3_prob'] * top_horses.iloc[1]['in_top3_prob'])
+            },
+            'tierce_ordre': {
+                'type': 'Tiercé Ordre',
+                'description': 'Pari sur les 3 premiers chevaux dans l\'ordre exact',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval']), int(top_horses.iloc[2]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top1_prob'] * top_horses.iloc[1]['in_top3_prob'] * top_horses.iloc[2]['in_top3_prob'] * 0.6)
+            },
+            'tierce_desordre': {
+                'type': 'Tiercé Désordre',
+                'description': 'Pari sur les 3 premiers chevaux dans n\'importe quel ordre',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval']), int(top_horses.iloc[2]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top3_prob'] * top_horses.iloc[1]['in_top3_prob'] * top_horses.iloc[2]['in_top3_prob'])
+            },
+            'quarte_ordre': {
+                'type': 'Quarté Ordre',
+                'description': 'Pari sur les 4 premiers chevaux dans l\'ordre exact',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval']), 
+                             int(top_horses.iloc[2]['id_cheval']), int(top_horses.iloc[3]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top1_prob'] * top_horses.iloc[1]['in_top3_prob'] * 
+                                  top_horses.iloc[2]['in_top5_prob'] * top_horses.iloc[3]['in_top5_prob'] * 0.4)
+            },
+            'quarte_desordre': {
+                'type': 'Quarté Désordre',
+                'description': 'Pari sur les 4 premiers chevaux dans n\'importe quel ordre',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval']), 
+                             int(top_horses.iloc[2]['id_cheval']), int(top_horses.iloc[3]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top5_prob'] * top_horses.iloc[1]['in_top5_prob'] * 
+                                  top_horses.iloc[2]['in_top5_prob'] * top_horses.iloc[3]['in_top5_prob'])
+            },
+            'quinte_ordre': {
+                'type': 'Quinté Ordre',
+                'description': 'Pari sur les 5 premiers chevaux dans l\'ordre exact',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval']), 
+                             int(top_horses.iloc[2]['id_cheval']), int(top_horses.iloc[3]['id_cheval']), 
+                             int(top_horses.iloc[4]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top1_prob'] * top_horses.iloc[1]['in_top3_prob'] * 
+                                  top_horses.iloc[2]['in_top5_prob'] * top_horses.iloc[3]['in_top7_prob'] * 
+                                  top_horses.iloc[4]['in_top7_prob'] * 0.2)
+            },
+            'quinte_desordre': {
+                'type': 'Quinté Désordre',
+                'description': 'Pari sur les 5 premiers chevaux dans n\'importe quel ordre',
+                'selection': [int(top_horses.iloc[0]['id_cheval']), int(top_horses.iloc[1]['id_cheval']), 
+                             int(top_horses.iloc[2]['id_cheval']), int(top_horses.iloc[3]['id_cheval']), 
+                             int(top_horses.iloc[4]['id_cheval'])],
+                'confiance': float(top_horses.iloc[0]['in_top7_prob'] * top_horses.iloc[1]['in_top7_prob'] * 
+                                  top_horses.iloc[2]['in_top7_prob'] * top_horses.iloc[3]['in_top7_prob'] * 
+                                  top_horses.iloc[4]['in_top7_prob'])
+            },
+            'top7': {
+                'type': 'Top 7',
+                'description': 'Prédiction des 7 premiers chevaux',
+                'selection': [int(top_horses.iloc[i]['id_cheval']) for i in range(7)],
+                'confiance': float(top_horses.iloc[0]['in_top7_prob'] * top_horses.iloc[1]['in_top7_prob'] * 
+                                  top_horses.iloc[2]['in_top7_prob'] * top_horses.iloc[3]['in_top7_prob'] * 
+                                  top_horses.iloc[4]['in_top7_prob'] * top_horses.iloc[5]['in_top7_prob'] * 
+                                  top_horses.iloc[6]['in_top7_prob'])
             }
         }
         
+        return betting_suggestions
+    
+    def run_training(self, optimize_for_top7=False):
+        """Entraîne les modèles sur les données historiques avec support optionnel pour Top 7."""
+        self.logger.info("Démarrage de l'entraînement des modèles")
+        
+        try:
+            # Récupérer les paramètres d'entraînement
+            days_back = self.config.get('training', {}).get('days_back', 180)
+            test_size = self.config.get('training', {}).get('test_size', 0.2)
+            standard_model_type = self.config.get('training', {}).get('standard_model_type', 'xgboost')
+            simulation_model_type = self.config.get('training', {}).get('simulation_model_type', 'xgboost_ranking')
+            top_n_features = self.config.get('training', {}).get('top_n_features', 30)
+            
+            self.logger.info(f"Entraînement des modèles sur les données des {days_back} derniers jours")
+            
+            # Définir la période d'entraînement
+            end_date = datetime.now()
+            start_date = end_date - timedelta(days=days_back)
+            
+            self.logger.info(f"Récupération des données du {start_date.strftime('%Y-%m-%d')} au {end_date.strftime('%Y-%m-%d')}")
+            
+            # Récupérer les données
+            training_data = self.data_prep.get_training_data(
+                start_date=start_date.strftime("%Y-%m-%d"),
+                end_date=end_date.strftime("%Y-%m-%d")
+            )
+            
+            if training_data.empty:
+                self.logger.error("Aucune donnée d'entraînement trouvée")
+                return False
+            
+            self.logger.info(f"Données récupérées: {len(training_data)} échantillons")
+            
+            # Créer des features avancées
+            enhanced_data = self.data_prep.create_enhanced_features(training_data)
+            
+            # Créer les variables cibles
+            prepared_data = self.model.create_target_variables(enhanced_data)
+            
+            # Entraîner le modèle standard
+            self.logger.info(f"Entraînement du modèle standard ({standard_model_type})")
+            
+            if optimize_for_top7:
+                # Utiliser la méthode d'entraînement améliorée avec sélection de features enrichie
+                standard_accuracy, standard_path = self.model.train_with_enhanced_features(
+                    prepared_data, 
+                    target_col='target_place',
+                    test_size=test_size,
+                    top_n_features=top_n_features
+                )
+            else:
+                # Utiliser la méthode d'entraînement standard existante
+                standard_accuracy, standard_path = self.model.train_standard_model(prepared_data, test_size=test_size)
+            
+            # Entraîner le modèle de simulation
+            self.logger.info(f"Entraînement du modèle de simulation ({simulation_model_type})")
+            
+            if optimize_for_top7:
+                # Utiliser le modèle optimisé pour le Top 7
+                simulation_metrics, simulation_path = self.model.train_top7_simulation_model(
+                    prepared_data,
+                    test_size=test_size,
+                    top_n_features=top_n_features
+                )
+            else:
+                # Utiliser la méthode d'entraînement de simulation standard
+                simulation_metrics, simulation_path = self.model.train_simulation_model(prepared_data, test_size=test_size)
+            
+            # Mettre à jour les chemins des modèles dans la configuration
+            if optimize_for_top7:
+                self.config['standard_enhanced_model_path'] = standard_path
+                self.config['simulation_top7_model_path'] = simulation_path
+            else:
+                self.config['standard_model_path'] = standard_path
+                self.config['simulation_model_path'] = simulation_path
+            
+            # Sauvegarder la configuration mise à jour
+            with open('config/config.json', 'w') as f:
+                json.dump(self.config, f, indent=2)
+            
+            self.logger.info("Entraînement des modèles terminé")
+            self.logger.info(f"Modèle standard ({standard_model_type}): {standard_path}")
+            self.logger.info(f"Précision: {standard_accuracy:.4f}")
+            self.logger.info(f"Modèle de simulation ({simulation_model_type}): {simulation_path}")
+            
+            # Configuration mise à jour avec les nouveaux modèles
+            self.logger.info("Configuration mise à jour avec les nouveaux modèles")
+            
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors de l'entraînement: {str(e)}")
+            return False
+
 def parse_args():
     """Parse les arguments de ligne de commande."""
     parser = argparse.ArgumentParser(description='Orchestrateur du système de prédiction PMU')
@@ -423,31 +699,22 @@ def parse_args():
                         choices=['all', 'scrape', 'predict', 'evaluate', 'train', 'schedule', 'simulate'],
                         default='all', help='Action à exécuter')
     
-    # Arguments pour les actions spécifiques
-    parser.add_argument('--days-back', type=int,
-                        help='Nombre de jours en arrière pour le scraping ou l\'évaluation')
+    # Arguments pour l'optimisation Top 7
+    parser.add_argument('--top7', action='store_true',
+                       help='Optimiser les modèles pour les prédictions Top 7 (Quinté)')
     
-    parser.add_argument('--days-ahead', type=int,
-                        help='Nombre de jours en avant pour les prédictions')
+    parser.add_argument('--quinte', action='store_true',
+                       help='Alias pour --top7')
     
-    # Arguments pour la simulation
-    parser.add_argument('--course-id', type=int,
-                        help='ID de la course à simuler')
+    # Autres arguments existants...
     
-    parser.add_argument('--horses', type=str,
-                        help='Liste des IDs de chevaux séparés par des virgules')
+    args = parser.parse_args()
     
-    parser.add_argument('--jockey-id', type=int,
-                        help='ID du jockey pour la simulation')
+    # Gérer l'alias quinte → top7
+    if args.quinte:
+        args.top7 = True
     
-    parser.add_argument('--weight', type=int,
-                        help='Poids pour la simulation')
-    
-    parser.add_argument('--meteo', type=str, choices=['Ensoleillé', 'Nuageux', 'Pluie', 'Brouillard'],
-                        help='Condition météo pour la simulation')
-    
-    return parser.parse_args()
-
+    return args
 def main():
     """Fonction principale."""
     args = parse_args()
@@ -456,71 +723,40 @@ def main():
     orchestrateur = PMUOrchestrateur(config_path=args.config)
     
     # Exécuter l'action demandée
-    if args.action == 'all':
-        orchestrateur.run_all()
-    
+    if args.action == 'train':
+        optimize_for_top7 = args.top7 or args.quinte
+        orchestrateur.run_training(optimize_for_top7=optimize_for_top7)
+        
+    # Autres actions...
     elif args.action == 'scrape':
-        if args.days_back:
-            orchestrateur.config['scraping']['days_back'] = args.days_back
         orchestrateur.run_scraping()
+    # etc.
     
     elif args.action == 'predict':
-        if args.days_ahead:
-            orchestrateur.config['prediction']['days_ahead'] = args.days_ahead
-        orchestrateur.run_predictions()
+        # Exemple d'utilisation de la prédiction
+        course_id = 12345  # Remplacer par l'ID de la course souhaitée
+        predictions = orchestrateur.predict_course_top7(course_id)
+        print(predictions)
+    
+    elif args.action == 'simulate':
+        # Exemple d'utilisation de la simulation
+        course_id = 12345  # Remplacer par l'ID de la course souhaitée
+        selected_horses = [1, 2, 3]  # Liste des chevaux sélectionnés
+        simulation_params = {'param1': 'value1'}  # Paramètres personnalisés pour la simulation
+        results = orchestrateur.simulate_custom_top7(course_id, selected_horses, simulation_params)
+        print(results)
     
     elif args.action == 'evaluate':
-        if args.days_back:
-            orchestrateur.config['evaluation']['days_back'] = args.days_back
-        orchestrateur.run_evaluation()
-    
-    elif args.action == 'train':
-        if args.days_back:
-            orchestrateur.config['training']['days_back'] = args.days_back
-        orchestrateur.run_training()
+        # Exemple d'utilisation de l'évaluation
+        course_id = 12345  # Remplacer par l'ID de la course souhaitée
+        analysis_report = orchestrateur.run_course_analysis(course_id)
+        print(analysis_report)
     
     elif args.action == 'schedule':
-        orchestrateur.run_scheduler()
-        
-    elif args.action == 'simulate':
-        # Vérifier les arguments requis
-        if not args.course_id:
-            print("Erreur: l'argument --course-id est requis pour la simulation")
-            return
-        
-        if not args.horses:
-            print("Erreur: l'argument --horses est requis pour la simulation")
-            return
-        
-        # Convertir la liste de chevaux en liste d'entiers
-        selected_horses = [int(horse) for horse in args.horses.split(',')]
-        
-        # Construire les paramètres de simulation
-        simulation_params = {}
-        
-        if args.jockey_id:
-            simulation_params['jockey_id'] = args.jockey_id
-        
-        if args.weight:
-            simulation_params['poids'] = args.weight
-            
-        if args.meteo:
-            simulation_params['meteo'] = args.meteo
-        
-        # Exécuter la simulation
-        results = orchestrateur.run_simulation(
-            course_id=args.course_id,
-            selected_horses=selected_horses,
-            simulation_params=simulation_params
-        )
-        
-        if results is not None:
-            print(f"Résultats de la simulation pour la course {args.course_id}:")
-            print(f"Classement simulé:")
-            for i, row in results.iterrows():
-                print(f"{i+1}. {row['cheval_nom']} - Score: {row['predicted_score']:.4f}")
-        else:
-            print("La simulation a échoué. Consultez les logs pour plus de détails.")
-
+        # Exemple d'utilisation de la planification
+        orchestrateur.schedule_tasks()
+    
+    else:
+        print("Aucune action valide spécifiée.")
 if __name__ == '__main__':
     main()
