@@ -1,5 +1,6 @@
 # prediction_routes.py
 # api/routes/prediction_routes.py
+from datetime import datetime
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.services.prediction_service import PredictionService
@@ -206,3 +207,183 @@ def prediction_history():
             "total_pages": history['total_pages'],
             "data": history['data']
         }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error retrieving prediction history: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/<int:prediction_id>', methods=['GET'])
+@jwt_required()
+def get_prediction(prediction_id):
+    """Récupère les détails d'une prédiction spécifique"""
+    try:
+        user_id = get_jwt_identity()
+        
+        # Récupérer la prédiction
+        prediction = prediction_service.get_prediction_by_id(prediction_id, user_id)
+        
+        if not prediction:
+            return jsonify({"success": False, "message": "Prediction not found"}), 404
+        
+        return jsonify({
+            "success": True,
+            "data": prediction
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error retrieving prediction: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/compare/<int:course_id>', methods=['GET'])
+@jwt_required()
+@subscription_required(['premium'])
+def compare_predictions(course_id):
+    """Compare les prédictions historiques pour une course"""
+    try:
+        # Récupérer toutes les prédictions pour cette course
+        predictions = prediction_service.get_course_prediction_history(course_id)
+        
+        if not predictions or len(predictions) < 2:
+            return jsonify({
+                "success": False, 
+                "message": "Not enough predictions available for comparison"
+            }), 404
+        
+        # Comparer les prédictions
+        comparison = prediction_service.compare_predictions(predictions)
+        
+        return jsonify({
+            "success": True,
+            "course_id": course_id,
+            "data": comparison
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error comparing predictions: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/stats', methods=['GET'])
+@jwt_required()
+@subscription_required(['standard', 'premium'])
+def prediction_stats():
+    """Statistiques globales sur les prédictions de l'utilisateur"""
+    try:
+        user_id = get_jwt_identity()
+        days = request.args.get('days', default=30, type=int)
+        
+        # Récupérer les statistiques
+        stats = prediction_service.get_user_prediction_stats(user_id, days)
+        
+        return jsonify({
+            "success": True,
+            "days": days,
+            "stats": stats
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error retrieving prediction stats: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/evaluate/<int:prediction_id>', methods=['GET'])
+@jwt_required()
+def evaluate_prediction(prediction_id):
+    """Évalue une prédiction en la comparant aux résultats réels"""
+    try:
+        user_id = get_jwt_identity()
+        
+        # Récupérer et évaluer la prédiction
+        evaluation = prediction_service.evaluate_prediction(prediction_id, user_id)
+        
+        if not evaluation:
+            return jsonify({
+                "success": False, 
+                "message": "Prediction not found or results not available"
+            }), 404
+        
+        return jsonify({
+            "success": True,
+            "prediction_id": prediction_id,
+            "evaluation": evaluation
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error evaluating prediction: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/evaluate/recent', methods=['GET'])
+@jwt_required()
+@subscription_required(['standard', 'premium'])
+def evaluate_recent_predictions():
+    """Évalue les prédictions récentes de l'utilisateur pour voir leur précision"""
+    try:
+        user_id = get_jwt_identity()
+        days = request.args.get('days', default=7, type=int)
+        
+        # Limiter pour éviter les abus
+        if days > 30:
+            days = 30
+        
+        # Récupérer et évaluer les prédictions récentes
+        evaluations = prediction_service.evaluate_recent_predictions(user_id, days)
+        
+        return jsonify({
+            "success": True,
+            "days": days,
+            "count": len(evaluations),
+            "data": evaluations
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error evaluating recent predictions: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/odds/change/<int:course_id>', methods=['GET'])
+@jwt_required()
+@subscription_required(['premium'])
+def get_odds_change_impact(course_id):
+    """Analyse l'impact des changements de cotes sur les prédictions"""
+    try:
+        # Récupérer l'historique des cotes
+        odds_history = prediction_service.get_course_odds_history(course_id)
+        
+        # Analyser l'impact des changements
+        impact_analysis = prediction_service.analyze_odds_change_impact(course_id, odds_history)
+        
+        return jsonify({
+            "success": True,
+            "course_id": course_id,
+            "data": impact_analysis
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error analyzing odds impact: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
+
+
+@prediction_bp.route('/daily-summary', methods=['GET'])
+@jwt_required()
+@subscription_required(['premium'])
+def get_daily_summary():
+    """Récupère un résumé des meilleures prédictions du jour"""
+    try:
+        # Paramètres optionnels
+        date_str = request.args.get('date', default=None)
+        
+        # Récupérer le résumé
+        summary = prediction_service.get_daily_prediction_summary(date_str)
+        
+        return jsonify({
+            "success": True,
+            "date": date_str if date_str else datetime.now().strftime('%Y-%m-%d'),
+            "data": summary
+        }), 200
+    
+    except Exception as e:
+        current_app.logger.error(f"Error generating daily summary: {str(e)}")
+        return jsonify({"success": False, "message": "An error occurred"}), 500
