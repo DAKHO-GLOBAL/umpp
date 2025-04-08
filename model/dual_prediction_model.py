@@ -1111,6 +1111,7 @@ class DualPredictionModel:
         """Sauvegarde les informations du modèle dans la table model_versions"""
         try:
             from sqlalchemy.orm import sessionmaker
+            from sqlalchemy import text
             from database.setup_database import engine
             import json
             
@@ -1118,32 +1119,67 @@ class DualPredictionModel:
             session = Session()
             
             # Créer un dictionnaire pour la requête d'insertion
-            query = """
+            query = text("""
             INSERT INTO model_versions (
-                model_type, hyperparameters, training_date, training_duration,
+                model_type, model_category, hyperparameters, training_date, training_duration,
                 accuracy, precision_score, recall_score, f1_score, log_loss,
                 file_path, training_data_range, feature_count, sample_count,
-                validation_method, notes, is_active
+                validation_method, notes, is_active, created_at, updated_at
             ) VALUES (
-                :model_type, :hyperparameters, :training_date, :training_duration,
+                :model_type, :model_category, :hyperparameters, :training_date, :training_duration,
                 :accuracy, :precision_score, :recall_score, :f1_score, :log_loss,
                 :file_path, :training_data_range, :feature_count, :sample_count,
-                :validation_method, :notes, :is_active
+                :validation_method, :notes, :is_active, :created_at, :updated_at
             )
-            """
+            """)
+            
+            # Timestamp actuel
+            current_time = datetime.now()
+            
+            # Simplifier les hyperparamètres - ne garder que les paramètres importants
+            if model_category == 'standard':
+                model_params = self.standard_model.get_params()
+                important_params = {
+                    'n_estimators': model_params.get('n_estimators'),
+                    'max_depth': model_params.get('max_depth'),
+                    'learning_rate': model_params.get('learning_rate', model_params.get('eta')),
+                    'subsample': model_params.get('subsample'),
+                    'colsample_bytree': model_params.get('colsample_bytree'),
+                    'objective': model_params.get('objective')
+                }
+                hyperparameters = json.dumps(important_params)
+            else:
+                model_params = self.simulation_model.get_params()
+                important_params = {
+                    'n_estimators': model_params.get('n_estimators'),
+                    'max_depth': model_params.get('max_depth'),
+                    'learning_rate': model_params.get('learning_rate', model_params.get('eta')),
+                    'subsample': model_params.get('subsample'),
+                    'colsample_bytree': model_params.get('colsample_bytree'),
+                    'objective': model_params.get('objective')
+                }
+                hyperparameters = json.dumps(important_params)
+            
+            # S'assurer que la chaîne d'hyperparamètres n'est pas trop longue
+            if len(hyperparameters) > 8000:  # Limite arbitraire
+                hyperparameters = json.dumps({"message": "Hyperparameters truncated, see model file for details"})
             
             # Préparer les paramètres selon le type de modèle
             params = {
-                'model_type': f"{model_category}_{model_info['model_type']}",
-                'hyperparameters': json.dumps(self.simulation_model.get_params() if model_category == 'simulation' else self.standard_model.get_params()),
-                'training_date': datetime.now(),
-                'training_duration': None,  # À calculer dans le futur
+                'model_type': model_info['model_type'],
+                'model_category': model_category,
+                'hyperparameters': hyperparameters,  # Version simplifiée des hyperparamètres
+                'training_date': current_time,
+                'training_duration': None,
                 'file_path': model_path,
+                'training_data_range': "15 days",
                 'feature_count': model_info['feature_count'],
                 'sample_count': model_info['training_size'],
                 'validation_method': 'train_test_split',
                 'notes': f"Model trained with {model_info['feature_count']} features on {model_info['training_size']} samples.",
-                'is_active': True
+                'is_active': 1,
+                'created_at': current_time,
+                'updated_at': current_time
             }
             
             # Ajouter les métriques spécifiques à chaque type de modèle
@@ -1153,7 +1189,7 @@ class DualPredictionModel:
                     'precision_score': model_info['precision'],
                     'recall_score': model_info['recall'],
                     'f1_score': model_info['f1_score'],
-                    'log_loss': None  # À calculer dans le futur
+                    'log_loss': None
                 })
             else:
                 # Pour le modèle de simulation, nous stockons les métriques dans le champ 'notes'
@@ -1170,13 +1206,13 @@ class DualPredictionModel:
                 })
             
             # Désactiver tous les modèles existants de la même catégorie
-            update_query = """
+            update_query = text("""
             UPDATE model_versions
-            SET is_active = 0
-            WHERE model_type LIKE :model_type_pattern
-            """
+            SET is_active = 0, updated_at = :updated_at
+            WHERE model_category = :model_category
+            """)
             
-            session.execute(update_query, {'model_type_pattern': f"{model_category}_%"})
+            session.execute(update_query, {'model_category': model_category, 'updated_at': current_time})
             
             # Insérer le nouveau modèle
             session.execute(query, params)
@@ -1186,7 +1222,10 @@ class DualPredictionModel:
             
         except Exception as e:
             self.logger.error(f"Error saving model information to database: {str(e)}")
-    
+            # Afficher plus de détails sur l'erreur
+            import traceback
+            self.logger.error(traceback.format_exc())
+        
     def predict_standard(self, data, return_probabilities=True):
         """Effectue une prédiction avec le modèle standard (dans top 3 ou non)"""
         if self.standard_model is None:
@@ -1404,6 +1443,7 @@ class DualPredictionModel:
             json.dump(model_info, f, indent=4)
         
         self.logger.info(f"Top-7 simulation model saved to {model_path}")
+        self._save_model_to_db('simulation', model_path, model_info)
         
         return metrics, model_path
 
@@ -1759,6 +1799,8 @@ class DualPredictionModel:
             json.dump(model_info, f, indent=4)
         
         self.logger.info(f"Enhanced model saved to {model_path}")
+        # Enregistrer dans la base de données (table model_versions)
+        self._save_model_to_db('standard', model_path, model_info)
         
         return accuracy, model_path
     

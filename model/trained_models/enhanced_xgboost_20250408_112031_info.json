@@ -1,0 +1,12 @@
+{
+    "model_type": "xgboost",
+    "accuracy": 0.7353629976580797,
+    "precision": 0.456973293768546,
+    "recall": 0.4967741935483871,
+    "f1_score": 0.47604327666151464,
+    "training_size": 5120,
+    "test_size": 1281,
+    "timestamp": "20250408_112031",
+    "feature_count": 30,
+    "enhanced": true
+}

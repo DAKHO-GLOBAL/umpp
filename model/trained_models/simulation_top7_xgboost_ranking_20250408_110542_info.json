@@ -1,0 +1,18 @@
+{
+    "model_type": "xgboost_ranking",
+    "metrics": {
+        "ndcg_score": 0.7792065736543865,
+        "winner_accuracy": 0.18181818181818182,
+        "top3_accuracy": 0.41818181818181815,
+        "top5_accuracy": 0.7,
+        "top7_accuracy": 0.8,
+        "quinte_exact_rate": 0.0,
+        "quinte_desordre_rate": 0.045454545454545456,
+        "total_races_evaluated": 110
+    },
+    "training_size": 5056,
+    "test_size": 1345,
+    "timestamp": "20250408_110542",
+    "feature_count": 30,
+    "top7_optimized": true
+}
