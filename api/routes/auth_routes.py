@@ -5,9 +5,9 @@ from flask_jwt_extended import (
     create_access_token, create_refresh_token, 
     jwt_required, get_jwt_identity
 )
-from api.services.auth_service import AuthService
-from api.schemas.user_schema import UserLoginSchema, UserRegisterSchema
-from api.middleware.rate_limiter import limiter
+from services.auth_service import AuthService
+from schemas.user_schema import UserLoginSchema, UserRegisterSchema
+from middleware.rate_limiter import limiter
 
 auth_bp = Blueprint('auth', __name__)
 auth_service = AuthService()

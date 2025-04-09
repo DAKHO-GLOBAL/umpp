@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, T
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from api import db
-from api.models.user import User
+from models.user import User
 
 class ApiKey(db.Model):
     """Modèle pour les clés API utilisées pour l'authentification des services externes"""
@@ -28,7 +28,7 @@ class ApiKey(db.Model):
     
     def __init__(self, name, user_id, description=None, expiry_days=None):
         """
-        Initialise une nouvelle clé API.
+        Initialise une nouvelle clé 
         
         Args:
             name (str): Nom de la clé API pour identification
@@ -74,7 +74,7 @@ class ApiKey(db.Model):
     
     def extend_expiry(self, days):
         """
-        Prolonge la date d'expiration de la clé API.
+        Prolonge la date d'expiration de la clé 
         
         Args:
             days (int): Nombre de jours à ajouter

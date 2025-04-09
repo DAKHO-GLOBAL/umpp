@@ -3,9 +3,9 @@
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from api import db
-from api.models.api_key import ApiKey
-from api.utils.decorators import admin_required, subscription_required
-from api.middleware.rate_limiter import limiter
+from models.api_key import ApiKey
+from utils.decorators import admin_required, subscription_required
+from middleware.rate_limiter import limiter
 from sqlalchemy import desc
 
 api_key_bp = Blueprint('api_key', __name__)

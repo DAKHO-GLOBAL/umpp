@@ -3,14 +3,14 @@
 # api/routes/admin_routes.py
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required
-from api.utils.decorators import admin_required
-from api.middleware.rate_limiter import limiter
+from utils.decorators import admin_required
+from middleware.rate_limiter import limiter
 from sqlalchemy import text
 from api import db
-from api.services.user_service import UserService
-from api.services.prediction_service import PredictionService
-from api.services.simulation_service import SimulationService
-from api.services.notification_service import NotificationService
+from services.user_service import UserService
+from services.prediction_service import PredictionService
+from services.simulation_service import SimulationService
+from services.notification_service import NotificationService
 
 admin_bp = Blueprint('admin', __name__)
 user_service = UserService()
@@ -466,7 +466,7 @@ def trigger_task():
         task_params = data.get('params', {})
         
         # Importer le gestionnaire de tâches
-        from api.tasks import task_manager
+        from tasks import task_manager
         
         # Déclencher la tâche
         task_id = task_manager.run_task(task_name, task_params)

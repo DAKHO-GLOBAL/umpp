@@ -4,13 +4,13 @@ def register_routes(app):
     """Enregistre toutes les routes de l'application"""
     
     # Import des blueprints
-    from api.routes.auth_routes import auth_bp
-    from api.routes.user_routes import user_bp
-    from api.routes.prediction_routes import prediction_bp
-    from api.routes.simulation_routes import simulation_bp
-    from api.routes.course_routes import course_bp
-    from api.routes.subscription_routes import subscription_bp
-    from api.routes.admin_routes import admin_bp
+    from routes.auth_routes import auth_bp
+    from routes.user_routes import user_bp
+    from routes.prediction_routes import prediction_bp
+    from routes.simulation_routes import simulation_bp
+    from routes.course_routes import course_bp
+    from routes.subscription_routes import subscription_bp
+    from routes.admin_routes import admin_bp
     
     # Enregistrement des blueprints avec préfixes
     app.register_blueprint(auth_bp, url_prefix='/api/auth')

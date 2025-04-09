@@ -5,7 +5,7 @@ import pytest
 from flask import url_for
 from unittest.mock import patch
 
-@patch('api.services.simulation_service.SimulationService.simulate_course')
+@patch('services.simulation_service.SimulationService.simulate_course')
 def test_basic_simulation(mock_simulate, client, auth_headers, test_course):
     """Test de la simulation de base"""
     # Configurer le mock pour la simulation
@@ -67,7 +67,7 @@ def test_basic_simulation(mock_simulate, client, auth_headers, test_course):
     assert 'data' in data
     assert 'animation_data' in data
 
-@patch('api.services.simulation_service.SimulationService.simulate_course')
+@patch('services.simulation_service.SimulationService.simulate_course')
 def test_advanced_simulation(mock_simulate, client, auth_headers, test_course):
     """Test de la simulation avancée"""
     # Configurer le mock pour la simulation

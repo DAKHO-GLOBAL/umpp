@@ -69,7 +69,7 @@ class ResetToken(db.Model):
         Returns:
             User or None: L'utilisateur associé au token ou None si invalide
         """
-        from api.models.user import User  # Import here to avoid circular imports
+        from models.user import User  # Import here to avoid circular imports
         
         reset_token = ResetToken.query.filter_by(
             token=token_string,
@@ -167,7 +167,7 @@ class VerificationToken(db.Model):
             return False
         
         try:
-            from api.models.user import User  # Import here to avoid circular imports
+            from models.user import User  # Import here to avoid circular imports
             
             user = User.query.get(self.user_id)
             if user:
@@ -191,7 +191,7 @@ class VerificationToken(db.Model):
         Returns:
             User or None: L'utilisateur associé au token ou None si invalide
         """
-        from api.models.user import User  # Import here to avoid circular imports
+        from models.user import User  # Import here to avoid circular imports
         
         verification_token = VerificationToken.query.filter_by(
             token=token_string,

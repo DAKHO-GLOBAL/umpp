@@ -3,11 +3,11 @@
 from datetime import datetime
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.services.prediction_service import PredictionService
-from api.services.user_service import UserService
-from api.schemas.prediction_schema import PredictionRequestSchema
-from api.middleware.rate_limiter import limiter
-from api.utils.decorators import subscription_required
+from services.prediction_service import PredictionService
+from services.user_service import UserService
+from schemas.prediction_schema import PredictionRequestSchema
+from middleware.rate_limiter import limiter
+from utils.decorators import subscription_required
 
 prediction_bp = Blueprint('prediction', __name__)
 prediction_service = PredictionService()

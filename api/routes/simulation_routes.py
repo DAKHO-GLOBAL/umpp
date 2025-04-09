@@ -2,11 +2,11 @@
 # api/routes/simulation_routes.py
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.services.simulation_service import SimulationService
-from api.services.user_service import UserService
-from api.schemas.simulation_schema import SimulationRequestSchema
-from api.middleware.rate_limiter import limiter
-from api.utils.decorators import subscription_required
+from services.simulation_service import SimulationService
+from services.user_service import UserService
+from schemas.simulation_schema import SimulationRequestSchema
+from middleware.rate_limiter import limiter
+from utils.decorators import subscription_required
 
 simulation_bp = Blueprint('simulation', __name__)
 simulation_service = SimulationService()

@@ -3,10 +3,10 @@
 # api/routes/user_routes.py
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.services.user_service import UserService
-from api.schemas.user_schema import UserProfileSchema, UserPasswordChangeSchema, UserPreferencesSchema
-from api.middleware.rate_limiter import limiter
-from api.utils.decorators import admin_required
+from services.user_service import UserService
+from schemas.user_schema import UserProfileSchema, UserPasswordChangeSchema, UserPreferencesSchema
+from middleware.rate_limiter import limiter
+from utils.decorators import admin_required
 
 user_bp = Blueprint('user', __name__)
 user_service = UserService()
@@ -504,7 +504,7 @@ def update_user(user_id):
         data = request.get_json()
         
         # Validation des données
-        from api.schemas.user_schema import AdminUserUpdateSchema
+        from schemas.user_schema import AdminUserUpdateSchema
         admin_schema = AdminUserUpdateSchema()
         
         errors = admin_schema.validate(data)

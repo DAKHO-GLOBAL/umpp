@@ -2,9 +2,9 @@
 # api/routes/course_routes.py
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.services.course_service import CourseService
-from api.middleware.rate_limiter import limiter
-from api.utils.decorators import subscription_required
+from services.course_service import CourseService
+from middleware.rate_limiter import limiter
+from utils.decorators import subscription_required
 
 course_bp = Blueprint('course', __name__)
 course_service = CourseService()

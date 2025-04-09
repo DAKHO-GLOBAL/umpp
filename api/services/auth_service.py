@@ -8,11 +8,11 @@ import jwt
 import requests
 import json
 
-from api import db
-from api.models.user import User
-from api.models.token import ResetToken, RefreshToken
-from api.utils.email_sender import send_reset_password_email
-from api.services.user_service import UserService
+from app import db
+from models.user import User
+from models.token import ResetToken, RefreshToken
+from utils.email_sender import send_reset_password_email
+from services.user_service import UserService
 
 class AuthService:
     """Service pour gérer l'authentification des utilisateurs"""
@@ -83,7 +83,7 @@ class AuthService:
         """
         try:
             # Vérifier le token Firebase
-            from api.utils.firebase_client import verify_firebase_token
+            from utils.firebase_client import verify_firebase_token
             decoded_token = verify_firebase_token(firebase_token)
             
             if not decoded_token:

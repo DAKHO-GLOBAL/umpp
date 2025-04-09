@@ -3,10 +3,10 @@
 # api/routes/subscription_routes.py
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.services.subscription_service import SubscriptionService
-from api.services.user_service import UserService
-from api.middleware.rate_limiter import limiter
-from api.utils.decorators import subscription_required
+from services.subscription_service import SubscriptionService
+from services.user_service import UserService
+from middleware.rate_limiter import limiter
+from utils.decorators import subscription_required
 
 subscription_bp = Blueprint('subscription', __name__)
 subscription_service = SubscriptionService()
@@ -382,12 +382,12 @@ def get_usage():
         user_id = get_jwt_identity()
         
         # Récupérer l'utilisation des prédictions
-        from api.services.prediction_service import PredictionService
+        from services.prediction_service import PredictionService
         prediction_service = PredictionService()
         predictions_today = prediction_service.get_predictions_count_today(user_id)
         
         # Récupérer l'utilisation des simulations
-        from api.services.simulation_service import SimulationService
+        from services.simulation_service import SimulationService
         simulation_service = SimulationService()
         simulations_today = simulation_service.get_simulations_count_today(user_id)
         

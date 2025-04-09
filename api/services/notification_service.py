@@ -399,7 +399,7 @@ class NotificationService:
             email = result.email
             
             # Importer le service d'email
-            from api.utils.email_sender import send_email
+            from utils.email_sender import send_email
             
             # Envoyer l'email
             send_email(
@@ -436,7 +436,7 @@ class NotificationService:
             token = result.notification_token
             
             # Importer le service de notification push
-            from api.utils.firebase_client import send_push_notification
+            from utils.firebase_client import send_push_notification
             
             # Envoyer la notification push
             send_push_notification(

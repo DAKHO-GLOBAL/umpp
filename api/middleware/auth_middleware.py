@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 def authenticate_api_key():
     """
-    Vérifie la validité d'une clé API.
+    Vérifie la validité d'une clé 
     
     Returns:
         tuple: (success, user_id, message)
@@ -24,7 +24,7 @@ def authenticate_api_key():
     
     # Vérifier la validité de la clé
     try:
-        from api.models.api_key import ApiKey
+        from models.api_key import ApiKey
         key = ApiKey.query.filter_by(key=api_key, is_active=True).first()
         
         if not key:
@@ -120,7 +120,7 @@ def admin_required(fn):
             user_id = get_jwt_identity()
             
             # Récupérer l'utilisateur depuis la base de données
-            from api.models.user import User
+            from models.user import User
             user = User.query.get(user_id)
             
             if not user:
@@ -163,7 +163,7 @@ def subscription_required(subscription_levels):
                 user_id = get_jwt_identity()
                 
                 # Récupérer l'utilisateur depuis la base de données
-                from api.models.user import User
+                from models.user import User
                 user = User.query.get(user_id)
                 
                 if not user:
@@ -216,7 +216,7 @@ def register_auth_middleware(app):
                 # Vérifier si c'est une clé API d'administrateur
                 api_key = request.headers.get('X-API-Key')
                 if api_key:
-                    from api.models.api_key import ApiKey
+                    from models.api_key import ApiKey
                     key = ApiKey.query.filter_by(key=api_key, is_active=True).first()
                     if key and key.user and key.user.is_admin:
                         return None  # Autoriser
@@ -225,7 +225,7 @@ def register_auth_middleware(app):
                 verify_jwt_in_request(optional=True)
                 user_id = get_jwt_identity()
                 if user_id:
-                    from api.models.user import User
+                    from models.user import User
                     user = User.query.get(user_id)
                     if user and user.is_admin:
                         return None  # Autoriser

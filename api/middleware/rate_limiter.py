@@ -70,7 +70,7 @@ def configure_rate_limiter(app):
         api_key = request.headers.get('X-API-Key')
         if api_key:
             try:
-                from api.models.api_key import ApiKey
+                from models.api_key import ApiKey
                 key = ApiKey.query.filter_by(key=api_key, is_active=True).first()
                 
                 # Vérifier si la clé appartient à un utilisateur premium

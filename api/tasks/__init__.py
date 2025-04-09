@@ -157,12 +157,12 @@ class TaskManager:
         Returns:
             dict: Résultat du scraping
         """
-        from api.tasks.data_updater import run_scraping
+        from tasks.data_updater import run_scraping
         
         # Lire la configuration
         if days_back is None:
             # Récupérer depuis la configuration
-            from api.config import get_config
+            from config import get_config
             config = get_config()
             days_back = config.SCRAPING_DAYS_BACK
         
@@ -181,12 +181,12 @@ class TaskManager:
         Returns:
             dict: Résultat de la génération de prédictions
         """
-        from api.tasks.data_updater import generate_predictions
+        from tasks.data_updater import generate_predictions
         
         # Lire la configuration
         if days_ahead is None:
             # Récupérer depuis la configuration
-            from api.config import get_config
+            from config import get_config
             config = get_config()
             days_ahead = config.PREDICTION_DAYS_AHEAD
         
@@ -206,12 +206,12 @@ class TaskManager:
         Returns:
             dict: Résultat de l'entraînement
         """
-        from api.tasks.training_scheduler import train_models
+        from tasks.training_scheduler import train_models
         
         # Lire la configuration
         if days_back is None or model_type is None:
             # Récupérer depuis la configuration
-            from api.config import get_config
+            from config import get_config
             config = get_config()
             days_back = days_back or config.TRAINING_DAYS_BACK
             model_type = model_type or config.TRAINING_MODEL_TYPE
@@ -231,12 +231,12 @@ class TaskManager:
         Returns:
             dict: Résultat de l'évaluation
         """
-        from api.tasks.training_scheduler import evaluate_models
+        from tasks.training_scheduler import evaluate_models
         
         # Lire la configuration
         if days_back is None:
             # Récupérer depuis la configuration
-            from api.config import get_config
+            from config import get_config
             config = get_config()
             days_back = config.EVALUATION_DAYS_BACK
         
@@ -255,7 +255,7 @@ class TaskManager:
         Returns:
             dict: Résultat de l'envoi de notifications
         """
-        from api.tasks.notification_sender import send_notifications
+        from tasks.notification_sender import send_notifications
         
         # Envoyer les notifications
         result = send_notifications(notification_type)
@@ -272,7 +272,7 @@ class TaskManager:
         Returns:
             dict: Résultat du nettoyage
         """
-        from api.tasks.data_updater import cleanup_old_data
+        from tasks.data_updater import cleanup_old_data
         
         # Nettoyer les données
         result = cleanup_old_data(days_to_keep)

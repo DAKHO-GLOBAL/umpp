@@ -13,15 +13,15 @@ def register_middlewares(app):
         app: L'application Flask
     """
     # Middleware de gestion des erreurs
-    from api.middleware.error_handler import register_error_handlers
+    from middleware.error_handler import register_error_handlers
     register_error_handlers(app)
     
     # Middleware de limitation de débit
-    from api.middleware.rate_limiter import configure_rate_limiter
+    from middleware.rate_limiter import configure_rate_limiter
     configure_rate_limiter(app)
     
     # Middleware d'authentification
-    from api.middleware.auth_middleware import register_auth_middleware
+    from middleware.auth_middleware import register_auth_middleware
     register_auth_middleware(app)
     
     logger.info("All middlewares registered successfully")

@@ -12,7 +12,7 @@ import numpy as np
 import time
 
 from api import db
-from api.models.course import Course, Participation, Cheval, Jockey, CoteHistorique
+from models.course import Course, Participation, Cheval, Jockey, CoteHistorique
 from data_traitement.traitement import save_race_data, save_participants_data
 
 logger = logging.getLogger(__name__)
@@ -105,7 +105,7 @@ def scrape_date(date_obj):
         tuple: (courses_scraped, participants_scraped, errors)
     """
     date_str = date_obj.strftime('%Y-%m-%d')
-    base_url = "https://online.turfinfo.api.pmu.fr/rest/client/1/programme"
+    base_url = "https://online.turfinfo.pmu.fr/rest/client/1/programme"
     
     courses_scraped = 0
     participants_scraped = 0
@@ -257,7 +257,7 @@ def update_odds(course_id=None, all_upcoming=False):
             
             try:
                 # Récupérer les participants et leurs cotes actuelles
-                base_url = "https://online.turfinfo.api.pmu.fr/rest/client/1/programme"
+                base_url = "https://online.turfinfo.pmu.fr/rest/client/1/programme"
                 participants_url = f"{base_url}/reunion/{num_reunion}/course/{num_course}?dateCourse={date_str}"
                 
                 response = requests.get(participants_url)
@@ -429,7 +429,7 @@ def update_results(course_id=None, all_past=False, days_back=1):
             
             try:
                 # Récupérer les résultats
-                base_url = "https://online.turfinfo.api.pmu.fr/rest/client/1/programme"
+                base_url = "https://online.turfinfo.pmu.fr/rest/client/1/programme"
                 results_url = f"{base_url}/reunion/{num_reunion}/course/{num_course}/rapports?dateCourse={date_str}"
                 
                 response = requests.get(results_url)

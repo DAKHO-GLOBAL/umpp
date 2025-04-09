@@ -7,9 +7,9 @@ from flask import current_app
 from sqlalchemy import func, and_, or_, text
 
 from api import db
-from api.models.user import User
-from api.models.subscription import UserSubscription, SubscriptionPlan, PaymentTransaction, PromotionCode
-from api.utils.email_sender import send_email
+from models.user import User
+from models.subscription import UserSubscription, SubscriptionPlan, PaymentTransaction, PromotionCode
+from utils.email_sender import send_email
 
 class SubscriptionService:
     """Service pour gérer les abonnements des utilisateurs"""

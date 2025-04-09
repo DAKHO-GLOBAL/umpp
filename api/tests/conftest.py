@@ -7,9 +7,9 @@ import jwt
 from flask import current_app
 
 from api import create_app, db
-from api.config import TestingConfig
-from api.models.user import User
-from api.models.course import Course, Participation, Cheval, Jockey
+from config import TestingConfig
+from models.user import User
+from models.course import Course, Participation, Cheval, Jockey
 
 @pytest.fixture(scope='module')
 def app():

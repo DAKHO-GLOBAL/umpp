@@ -17,7 +17,7 @@ def test_upcoming_races(client, auth_headers):
     assert data['success'] is True
     assert 'data' in data
 
-@patch('api.services.prediction_service.PredictionService.predict_course')
+@patch('services.prediction_service.PredictionService.predict_course')
 def test_standard_prediction(mock_predict, client, auth_headers, test_course):
     """Test de la prédiction standard"""
     # Configurer le mock pour la prédiction
@@ -53,7 +53,7 @@ def test_standard_prediction(mock_predict, client, auth_headers, test_course):
     assert 'data' in data
     assert len(data['data']) == 2
 
-@patch('api.services.prediction_service.PredictionService.predict_course')
+@patch('services.prediction_service.PredictionService.predict_course')
 def test_top3_prediction(mock_predict, client, auth_headers, test_course):
     """Test de la prédiction top3"""
     # Configurer le mock pour la prédiction

@@ -9,10 +9,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import func, and_, text
 
 from api import db
-from api.models.user import User, ResetToken
-from api.models.token import VerificationToken
-from api.models.notification import NotificationSetting
-from api.utils.email_sender import send_welcome_email, send_reset_password_email
+from models.user import User, ResetToken
+from models.token import VerificationToken
+from models.notification import NotificationSetting
+from utils.email_sender import send_welcome_email, send_reset_password_email
 
 class UserService:
     """Service pour gérer les opérations liées aux utilisateurs"""
@@ -375,7 +375,7 @@ class UserService:
             }
             
             # Envoyer l'email
-            from api.utils.email_sender import send_email
+            from utils.email_sender import send_email
             success = send_email(
                 recipient=user.email,
                 subject=f"Verify your {data['app_name']} account",

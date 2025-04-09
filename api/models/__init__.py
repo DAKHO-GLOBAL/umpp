@@ -6,14 +6,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Importer tous les modèles pour s'assurer qu'ils sont correctement enregistrés auprès de SQLAlchemy
-from api.models.user import User, ResetToken
-from api.models.token import VerificationToken, RefreshToken
-from api.models.course import Course, Participation, Cheval, Jockey, CoteHistorique, CommentaireCourse
-from api.models.prediction import Prediction, PredictionUsage, ModelVersion, PredictionEvaluation
-from api.models.simulation import Simulation, SimulationUsage, SimulationComparison, SimulationAnimation, PredefinedScenario
-from api.models.subscription import UserSubscription, SubscriptionPlan, PaymentTransaction, PromotionCode
-from api.models.notification import Notification, NotificationSetting, UserDevice
-from api.models.api_key import ApiKey
+from models.user import User, ResetToken
+from models.token import VerificationToken, RefreshToken
+from models.course import Course, Participation, Cheval, Jockey, CoteHistorique, CommentaireCourse
+from models.prediction import Prediction, PredictionUsage, ModelVersion, PredictionEvaluation
+from models.simulation import Simulation, SimulationUsage, SimulationComparison, SimulationAnimation, PredefinedScenario
+from models.subscription import UserSubscription, SubscriptionPlan, PaymentTransaction, PromotionCode
+from models.notification import Notification, NotificationSetting, UserDevice
+from models.api_key import ApiKey
 
 def create_tables(db):
     """Crée toutes les tables dans la base de données"""

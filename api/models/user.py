@@ -14,9 +14,9 @@ from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from api import db
-from api.models.notification import NotificationSetting, Notification, UserDevice
-from api.models.subscription import UserSubscription
-from api.models.api_key import ApiKey
+from models.notification import NotificationSetting, Notification, UserDevice
+from models.subscription import UserSubscription
+from models.api_key import ApiKey
 
 
 class User(db.Model):
@@ -152,7 +152,7 @@ class User(db.Model):
         token = str(uuid.uuid4())
         # Stocker temporairement le token en base de données ou dans un cache Redis
         from api import db
-        from api.models.token import ResetToken
+        from models.token import ResetToken
         
         # Supprimer les anciens tokens
         ResetToken.query.filter_by(user_id=self.id).delete()

@@ -29,7 +29,7 @@ def subscription_required(subscription_levels):
             user_id = get_jwt_identity()
             
             # Importer User pour éviter les imports circulaires
-            from api.models.user import User
+            from models.user import User
             
             # Récupérer l'utilisateur depuis la base de données
             user = User.query.get(user_id)
@@ -80,7 +80,7 @@ def admin_required(fn):
         user_id = get_jwt_identity()
         
         # Importer User pour éviter les imports circulaires
-        from api.models.user import User
+        from models.user import User
         
         # Récupérer l'utilisateur depuis la base de données
         user = User.query.get(user_id)
@@ -122,7 +122,7 @@ def api_key_required(fn):
             }), 401
         
         # Vérifier la validité de la clé API
-        from api.models.api_key import ApiKey
+        from models.api_key import ApiKey
         
         api_key_obj = ApiKey.query.filter_by(key=api_key, is_active=True).first()
         
@@ -197,7 +197,7 @@ def rate_limited(requests_per_minute=60):
 
 def log_api_call(fn):
     """
-    Décorateur qui journalise chaque appel API.
+    Décorateur qui journalise chaque appel 
     
     Returns:
         function: Le décorateur configuré

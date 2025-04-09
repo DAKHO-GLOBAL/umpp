@@ -22,7 +22,7 @@ def create_app(config_object=None):
         app.config.from_object(config_object)
     else:
         # Configuration par défaut
-        from api.config import get_config
+        from config import get_config
         app.config.from_object(get_config())
     
     # Support pour les proxys
