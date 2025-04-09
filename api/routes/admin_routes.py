@@ -6,7 +6,7 @@ from flask_jwt_extended import jwt_required
 from utils.decorators import admin_required
 from middleware.rate_limiter import limiter
 from sqlalchemy import text
-from api import db
+from extensions import db
 from services.user_service import UserService
 from services.prediction_service import PredictionService
 from services.simulation_service import SimulationService

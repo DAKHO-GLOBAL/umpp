@@ -3,7 +3,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, JSON
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from api import db
+from extensions import db
 from datetime import datetime
 
 class Notification(db.Model):

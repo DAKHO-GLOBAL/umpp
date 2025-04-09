@@ -1,12 +1,10 @@
-# api_key.py
 # api/models/api_key.py
 import uuid
 from datetime import datetime, timedelta
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from api import db
-from models.user import User
+from extensions import db
 
 class ApiKey(db.Model):
     """Modèle pour les clés API utilisées pour l'authentification des services externes"""

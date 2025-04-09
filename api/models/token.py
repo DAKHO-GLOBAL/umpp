@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from api import db
+from extensions import db
 
 class ResetToken(db.Model):
     """Modèle pour les tokens de réinitialisation de mot de passe"""

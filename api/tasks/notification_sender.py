@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import text
 from flask import current_app
 
-from api import db
+from extensions import db
 from services.notification_service import NotificationService
 from services.prediction_service import PredictionService
 from services.course_service import CourseService

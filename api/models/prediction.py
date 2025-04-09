@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, Float, Text, 
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from api import db
+from extensions import db
 
 class Prediction(db.Model):
     """Modèle pour les prédictions de courses"""

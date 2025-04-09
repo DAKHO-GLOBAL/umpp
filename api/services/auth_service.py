@@ -8,7 +8,7 @@ import jwt
 import requests
 import json
 
-from app import db
+from extensions import db
 from models.user import User
 from models.token import ResetToken, RefreshToken
 from utils.email_sender import send_reset_password_email

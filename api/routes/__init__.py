@@ -11,6 +11,7 @@ def register_routes(app):
     from routes.course_routes import course_bp
     from routes.subscription_routes import subscription_bp
     from routes.admin_routes import admin_bp
+    from routes.notification_routes import notification_bp
     
     # Enregistrement des blueprints avec préfixes
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -20,6 +21,19 @@ def register_routes(app):
     app.register_blueprint(course_bp, url_prefix='/api/courses')
     app.register_blueprint(subscription_bp, url_prefix='/api/subscriptions')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
+    app.register_blueprint(notification_bp, url_prefix='/api/notifications')
+    
+    # Ajouter une route racine pour vérifier que l'API fonctionne
+    @app.route('/')
+    def index():
+        return {
+            'status': 'online',
+            'message': 'PMU Prediction API is running',
+            'version': '1.0.0'
+        }
+    
+    # Journal des routes enregistrées
+    app.logger.info('Routes registered successfully')
     
     # Journal des routes enregistrées
     app.logger.info('Routes registered successfully')

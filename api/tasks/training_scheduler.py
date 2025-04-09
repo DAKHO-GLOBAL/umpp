@@ -11,7 +11,7 @@ import numpy as np
 from sqlalchemy import text
 from flask import current_app
 
-from api import db
+from extensions import db
 from model.dual_prediction_model import DualPredictionModel
 from data_preparation.enhanced_data_prep import EnhancedDataPreparation
 

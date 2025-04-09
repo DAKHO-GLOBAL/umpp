@@ -13,11 +13,11 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from api import db
+from extensions import db
 from models.notification import NotificationSetting, Notification, UserDevice
 from models.subscription import UserSubscription
-from models.api_key import ApiKey
-
+#from models.api_key import ApiKey
+from models.token import ResetToken  # Importez-le ici si vous y faites référence
 
 class User(db.Model):
     """Modèle utilisateur pour l'application de prédiction PMU"""
@@ -151,7 +151,7 @@ class User(db.Model):
         """
         token = str(uuid.uuid4())
         # Stocker temporairement le token en base de données ou dans un cache Redis
-        from api import db
+        from extensions import db
         from models.token import ResetToken
         
         # Supprimer les anciens tokens
@@ -393,7 +393,7 @@ class User(db.Model):
         
         if with_stats:
             # Ajouter des statistiques détaillées
-            from api import db
+            from extensions import db
             from sqlalchemy import func, and_
             
             # Récupérer des statistiques sur les prédictions
@@ -432,21 +432,19 @@ class User(db.Model):
         
         return data
     
-    def __repr__(self):
-        """Représentation textuelle de l'utilisateur."""
-        return f"<User {self.id}: {self.username}>"
+    # def __repr__(self):
+    #     """Représentation textuelle de l'utilisateur."""
+    #     return f"<User {self.id}: {self.username}>"
 
-
-class ResetToken(db.Model):
-    """Modèle pour les tokens de réinitialisation de mot de passe"""
-    __tablename__ = 'reset_tokens'
+    # """Modèle pour les tokens de réinitialisation de mot de passe"""
+    # __tablename__ = 'reset_tokens'
     
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    token = Column(String(100), nullable=False, unique=True)
-    created_at = Column(DateTime, default=func.now())
-    expires_at = Column(DateTime, nullable=False)
-    used = Column(Boolean, default=False)
+    # id = Column(Integer, primary_key=True)
+    # user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    # token = Column(String(100), nullable=False, unique=True)
+    # created_at = Column(DateTime, default=func.now())
+    # expires_at = Column(DateTime, nullable=False)
+    # used = Column(Boolean, default=False)
     
     @staticmethod
     def verify_token(token):

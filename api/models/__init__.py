@@ -1,13 +1,11 @@
-# __init__.py
-# __init__.py
 # api/models/__init__.py
 import logging
 
 logger = logging.getLogger(__name__)
 
-# Importer tous les modèles pour s'assurer qu'ils sont correctement enregistrés auprès de SQLAlchemy
-from models.user import User, ResetToken
-from models.token import VerificationToken, RefreshToken
+# Import des objets de modèle dans un ordre qui évite les dépendances circulaires
+from models.token import ResetToken, VerificationToken, RefreshToken
+from models.user import User
 from models.course import Course, Participation, Cheval, Jockey, CoteHistorique, CommentaireCourse
 from models.prediction import Prediction, PredictionUsage, ModelVersion, PredictionEvaluation
 from models.simulation import Simulation, SimulationUsage, SimulationComparison, SimulationAnimation, PredefinedScenario

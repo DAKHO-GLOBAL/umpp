@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime, timedelta
 from flask import current_app
-from api import db
+from extensions import db
 from sqlalchemy import func, and_, text
 
 class CourseService:

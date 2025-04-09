@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from flask import current_app
 from sqlalchemy import func, and_, or_, text
 
-from api import db
+from extensions import db
 from models.user import User
 from models.subscription import UserSubscription, SubscriptionPlan, PaymentTransaction, PromotionCode
 from utils.email_sender import send_email

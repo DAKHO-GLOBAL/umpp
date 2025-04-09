@@ -407,7 +407,7 @@ def list_users():
         params['offset'] = (page - 1) * per_page
         
         # Exécuter la requête
-        from api import db
+        from extensions import db
         from sqlalchemy import text
         
         result = db.session.execute(text(query), params)
@@ -545,7 +545,7 @@ def update_user(user_id):
             user.subscription_expiry = data['subscription_expiry']
         
         # Sauvegarder les modifications
-        from api import db
+        from extensions import db
         db.session.commit()
         
         return jsonify({
@@ -583,7 +583,7 @@ def admin_reset_password(user_id):
         user.set_password(data['new_password'])
         
         # Sauvegarder les modifications
-        from api import db
+        from extensions import db
         db.session.commit()
         
         return jsonify({
@@ -693,7 +693,7 @@ def admin_get_user_stats():
     """Récupère des statistiques globales sur les utilisateurs (admin seulement)"""
     try:
         # Requête SQL pour les statistiques globales
-        from api import db
+        from extensions import db
         from sqlalchemy import text
         
         stats_query = """

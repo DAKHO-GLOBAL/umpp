@@ -8,7 +8,7 @@ from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import func, and_, text
 
-from api import db
+from extensions import db
 from models.user import User, ResetToken
 from models.token import VerificationToken
 from models.notification import NotificationSetting

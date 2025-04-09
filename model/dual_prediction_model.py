@@ -522,6 +522,8 @@
 # ------------------------------
 
 # model/dual_prediction_model.py
+import glob
+from venv import logger
 import pandas as pd
 import numpy as np
 import logging
@@ -560,46 +562,101 @@ class DualPredictionModel:
         # Créer le répertoire si nécessaire
         os.makedirs(base_path, exist_ok=True)
     
-    def load_standard_model(self, model_path=None):
-        """Charge le modèle pour les prédictions standard"""
-        if model_path is None:
-            model_path = f"{self.base_path}/standard_latest.pkl"
-        
+
+    # def load_standard_model(self, model_file=None):
+    #     try:
+    #         if model_file:
+    #             model_path = os.path.join(self.base_path, model_file)
+    #         else:
+    #             # Chercher le fichier le plus récent commençant par "enhanced_xgboost_"
+    #             pattern = os.path.join(self.base_path, "enhanced_xgboost_*.pkl")
+    #             files = glob.glob(pattern)
+    #             if not files:
+    #                 raise FileNotFoundError(f"No model files found matching pattern: {pattern}")
+    #             # Trier par date de modification (le plus récent en premier)
+    #             model_path = max(files, key=os.path.getmtime)
+                
+    #         # Charger le modèle avec le chemin trouvé
+    #         self.standard_model = joblib.load(model_path)
+    #         return True
+    #     except Exception as e:
+    #         logger.error(f"Error loading standard model: {str(e)}")
+    #         return False
+    
+    # def load_simulation_model(self, model_file=None):
+    #     """Charge le modèle pour les simulations personnalisées"""
+    #     try:
+    #         if model_file:
+    #             model_path = os.path.join(self.base_path, model_file)
+    #         else:
+    #             # Chercher le fichier le plus récent commençant par "simulation_" ou "simulation_top7_"
+    #             pattern = os.path.join(self.base_path, "simulation_*xgboost*.pkl")
+    #             files = glob.glob(pattern)
+    #             if not files:
+    #                 raise FileNotFoundError(f"No simulation model files found matching pattern: {pattern}")
+                
+    #             # Trier par date de modification (le plus récent en premier)
+    #             model_path = max(files, key=os.path.getmtime)
+            
+    #         # Charger le modèle avec le chemin trouvé
+    #         self.simulation_model = joblib.load(model_path)
+    #         self.logger.info(f"Simulation model loaded from {model_path}")
+            
+    #         # Charger aussi les importances de features si disponibles
+    #         importance_path = model_path.replace('.pkl', '_importance.json')
+    #         if os.path.exists(importance_path):
+    #             with open(importance_path, 'r') as f:
+    #                 self.feature_importances['simulation'] = json.load(f)
+            
+    #         return True
+    #     except Exception as e:
+    #         self.logger.error(f"Error loading simulation model: {str(e)}")
+    #         return False
+    
+    def load_standard_model(self, model_file=None):
         try:
+            if model_file:
+                # Utilisez le chemin directement ou joignez-le au répertoire de base sans dupliquer
+                model_path = model_file if os.path.isabs(model_file) else os.path.join(self.base_path, model_file)
+            else:
+                # Utilisez les chemins de configuration
+                from config import get_config
+                config = get_config()
+                model_path = config.get('standard_enhanced_model_path', '')
+                
+                # Si le chemin est relatif, ajoutez le chemin de base
+                if not os.path.isabs(model_path):
+                    model_path = os.path.normpath(model_path)  # Normaliser pour éviter les doublons
+            
             self.standard_model = joblib.load(model_path)
             self.logger.info(f"Standard model loaded from {model_path}")
-            
-            # Charger aussi les importances de features si disponibles
-            importance_path = model_path.replace('.pkl', '_importance.json')
-            if os.path.exists(importance_path):
-                with open(importance_path, 'r') as f:
-                    self.feature_importances['standard'] = json.load(f)
-            
             return True
         except Exception as e:
             self.logger.error(f"Error loading standard model: {str(e)}")
             return False
-    
-    def load_simulation_model(self, model_path=None):
-        """Charge le modèle pour les simulations personnalisées"""
-        if model_path is None:
-            model_path = f"{self.base_path}/simulation_latest.pkl"
-        
+
+    def load_simulation_model(self, model_file=None):
         try:
+            if model_file:
+                # Utilisez le chemin directement ou joignez-le au répertoire de base sans dupliquer
+                model_path = model_file if os.path.isabs(model_file) else os.path.join(self.base_path, model_file)
+            else:
+                # Utilisez les chemins de configuration
+                from config import get_config
+                config = get_config()
+                model_path = config.get('simulation_top7_model_path', '')
+                
+                # Si le chemin est relatif, ajoutez le chemin de base
+                if not os.path.isabs(model_path):
+                    model_path = os.path.normpath(model_path)  # Normaliser pour éviter les doublons
+            
             self.simulation_model = joblib.load(model_path)
             self.logger.info(f"Simulation model loaded from {model_path}")
-            
-            # Charger aussi les importances de features si disponibles
-            importance_path = model_path.replace('.pkl', '_importance.json')
-            if os.path.exists(importance_path):
-                with open(importance_path, 'r') as f:
-                    self.feature_importances['simulation'] = json.load(f)
-            
             return True
         except Exception as e:
             self.logger.error(f"Error loading simulation model: {str(e)}")
             return False
-    
+        
     def initialize_standard_model(self, model_type='xgboost'):
         """Initialise le modèle pour les prédictions standard"""
         self.standard_model_type = model_type

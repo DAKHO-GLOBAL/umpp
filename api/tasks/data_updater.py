@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 import time
 
-from api import db
+from extensions import db
 from models.course import Course, Participation, Cheval, Jockey, CoteHistorique
 from data_traitement.traitement import save_race_data, save_participants_data
 

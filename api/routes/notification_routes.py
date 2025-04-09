@@ -7,7 +7,7 @@ from services.notification_service import NotificationService
 from services.user_service import UserService
 from middleware.rate_limiter import limiter
 from utils.decorators import subscription_required
-from app import db
+from extensions import db
 
 notification_bp = Blueprint('notification', __name__)
 notification_service = NotificationService()
