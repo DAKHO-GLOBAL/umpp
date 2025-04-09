@@ -21,6 +21,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   bool _isLoading = false;
   int _resendCooldown = 0;
   Timer? _timer;
+  Timer? _resendTimer;
 
   @override
   void initState() {
@@ -38,17 +39,18 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
   void _startResendCooldown() {
     setState(() {
-      _resendCooldown = 60;
+      _resendCooldown = 60; // par exemple 60 secondes
     });
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_resendCooldown > 0) {
+    _resendTimer?.cancel();
+    _resendTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_resendCooldown == 0) {
+        timer.cancel();
+      } else {
+        setState(() {
           _resendCooldown--;
-        } else {
-          _timer?.cancel();
-        }
-      });
+        });
+      }
     });
   }
 
@@ -106,7 +108,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      await authProvider.loadUserProfile();
+      await authProvider.status;
 
       // Si l'email est vérifié, rediriger vers l'écran d'accueil
       if (authProvider.isEmailVerified) {
@@ -238,6 +240,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                     ? 'Renvoyer l\'email (${_resendCooldown}s)'
                     : 'Renvoyer l\'email',
                 onPressed: _resendCooldown > 0 ? null : _sendVerificationEmail,
+                //onPressed: _resendCooldown > 0 ? () {} : () => _sendVerificationEmail(),
+
+
+
                 isOutlined: true,
                 width: double.infinity,
               ),

@@ -5,18 +5,20 @@ import 'package:smart_turf/services/payment/payment_service.dart';
 
 class SubscriptionService {
   static final SubscriptionService _instance = SubscriptionService._internal();
-  final ApiClient _apiClient;
-  final PaymentService _paymentService;
+  late ApiClient _apiClient;
+  late PaymentService _paymentService;
 
-  factory SubscriptionService(ApiClient apiClient, PaymentService paymentService) {
-    _instance._apiClient = apiClient;
-    _instance._paymentService = paymentService;
+  factory SubscriptionService(ApiClient? apiClient, PaymentService? paymentService) {
+    if (apiClient != null) {
+      _instance._apiClient = apiClient;
+    }
+    if (paymentService != null) {
+      _instance._paymentService = paymentService;
+    }
     return _instance;
   }
 
-  SubscriptionService._internal()
-      : _apiClient = ApiClient(null),
-        _paymentService = PaymentService(ApiClient(null));
+  SubscriptionService._internal();
 
   // Obtenir la liste des plans d'abonnement
   Future<List<Map<String, dynamic>>> getSubscriptionPlans() async {

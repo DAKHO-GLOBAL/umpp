@@ -20,14 +20,16 @@ enum PaymentStatus {
 
 class PaymentService {
   static final PaymentService _instance = PaymentService._internal();
-  final ApiClient _apiClient;
+  late ApiClient _apiClient;
 
   factory PaymentService(ApiClient apiClient) {
     _instance._apiClient = apiClient;
     return _instance;
   }
+  PaymentService._internal() {
+    // Initialisation par défaut
+  }
 
-  PaymentService._internal() : _apiClient = ApiClient(null);
 
   // Initialiser un paiement Orange Money
   Future<Map<String, dynamic>> initializeOrangeMoneyPayment({

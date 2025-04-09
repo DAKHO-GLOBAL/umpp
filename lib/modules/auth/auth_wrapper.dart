@@ -5,6 +5,7 @@ import 'package:smart_turf/core/widgets/loading_indicator.dart';
 import 'package:smart_turf/data/providers/auth_provider.dart';
 import 'package:smart_turf/routes/app_router.dart';
 
+@RoutePage()
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({Key? key}) : super(key: key);
 
@@ -25,14 +26,17 @@ class AuthWrapper extends StatelessWidget {
       // Vérifier si l'email de l'utilisateur est vérifié
         if (!authProvider.isEmailVerified) {
           // Rediriger vers la page de vérification d'email
-          return AutoRouter.of(context).replace(const VerifyEmailRoute());
+          context.router.replace(const VerifyEmailRoute());
+          return Container(); // Placeholder pendant la navigation
         }
         // Rediriger vers la page d'accueil
-        return AutoRouter.of(context).replace(const HomeRoute());
+        context.router.replace(const HomeRoute());
+        return Container(); // Placeholder pendant la navigation
 
       case AuthStatus.unauthenticated:
       // Rediriger vers la page d'accueil ou de login selon les préférences
-        return AutoRouter.of(context).replace(const LoginRoute());
+        context.router.replace(const LoginRoute());
+        return Container(); // Placeholder pendant la navigation
 
       case AuthStatus.error:
       // Montrer une erreur et rediriger vers la connexion
@@ -41,25 +45,25 @@ class AuthWrapper extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, color: Colors.red, size: 48),
-                SizedBox(height: 16),
+                const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                const SizedBox(height: 16),
                 Text(
                   'Impossible de vérifier votre identité',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   authProvider.errorMessage ?? 'Veuillez vous reconnecter',
                   style: Theme.of(context).textTheme.bodyMedium,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
                     authProvider.clearError();
-                    AutoRouter.of(context).replace(const LoginRoute());
+                    context.router.replace(const LoginRoute());
                   },
-                  child: Text('Se connecter'),
+                  child: const Text('Se connecter'),
                 ),
               ],
             ),

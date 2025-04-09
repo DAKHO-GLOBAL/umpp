@@ -13,7 +13,11 @@ class AppTheme {
   static const Color infoColor = AppColors.info;
   static const Color warningColor = AppColors.warning;
   static const Color successColor = AppColors.success;
-
+  // Dans lib/theme/app_theme.dart
+  static const Color primaryColorLight = Color(0xFF2A8C54);
+  static const Color secondaryColor= AppColors.secondary;
+  //static const Color lightTheme = AppColors.lightBackground;
+  //static const Color darkTheme = AppColors.darkBackground;
   // Thème clair
   static ThemeData get lightTheme {
     return ThemeData(

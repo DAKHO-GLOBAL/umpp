@@ -20,12 +20,14 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
+
   bool _agreeToTerms = false;
   bool _isLoading = false;
 
@@ -41,9 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> _register() async {
-    if (_formKey.currentState?.validate() != true) {
-      return;
-    }
+    if (_formKey.currentState?.validate() != true) return;
 
     if (!_agreeToTerms) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -55,9 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -69,37 +67,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
         lastName: _lastNameController.text.trim(),
       );
 
-      if (success) {
-        // La redirection sera gérée par AuthWrapper
-      } else {
-        // Afficher l'erreur
-        if (context.mounted) {
-          ErrorDialog.show(
-            context,
-            message: authProvider.errorMessage ?? AppConstants.errorMessage,
-          );
-        }
+      if (!success && context.mounted) {
+        ErrorDialog.show(
+          context,
+          message: authProvider.errorMessage ?? AppConstants.errorMessage,
+        );
       }
     } catch (e) {
       if (context.mounted) {
-        ErrorDialog.show(
-          context,
-          message: e.toString(),
-        );
+        ErrorDialog.show(context, message: e.toString());
       }
     } finally {
       if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
+        setState(() => _isLoading = false);
       }
     }
   }
 
   Future<void> _registerWithGoogle() async {
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -113,16 +99,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       }
     } catch (e) {
       if (context.mounted) {
-        ErrorDialog.show(
-          context,
-          message: e.toString(),
-        );
+        ErrorDialog.show(context, message: e.toString());
       }
     } finally {
       if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
+        setState(() => _isLoading = false);
       }
     }
   }
@@ -130,238 +111,238 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-        title: Text('Créer un compte'),
-    centerTitle: true,
-    elevation: 0,
-    backgroundColor: Colors.transparent,
-    foregroundColor: AppTheme.textPrimaryColor,
-    ),
-    body: SafeArea(
-    child: SingleChildScrollView(
-    padding: const EdgeInsets.all(24.0),
-    child: Form(
-    key: _formKey,
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    // En-tête
-    Text(
-    'Rejoignez SmartTurf',
-    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-    fontWeight: FontWeight.bold,
-    color: AppTheme.primaryColor,
-    ),
-    ),
-    const SizedBox(height: 8),
-    Text(
-    'Créez votre compte pour accéder aux prédictions hippiques',
-    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-    color: AppTheme.textSecondaryColor,
-    ),
-    ),
-    const SizedBox(height: 24),
-
-    // Bouton d'inscription avec Google
-    CustomButton(
-    text: 'S\'inscrire avec Google',
-    onPressed: _registerWithGoogle,
-    isOutlined: true,
-    width: double.infinity,
-    iconData: Icons.g_mobiledata,
-    ),
-    const SizedBox(height: 20),
-
-    // Séparateur
-    Row(
-    children: [
-    Expanded(child: Divider()),
-    Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-    child: Text(
-    'OU',
-    style: TextStyle(color: AppTheme.textSecondaryColor),
-    ),
-    ),
-    Expanded(child: Divider()),
-    ],
-    ),
-    const SizedBox(height: 20),
-
-    // Informations personnelles
-    Text(
-    'Informations personnelles',
-    style: Theme.of(context)
-        .textTheme
-        .titleLarge
-        ?.copyWith(fontWeight: FontWeight.w600),
-    ),
-    const SizedBox(height: 16),
-
-    // Prénom
-    CustomTextField(
-    label: 'Prénom',
-    hintText: 'Votre prénom',
-    controller: _firstNameController,
-    textInputAction: TextInputAction.next,
-    ),
-    const SizedBox(height: 16),
-
-    // Nom
-    CustomTextField(
-    label: 'Nom',
-    hintText: 'Votre nom',
-    controller: _lastNameController,
-    textInputAction: TextInputAction.next,
-    ),
-    const SizedBox(height: 24),
-
-    // Informations du compte
-    Text(
-    'Informations du compte',
-    style: Theme.of(context)
-        .textTheme
-        .titleLarge
-        ?.copyWith(fontWeight: FontWeight.w600),
-    ),
-    const SizedBox(height: 16),
-
-    // Email
-    CustomTextField(
-    label: 'Email',
-    hintText: 'Votre adresse email',
-    controller: _emailController,
-    keyboardType: TextInputType.emailAddress,
-    textInputAction: TextInputAction.next,
-    validator: Validators.validateEmail,
-    ),
-    const SizedBox(height: 16),
-
-    // Nom d'utilisateur
-    CustomTextField(
-    label: 'Nom d\'utilisateur',
-    hintText: 'Choisissez un nom d\'utilisateur',
-    controller: _usernameController,
-    textInputAction: TextInputAction.next,
-    validator: Validators.validateUsername,
-    ),
-    const SizedBox(height: 16),
-
-    // Mot de passe
-    CustomTextField(
-    label: 'Mot de passe',
-    hintText: 'Choisissez un mot de passe',
-    controller: _passwordController,
-    obscureText: true,
-    textInputAction: TextInputAction.next,
-    validator: Validators.validatePassword,
-    ),
-    const SizedBox(height: 16),
-
-    // Confirmation du mot de passe
-    CustomTextField(
-    label: 'Confirmer le mot de passe',
-    hintText: 'Confirmez votre mot de passe',
-    controller: _confirmPasswordController,
-    obscureText: true,
-    textInputAction: TextInputAction.done,
-    validator: (value) => Validators.validateConfirmPassword(
-    value,
-    _passwordController.text,
-    ),
-    ),
-    const SizedBox(height: 16),
-
-    // Conditions d'utilisation
-    Row(
-    children: [
-    Checkbox(
-    value: _agreeToTerms,
-    onChanged: (value) {
-    setState(() {
-    _agreeToTerms = value ?? false;
-    });
-    },
-    activeColor: AppTheme.primaryColor,
-    ),
-    Expanded(
-    child: GestureDetector(
-    onTap: () {
-    setState(() {
-    _agreeToTerms = !_agreeToTerms;
-    });
-    },
-    child: RichText(
-    text: TextSpan(
-    style: Theme.of(context)
-        .textTheme
-        .bodyMedium
-    ?.copyWith(color: AppTheme.text
-        style: Theme.of(context)
-        .textTheme
-        .bodyMedium
-        ?.copyWith(color: AppTheme.textPrimaryColor),
-      children: [
-        TextSpan(
-          text: 'J\'accepte les ',
-        ),
-        TextSpan(
-          text: 'Conditions d\'utilisation',
-          style: TextStyle(
-            color: AppTheme.primaryColor,
-            fontWeight: FontWeight.bold,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Créer un compte'),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        foregroundColor: AppTheme.textPrimaryColor,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(context),
+                const SizedBox(height: 24),
+                _buildGoogleButton(),
+                const SizedBox(height: 20),
+                _buildSeparator(context),
+                const SizedBox(height: 20),
+                _buildPersonalInfoFields(),
+                const SizedBox(height: 24),
+                _buildAccountInfoFields(),
+                const SizedBox(height: 16),
+                _buildTermsCheckbox(context),
+                const SizedBox(height: 32),
+                CustomButton(
+                  text: 'S\'inscrire',
+                  onPressed: _register,
+                  isLoading: _isLoading,
+                  width: double.infinity,
+                ),
+                const SizedBox(height: 24),
+                _buildLoginLink(context),
+              ],
+            ),
           ),
         ),
-        TextSpan(
-          text: ' et la ',
-        ),
-        TextSpan(
-          text: 'Politique de confidentialité',
-          style: TextStyle(
-            color: AppTheme.primaryColor,
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Rejoignez SmartTurf',
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
+            color: AppTheme.primaryColor,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Créez votre compte pour accéder aux prédictions hippiques',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppTheme.textSecondaryColor,
           ),
         ),
       ],
-    ),
-    ),
-    ),
-    ),
-    ],
-    ),
-      const SizedBox(height: 32),
+    );
+  }
 
-      // Bouton d'inscription
-      CustomButton(
-        text: 'S\'inscrire',
-        onPressed: _register,
-        isLoading: _isLoading,
-        width: double.infinity,
-      ),
-      const SizedBox(height: 24),
+  Widget _buildGoogleButton() {
+    return CustomButton(
+      text: 'S\'inscrire avec Google',
+      onPressed: _registerWithGoogle,
+      isOutlined: true,
+      width: double.infinity,
+      iconData: Icons.g_mobiledata,
+    );
+  }
 
-      // Lien de connexion
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Déjà un compte ? ',
-            style: Theme.of(context).textTheme.bodyMedium,
+  Widget _buildSeparator(BuildContext context) {
+    return Row(
+      children: [
+        const Expanded(child: Divider()),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            'OU',
+            style: TextStyle(color: AppTheme.textSecondaryColor),
           ),
-          TextButton(
-            onPressed: () {
-              context.router.replace(const LoginRoute());
+        ),
+        const Expanded(child: Divider()),
+      ],
+    );
+  }
+
+  Widget _buildPersonalInfoFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Informations personnelles',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Prénom',
+          hintText: 'Votre prénom',
+          controller: _firstNameController,
+          textInputAction: TextInputAction.next,
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Nom',
+          hintText: 'Votre nom',
+          controller: _lastNameController,
+          textInputAction: TextInputAction.next,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAccountInfoFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Informations du compte',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Email',
+          hintText: 'Votre adresse email',
+          controller: _emailController,
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          validator: Validators.validateEmail,
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Nom d\'utilisateur',
+          hintText: 'Choisissez un nom d\'utilisateur',
+          controller: _usernameController,
+          textInputAction: TextInputAction.next,
+          validator: Validators.validateUsername,
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Mot de passe',
+          hintText: 'Choisissez un mot de passe',
+          controller: _passwordController,
+          obscureText: true,
+          textInputAction: TextInputAction.next,
+          validator: Validators.validatePassword,
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
+          label: 'Confirmer le mot de passe',
+          hintText: 'Confirmez votre mot de passe',
+          controller: _confirmPasswordController,
+          obscureText: true,
+          textInputAction: TextInputAction.done,
+          validator: (value) => Validators.validateConfirmPassword(
+            value,
+            _passwordController.text,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTermsCheckbox(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+          value: _agreeToTerms,
+          onChanged: (value) {
+            setState(() {
+              _agreeToTerms = value ?? false;
+            });
+          },
+          activeColor: AppTheme.primaryColor,
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                _agreeToTerms = !_agreeToTerms;
+              });
             },
-            child: Text('Se connecter'),
+            child: RichText(
+              text: TextSpan(
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppTheme.textPrimaryColor,
+                ),
+                children: [
+                  const TextSpan(text: 'J\'accepte les '),
+                  TextSpan(
+                    text: 'Conditions d\'utilisation',
+                    style: const TextStyle(
+                      color: AppTheme.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const TextSpan(text: ' et la '),
+                  TextSpan(
+                    text: 'Politique de confidentialité',
+                    style: const TextStyle(
+                      color: AppTheme.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
-      ),
-    ],
-    ),
-    ),
-    ),
-    ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLoginLink(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Déjà un compte ? ', style: Theme.of(context).textTheme.bodyMedium),
+        TextButton(
+          onPressed: () => context.router.replace(const LoginRoute()),
+          child: const Text('Se connecter'),
+        ),
+      ],
     );
   }
 }

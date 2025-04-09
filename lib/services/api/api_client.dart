@@ -97,10 +97,12 @@ class ApiClient {
   }
 
   // Méthode GET
-  Future<dynamic> get(String endpoint, {
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) async {
+  Future<dynamic> get(
+      String endpoint, {
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        bool requiresAuth = true, // Ajoutez ce paramètre avec une valeur par défaut
+      })async {
     try {
       final response = await _dio.get(
         endpoint,
@@ -116,11 +118,13 @@ class ApiClient {
   }
 
   // Méthode POST
-  Future<dynamic> post(String endpoint, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) async {
+  Future<dynamic> post(
+      String endpoint, {
+        dynamic data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        bool requiresAuth = true, // Ajoutez ce paramètre avec une valeur par défaut
+      })async {
     try {
       final response = await _dio.post(
         endpoint,
@@ -137,11 +141,13 @@ class ApiClient {
   }
 
   // Méthode PUT
-  Future<dynamic> put(String endpoint, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) async {
+  Future<dynamic> put(
+      String endpoint, {
+        dynamic data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        bool requiresAuth = true, // Ajoutez ce paramètre avec une valeur par défaut
+      })  async {
     try {
       final response = await _dio.put(
         endpoint,
@@ -158,11 +164,13 @@ class ApiClient {
   }
 
   // Méthode DELETE
-  Future<dynamic> delete(String endpoint, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) async {
+  Future<dynamic> delete(
+      String endpoint, {
+        dynamic data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        bool requiresAuth = true, // Ajoutez ce paramètre avec une valeur par défaut
+      }) async {
     try {
       final response = await _dio.delete(
         endpoint,
