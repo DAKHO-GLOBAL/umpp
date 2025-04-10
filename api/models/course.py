@@ -2,7 +2,8 @@
 # course.py
 # api/models/course.py
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Float, Text, ForeignKey, JSON
+#from pymysql import Date, Time
+from sqlalchemy import Column, Date, Integer, String, Boolean, DateTime, Float, Text, ForeignKey, JSON, Time
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -121,6 +122,7 @@ class Cheval(db.Model):
     participations = relationship("Participation", back_populates="cheval")
     participants_pmu = relationship("PmuParticipant", back_populates="cheval")
     
+    
     def __repr__(self):
         return f"<Cheval {self.id}: {self.nom}>"
     
@@ -164,6 +166,42 @@ class Jockey(db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
 
+class PmuParticipant(db.Model):
+    """Modèle pour les participants PMU aux courses"""
+    __tablename__ = 'pmu_participants'
+    
+    id = Column(Integer, primary_key=True)
+    id_pmu_course = Column(Integer, ForeignKey('pmu_courses.id'), nullable=False)
+    id_cheval = Column(Integer, ForeignKey('chevaux.id'), nullable=True)
+    id_jockey = Column(Integer, ForeignKey('jockeys.id'), nullable=True)
+    numPmu = Column(Integer, nullable=True)
+    nom = Column(String(100), nullable=True)
+    nom_jockey = Column(String(100), nullable=True)
+    created_at = Column(DateTime, default=func.now())
+    
+    # Relations
+    cheval = relationship("Cheval", back_populates="participants_pmu")
+    jockey_ref = relationship("Jockey", back_populates="participants_pmu")
+    pmu_course = relationship("PmuCourse", back_populates="participants")
+
+class PmuCourse(db.Model):
+    """Modèle pour les courses PMU brutes"""
+    __tablename__ = 'pmu_courses'
+    
+    id = Column(Integer, primary_key=True)
+    pmuId = Column(String(100), nullable=True)
+    numReunion = Column(Integer, nullable=True)
+    numOrdre = Column(Integer, nullable=True)
+    nom = Column(String(200), nullable=True)
+    dateCourse = Column(Date, nullable=True)
+    heureCourse = Column(Time, nullable=True)
+    discipline = Column(String(50), nullable=True)
+    specialite = Column(String(50), nullable=True)
+    hippodrome = Column(String(100), nullable=True)
+    created_at = Column(DateTime, default=func.now())
+    
+    # Relations
+    participants = relationship("PmuParticipant", back_populates="pmu_course", cascade="all, delete-orphan")
 
 class CoteHistorique(db.Model):
     """Modèle pour l'historique des cotes"""

@@ -1,0 +1,449 @@
+[2025-04-10 14:13:55,508] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 14:13:55,508] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 14:13:55,511] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 14:14:03,441] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 14:14:03,461] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 14:14:03,465] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 14:14:03,465] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 14:14:03,573] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 14:14:03,573] None - None - DEBUG in font_manager: font search path [PosixPath('/home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data/fonts/ttf'), PosixPath('/home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data/fonts/afm'), PosixPath('/home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data/fonts/pdfcorefonts')]
+[2025-04-10 14:14:08,574] None - None - WARNING in font_manager: Matplotlib is building the font cache; this may take a moment.
+[2025-04-10 14:14:32,546] None - None - INFO in font_manager: Failed to extract font properties from /usr/share/fonts/opentype/cantarell/Cantarell-VF.otf: In FT2Font: Can not load face (SFNT font table missing; error code 0x8e)
+[2025-04-10 14:14:32,549] None - None - INFO in font_manager: Failed to extract font properties from /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf: In FT2Font: Can not load face (unknown file format; error code 0x2)
+[2025-04-10 14:14:32,821] None - None - INFO in font_manager: generated new fontManager
+[2025-04-10 14:14:34,263] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 14:14:34,263] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:34,263] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 14:14:34,356] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:34,357] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 14:14:34,765] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 14:14:34,766] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:34,766] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 14:14:34,768] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:34,768] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 14:14:34,980] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:34,980] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:34,980] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:34,980] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:34,988] None - None - INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.80:5000
+[2025-04-10 14:14:34,988] None - None - INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-04-10 14:14:34,991] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 14:14:35,651] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 14:14:35,651] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 14:14:35,652] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 14:14:36,585] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 14:14:36,594] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 14:14:36,596] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 14:14:36,597] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 14:14:36,685] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 14:14:36,698] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 14:14:37,263] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 14:14:37,263] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:37,263] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 14:14:37,264] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:37,264] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 14:14:37,266] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 14:14:37,266] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:37,266] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 14:14:37,266] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 14:14:37,267] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 14:14:37,310] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:37,310] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:37,310] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:37,310] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 14:14:37,313] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 14:14:37,365] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 14:18:30,288] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 14:18:30] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 14:18:30,369] 192.168.1.80 - unknown - ERROR in auth_routes: Login error: When initializing mapper Mapper[Cheval(chevaux)], expression 'PmuParticipant' failed to locate a name ('PmuParticipant'). If this is a class name, consider adding this relationship() to the <class 'models.course.Cheval'> class after both dependent classes have been defined.
+[2025-04-10 14:18:30,369] 192.168.1.80 - unknown - ERROR in auth_routes: Login error: When initializing mapper Mapper[Cheval(chevaux)], expression 'PmuParticipant' failed to locate a name ('PmuParticipant'). If this is a class name, consider adding this relationship() to the <class 'models.course.Cheval'> class after both dependent classes have been defined.
+[2025-04-10 14:18:30,371] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 14:18:30] "[35m[1mPOST /api/auth/login HTTP/1.1[0m" 500 -
+[2025-04-10 14:19:51,539] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 14:19:51] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 14:19:51,543] 192.168.1.80 - unknown - ERROR in auth_routes: Login error: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Cheval(chevaux)]'. Original exception was: When initializing mapper Mapper[Cheval(chevaux)], expression 'PmuParticipant' failed to locate a name ('PmuParticipant'). If this is a class name, consider adding this relationship() to the <class 'models.course.Cheval'> class after both dependent classes have been defined.
+[2025-04-10 14:19:51,543] 192.168.1.80 - unknown - ERROR in auth_routes: Login error: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Cheval(chevaux)]'. Original exception was: When initializing mapper Mapper[Cheval(chevaux)], expression 'PmuParticipant' failed to locate a name ('PmuParticipant'). If this is a class name, consider adding this relationship() to the <class 'models.course.Cheval'> class after both dependent classes have been defined.
+[2025-04-10 14:19:51,545] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 14:19:51] "[35m[1mPOST /api/auth/login HTTP/1.1[0m" 500 -
+[2025-04-10 16:20:58,682] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:20:59,196] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:21:00,245] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:21:00,245] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:21:00,246] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:21:01,912] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:21:01,920] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:21:01,922] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:21:01,922] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:21:02,030] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:21:02,052] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:21:02,915] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:21:02,916] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:02,916] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:21:02,917] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:02,917] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:21:02,919] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:21:02,919] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:02,920] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:21:02,920] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:02,920] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:21:02,961] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:02,961] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:02,961] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:02,961] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:02,969] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:21:02,970] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:21:07,054] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:21:07,517] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:21:08,193] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:21:08,193] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:21:08,194] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:21:09,331] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:21:09,340] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:21:09,342] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:21:09,342] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:21:09,435] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:21:09,451] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:21:10,108] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:21:10,108] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:10,109] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:21:10,110] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:10,110] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:21:10,112] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:21:10,112] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:10,112] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:21:10,113] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:10,113] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:21:10,167] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:10,167] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:10,168] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:10,168] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:10,170] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:21:10,172] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:21:14,242] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:21:14,751] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:21:15,502] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:21:15,502] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:21:15,503] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:21:16,690] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:21:16,701] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:21:16,705] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:21:16,705] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:21:16,815] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:21:16,834] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:21:17,572] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:21:17,572] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:17,573] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:21:17,574] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:17,574] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:21:17,576] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:21:17,576] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:17,576] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:21:17,577] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:21:17,577] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:21:17,621] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:17,621] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:17,621] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:17,621] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:21:17,624] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:21:17,625] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:22:15,472] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:22:15,956] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:22:16,701] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:22:16,701] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:22:16,702] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:22:17,822] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:22:17,830] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:22:17,832] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:22:17,833] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:22:17,930] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:22:17,944] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:22:18,535] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:22:18,535] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:18,536] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:22:18,537] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:18,537] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:22:18,539] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:22:18,539] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:18,539] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:22:18,540] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:18,540] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:22:18,588] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:18,588] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:18,588] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:18,588] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:18,591] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:22:18,592] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:22:20,647] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:22:21,137] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:22:21,827] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:22:21,827] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:22:21,828] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:22:23,034] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:22:23,041] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:22:23,043] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:22:23,043] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:22:23,146] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:22:23,162] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:22:23,772] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:22:23,772] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:23,772] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:22:23,775] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:23,775] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:22:23,779] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:22:23,779] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:23,780] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:22:23,780] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:22:23,780] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:22:23,830] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:23,830] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:23,830] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:23,830] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:22:23,833] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:22:23,833] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:23:02,483] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:23:02,991] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:23:03,601] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:23:03,601] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:23:03,601] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:23:04,564] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:23:04,572] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:23:04,573] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:23:04,574] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:23:04,666] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:23:04,680] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:23:05,282] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:23:05,282] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:23:05,282] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:23:05,284] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:23:05,284] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:23:05,286] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:23:05,286] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:23:05,286] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:23:05,287] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:23:05,287] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:23:05,332] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:23:05,332] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:23:05,333] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:23:05,333] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:23:05,336] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:23:05,337] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:23:06,374] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/models/course.py', reloading
+[2025-04-10 16:23:06,868] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:23:07,477] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:23:07,477] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:23:07,477] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:23:32,537] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:23:32,537] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:23:32,538] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:24:43,440] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:24:43,440] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:24:43,441] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:24:44,390] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:24:44,397] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:24:44,399] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:24:44,400] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:24:44,486] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:24:44,499] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:24:45,077] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:24:45,077] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:45,077] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:24:45,078] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:45,079] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:24:45,081] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:24:45,081] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:45,081] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:24:45,081] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:45,081] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:24:45,133] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:45,133] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:45,133] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:45,133] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:45,136] None - None - INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.80:5000
+[2025-04-10 16:24:45,137] None - None - INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-04-10 16:24:45,139] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:24:45,743] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:24:45,743] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:24:45,744] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:24:46,630] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:24:46,637] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:24:46,638] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:24:46,639] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:24:46,723] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:24:46,737] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:24:47,290] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:24:47,290] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:47,290] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:24:47,291] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:47,291] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:24:47,293] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:24:47,293] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:47,293] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:24:47,293] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:24:47,293] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:24:47,337] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:47,337] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:47,337] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:47,337] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:24:47,340] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:24:47,340] None - None - INFO in _internal:  * Debugger PIN: 170-916-147
+[2025-04-10 16:25:42,502] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:25:42] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:25:43,229] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:25:43] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:33:48,826] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:33:48,826] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:33:48,828] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:33:51,376] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:33:51,384] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:33:51,387] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:33:51,387] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:33:51,498] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:33:51,524] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:33:52,491] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:33:52,491] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:52,491] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:33:52,493] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:52,493] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:33:52,495] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:33:52,496] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:52,496] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:33:52,496] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:52,496] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:33:52,551] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:52,551] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:52,552] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:52,552] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:52,559] None - None - INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.80:5000
+[2025-04-10 16:33:52,560] None - None - INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-04-10 16:33:52,562] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:33:53,848] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:33:53,848] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:33:53,849] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:33:55,195] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:33:55,202] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:33:55,204] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:33:55,204] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:33:55,310] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:33:55,328] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:33:55,989] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:33:55,989] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:55,989] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:33:55,990] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:55,991] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:33:55,992] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:33:55,992] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:55,993] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:33:55,993] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:33:55,993] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:33:56,041] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:56,041] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:56,042] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:56,042] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:33:56,045] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:33:56,045] None - None - INFO in _internal:  * Debugger PIN: 139-317-900
+[2025-04-10 16:34:50,376] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:34:50] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:34:55,172] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:34:55] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:36:10,463] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:36:10] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:36:10,990] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:36:10] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:53:29,613] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:53:29] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:53:30,211] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 16:53:30] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 16:55:14,671] None - None - INFO in _internal:  * Detected change in '/home/dakho/Documents/umpp/api/routes/__init__.py', reloading
+[2025-04-10 16:55:16,424] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 16:55:17,651] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:55:17,651] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 16:55:17,652] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 16:55:19,224] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 16:55:19,231] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 16:55:19,233] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 16:55:19,234] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 16:55:19,357] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 16:55:19,383] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 16:55:20,421] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:55:20,421] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:55:20,421] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:55:20,422] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:55:20,423] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:55:20,425] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 16:55:20,426] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:55:20,426] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 16:55:20,426] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 16:55:20,427] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 16:55:20,478] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:55:20,478] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:55:20,479] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:55:20,479] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 16:55:20,489] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 16:55:20,490] None - None - INFO in _internal:  * Debugger PIN: 139-317-900
+[2025-04-10 21:01:58,416] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 21:01:58,416] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 21:01:58,425] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 21:02:00,744] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 21:02:00,759] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 21:02:00,761] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 21:02:00,761] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 21:02:00,863] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 21:02:00,879] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 21:02:01,853] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 21:02:01,853] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:01,853] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 21:02:01,854] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:01,855] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 21:02:01,857] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 21:02:01,857] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:01,857] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 21:02:01,858] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:01,858] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 21:02:01,904] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:01,904] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:01,904] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:01,904] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:01,913] None - None - INFO in _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.80:5000
+[2025-04-10 21:02:01,913] None - None - INFO in _internal: [33mPress CTRL+C to quit[0m
+[2025-04-10 21:02:01,914] None - None - INFO in _internal:  * Restarting with stat
+[2025-04-10 21:02:02,475] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 21:02:02,475] None - None - INFO in logger: Logger configured with level DEBUG
+[2025-04-10 21:02:02,476] None - None - INFO in error_handler: Error handlers registered successfully
+[2025-04-10 21:02:03,322] None - None - DEBUG in __init__: matplotlib data path: /home/dakho/exit/envs/tf_gpu/lib/python3.9/site-packages/matplotlib/mpl-data
+[2025-04-10 21:02:03,330] None - None - DEBUG in __init__: CONFIGDIR=/home/dakho/.config/matplotlib
+[2025-04-10 21:02:03,332] None - None - DEBUG in __init__: interactive is False
+[2025-04-10 21:02:03,332] None - None - DEBUG in __init__: platform is linux
+[2025-04-10 21:02:03,425] None - None - DEBUG in __init__: CACHEDIR=/home/dakho/.cache/matplotlib
+[2025-04-10 21:02:03,438] None - None - DEBUG in font_manager: Using fontManager instance from /home/dakho/.cache/matplotlib/fontlist-v390.json
+[2025-04-10 21:02:03,985] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 21:02:03,985] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:03,985] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 21:02:03,986] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:03,986] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 21:02:03,988] None - None - ERROR in dual_prediction_model: Error loading standard model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/enhanced_xgboost_latest.pkl'
+[2025-04-10 21:02:03,988] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:03,988] None - None - INFO in prediction_service: Prediction models loaded successfully
+[2025-04-10 21:02:03,988] None - None - ERROR in dual_prediction_model: Error loading simulation model: [Errno 2] No such file or directory: 'model/trained_models/model/trained_models/simulation_top7_xgboost_ranking_latest.pkl'
+[2025-04-10 21:02:03,989] None - None - INFO in simulation_service: Simulation model loaded successfully
+[2025-04-10 21:02:04,033] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:04,033] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:04,033] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:04,033] None - None - INFO in __init__: Routes registered successfully
+[2025-04-10 21:02:04,035] None - None - WARNING in _internal:  * Debugger is active!
+[2025-04-10 21:02:04,036] None - None - INFO in _internal:  * Debugger PIN: 134-464-855
+[2025-04-10 21:48:36,498] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 21:48:36] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 21:48:38,432] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 21:48:38] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 21:55:33,119] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 21:55:33] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 21:55:33,821] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 21:55:33] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 22:01:52,270] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:01:52] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 22:01:52,818] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:01:52] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 22:09:36,843] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:09:36] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 22:09:37,440] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:09:37] "POST /api/auth/login HTTP/1.1" 200 -
+[2025-04-10 22:09:37,549] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:09:37] "OPTIONS /api/auth/refresh HTTP/1.1" 200 -
+[2025-04-10 22:09:37,577] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:09:37] "POST /api/auth/refresh HTTP/1.1" 200 -
+[2025-04-10 22:09:37,615] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:09:37] "OPTIONS /api/predictions/upcoming HTTP/1.1" 200 -
+[2025-04-10 22:09:37,777] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:09:37] "GET /api/predictions/upcoming HTTP/1.1" 200 -
+[2025-04-10 22:34:23,643] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:34:23] "OPTIONS /api/auth/refresh HTTP/1.1" 200 -
+[2025-04-10 22:34:23,648] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:34:23] "POST /api/auth/refresh HTTP/1.1" 200 -
+[2025-04-10 22:34:23,705] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:34:23] "OPTIONS /api/predictions/upcoming HTTP/1.1" 200 -
+[2025-04-10 22:34:23,725] None - None - INFO in _internal: 192.168.1.80 - - [10/Apr/2025 22:34:23] "GET /api/predictions/upcoming HTTP/1.1" 200 -

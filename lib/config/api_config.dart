@@ -1,26 +1,30 @@
 class ApiConfig {
-  // URL de base de l'API
-  static const String baseUrl = 'https://api.smartturf.com';
+  // Base URL - Changez ceci selon votre environnement
+  static const String baseUrl = 'http://192.168.1.80:5000/api';
 
-  // Endpoint API version
-  static const String apiVersion = '/v1';
+  // Endpoints d'authentification
+  static const String loginEndpoint = '$baseUrl/auth/login';
+  static const String registerEndpoint = '$baseUrl/auth/register';
+  static const String refreshTokenEndpoint = '$baseUrl/auth/refresh';
+  static const String forgotPasswordEndpoint = '$baseUrl/auth/forgot-password';
 
-  // URL complète de l'API
-  static String get apiUrl => '$baseUrl$apiVersion';
+  // Endpoints utilisateur
+  static const String userProfileEndpoint = '$baseUrl/users/profile';
 
-  // Headers par défaut
-  static Map<String, String> get defaultHeaders => {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'x-app-version': '1.0.0',
-  };
+  // Endpoints pour les prédictions
+  static const String upcomingRacesEndpoint = '$baseUrl/predictions/upcoming';
+  static const String standardPredictionEndpoint = '$baseUrl/predictions/standard';
+  static const String top3PredictionEndpoint = '$baseUrl/predictions/top3';
+  static const String top7PredictionEndpoint = '$baseUrl/predictions/top7';
 
-  // Configuration des timeouts (en millisecondes)
-  static const int connectTimeout = 15000;
-  static const int receiveTimeout = 15000;
-  static const int sendTimeout = 15000;
+  // Endpoints pour les simulations
+  static const String basicSimulationEndpoint = '$baseUrl/simulations/basic';
+  static const String advancedSimulationEndpoint = '$baseUrl/simulations/advanced';
+}
 
-  // Configuration de la politique de retry
-  static const int maxRetryAttempts = 3;
-  static const int retryDelay = 1000; // en millisecondes
+class AppConfig {
+  static const String appName = 'SmartTurf';
+  static const String tokenKey = 'auth_token';
+  static const String refreshTokenKey = 'refresh_token';
+  static const String userKey = 'user_data';
 }
